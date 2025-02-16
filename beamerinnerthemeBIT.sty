@@ -1,0 +1,118 @@
+\pgfdeclareverticalshading[lower.bg,upper.bg]{bmb@transition}{200cm}{%
+color(0pt)=(lower.bg); color(2pt)=(lower.bg); color(4pt)=(lower.bg)}
+
+\setbeamersize{text margin left=2em,text margin right=2em}
+
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{navigation symbols}{}
+
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+\setbeamertemplate{enumerate items}[default]
+\setbeamertemplate{enumerate subitem}[default]
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{itemize subitem}[circle]
+
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}{%
+    \leavevmode
+    \leftskip=3.2em
+    \rlap{\hskip-2em\inserttocsectionnumber.\inserttocsubsectionnumber}
+    \inserttocsubsection\par
+}
+
+\newcommand{\insertbitlogo}{%
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[anchor=north east, xshift=-0.15cm, yshift=0cm] at (current page.north east) {
+            \includegraphics[height=0.9cm]{../figures/bit-logo-small}
+        };
+    \end{tikzpicture}
+}
+
+\newcommand{\insertbitlogotitle}{%
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[anchor=center, xshift=0cm, yshift=1.3cm] at (current page.center) { % Adjust yshift as needed
+            \includegraphics[height=1.7cm]{../figures/bit-logo-title}
+        };
+    \end{tikzpicture}
+}
+
+\setbeamertemplate{frametitle}
+{
+    \nointerlineskip
+    \begin{beamercolorbox}[sep=0.3cm,ht=2.7em,wd=\paperwidth]{frametitle}
+        \strut\usebeamerfont{title}\insertframetitle\strut
+        \ifx\insertsection\@empty%
+        \else%
+        \vskip -2ex
+        \centering {\usebeamercolor[fg]{section in head/foot} \usebeamerfont{section in head/foot} \vskip1.2ex \insertsection}
+        \fi%
+        \insertbitlogo 
+        \vskip -0.2ex
+    \end{beamercolorbox}
+}
+
+\setbeamertemplate{title page}{%
+    \vspace{5.8em}
+    \begingroup
+    \centering    
+    \begin{beamercolorbox}[sep=10pt,ht =3.5cm, center,shadow=true,rounded=true]{title}
+            \insertbitlogotitle 
+            \vskip2.25em%
+            \usebeamerfont{title}\inserttitle\par%
+            \ifx\insertsubtitle\@empty%
+            \else%
+            \vskip0.25em%
+            {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+            \fi%
+    \end{beamercolorbox}
+    \vskip0.5em\par
+    % ------------------------
+    \begin{beamercolorbox}[sep=8pt,center]{author}
+        \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \vskip-1em
+    % ------------------------
+    \begin{beamercolorbox}[sep=8pt,center]{institute}
+        \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
+    % ------------------------
+    \begin{beamercolorbox}[sep=8pt,center]{date}
+        \usebeamerfont{date}\insertdate
+    \end{beamercolorbox}\vskip0.5em
+    % ------------------------
+    {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+    \endgroup
+    \vfill
+}
+
+\makeatletter
+\setbeamertemplate{block definition begin}{%
+  \begin{beamercolorbox}[sep=0.5em,wd=\textwidth,rounded=true,shadow=true]{block title definition}
+    \usebeamerfont*{block title}\insertblocktitle%
+  \end{beamercolorbox}
+  \begin{beamercolorbox}[sep=0.5em,wd=\textwidth,rounded=true,shadow=true]{block body definition}
+    \usebeamerfont{block body}%
+}
+
+\setbeamertemplate{block definition end}{%
+  \end{beamercolorbox}
+}
+
+% Define the definitionblock environment
+\newenvironment<>{definitionblock}[1]{%
+  \begin{actionenv}#2%
+    \def\insertblocktitle{#1}%
+    \par%
+    \usebeamertemplate{block definition begin}%
+}{%
+  \par%
+  \usebeamertemplate{block definition end}%
+  \end{actionenv}%
+}
+
+\def\th@definition{%
+  \normalfont % body font
+  \def\inserttheoremblockenv{definitionblock} % Use definitionblock
+}
+\makeatother
