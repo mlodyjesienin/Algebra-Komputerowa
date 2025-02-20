@@ -88,17 +88,17 @@ color(0pt)=(lower.bg); color(2pt)=(lower.bg); color(4pt)=(lower.bg)}
 
 \makeatletter
 \setbeamertemplate{block definition begin}{%
-  \begin{beamercolorbox}[sep=0.5em,wd=\textwidth,rounded=true,shadow=true]{block title definition}
-    \usebeamerfont*{block title}\insertblocktitle%
-  \end{beamercolorbox}
-  \begin{beamercolorbox}[sep=0.5em,wd=\textwidth,rounded=true,shadow=true]{block body definition}
-    \usebeamerfont{block body}%
+  \begin{beamercolorbox}[colsep=1pt, rounded=true, shadow=true, wd=\textwidth]{block body definition}
+    \begin{beamercolorbox}[wd=\textwidth, sep=0.3em, center, rounded=false, colsep=1.5pt]{block title definition}
+      \usebeamerfont*{block title} \insertblocktitle
+    \end{beamercolorbox}
+    \vspace{0.3em} % Space between title and content
+    \usebeamerfont{block body}
 }
 
 \setbeamertemplate{block definition end}{%
   \end{beamercolorbox}
 }
-
 % Define the definitionblock environment
 \newenvironment<>{definitionblock}[1]{%
   \begin{actionenv}#2%
