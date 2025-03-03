@@ -85,34 +85,44 @@ color(0pt)=(lower.bg); color(2pt)=(lower.bg); color(4pt)=(lower.bg)}
     \endgroup
     \vfill
 }
+\addtobeamertemplate{block alerted begin}{
+  \setbeamercolor{item}{fg=orange}
+  \setbeamercolor{enumerate item}{fg=orange}
+}{}
 
-\makeatletter
-\setbeamertemplate{block definition begin}{%
-  \begin{beamercolorbox}[colsep=1pt, rounded=true, shadow=true, wd=\textwidth]{block body definition}
-    \begin{beamercolorbox}[wd=\textwidth, sep=0.3em, center, rounded=false, colsep=1.5pt]{block title definition}
-      \usebeamerfont*{block title} \insertblocktitle
-    \end{beamercolorbox}
-    \vspace{0.3em} % Space between title and content
-    \usebeamerfont{block body}
-}
+\addtobeamertemplate{block example begin}{
+  \setbeamercolor{item}{fg=washed_green}
+  \setbeamercolor{enumerate item}{fg=washed_green}
+}{}
 
-\setbeamertemplate{block definition end}{%
-  \end{beamercolorbox}
-}
-% Define the definitionblock environment
-\newenvironment<>{definitionblock}[1]{%
-  \begin{actionenv}#2%
-    \def\insertblocktitle{#1}%
-    \par%
-    \usebeamertemplate{block definition begin}%
-}{%
-  \par%
-  \usebeamertemplate{block definition end}%
-  \end{actionenv}%
-}
+% modifications of custom beamer blocks. currently not used, saved for later possible usage. 
+% \makeatletter
+% \setbeamertemplate{block definition begin}{%
+%   \begin{beamercolorbox}[colsep=1pt, rounded=true, shadow=true, wd=\textwidth]{block body definition}
+%     \begin{beamercolorbox}[wd=\textwidth, sep=0.3em, center, rounded=false, colsep=1.5pt]{block title definition}
+%       \usebeamerfont*{block title} \insertblocktitle
+%     \end{beamercolorbox}
+%     \vspace{0.3em} % Space between title and content
+%     \usebeamerfont{block body}
+% }
 
-\def\th@definition{%
-  \normalfont % body font
-  \def\inserttheoremblockenv{definitionblock} % Use definitionblock
-}
-\makeatother
+% \setbeamertemplate{block definition end}{%
+%   \end{beamercolorbox}
+% }
+% % Define the definitionblock environment
+% \newenvironment<>{definitionblock}[1]{%
+%   \begin{actionenv}#2%
+%     \def\insertblocktitle{#1}%
+%     \par%
+%     \usebeamertemplate{block definition begin}%
+% }{%
+%   \par%
+%   \usebeamertemplate{block definition end}%
+%   \end{actionenv}%
+% }
+
+% \def\th@definition{%
+%   \normalfont % body font
+%   \def\inserttheoremblockenv{definitionblock} % Use definitionblock
+% }
+% \makeatother
