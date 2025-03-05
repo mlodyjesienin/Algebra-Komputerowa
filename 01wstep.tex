@@ -1,0 +1,73 @@
+\documentclass{beamer}
+
+\usepackage{polski}
+\usepackage{pgf,tikz}
+\usepackage{tgheros}       
+
+\usepackage{qrcode}
+
+
+\usetheme{BIT}
+
+\usepackage[utf8]{inputenc}
+\usepackage[backend=bibtex,style=numeric]{biblatex}
+\addbibresource{literature.bib}
+\usepackage{amssymb,amsmath,amsthm}
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes,decorations}
+
+\title{Algebra Komputerowa}
+\subtitle{Informacje Wstępne}
+\author{Filip Zieli\'nski}
+\date{2025}
+ 
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+ 
+\begin{frame}{Podstawowe Informacje}
+    \begin{itemize}
+        \item Zajęcia co tydzień w środę 18:30 sala 3.27d, Budynek D17 
+        \item Repozytorium z prezentacjami: 
+                \href{https://github.com/mlodyjesienin/Algebra-komputerowa}{\textit{github.com/mlodyjesienin/Algebra-komputerowa}}
+        \item mail: \textit{fzielinski@student.agh.edu.pl}
+    \end{itemize}
+    \begin{center}
+        \begin{tabular}{p{.3\textwidth} p{.3\textwidth}}
+        \qrcode{https://discord.gg/wf4PdGBen9}  & \qrcode{https://github.com/mlodyjesienin/Algebra-komputerowa} \\[3em]
+        Discord  &   Github
+        \end{tabular}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Lista Tematów}
+    \begin{enumerate}
+        \item Powtórzenie Podstaw Algebry 
+        \item Macierze Blokowe
+        \item Teoria Grup, Podgrupy Normalne, Grupy Cykliczne \cite{Gleichgewicht}
+        \item Teoria Pierścieni, Ideały, Struktury Ilorazowe \cite{Gleichgewicht}
+        \item Rozszerzony Algorytm Euklidesa \cite{ComputerAlgebra}
+        \item Algorytmy Modularne, Chińskie Twierdzenie o Resztach \cite{LCM} 
+        \item Rozkład Bezkwadratowy Wielomianu \cite{LCM}, \cite{ComputerAlgebra}
+        \item Bazy Gr{\"o}bnera \cite{Dumnicki}, \cite{Computative1}, \cite{ComputerAlgebra}, \cite{LCM}
+    \end{enumerate}
+        
+\end{frame}
+
+\begin{frame}{Potencjalne Tematy}
+    \begin{enumerate}
+        \item Rozkład Liczby na Czynniki Pierwsze
+        \item Algebra Przemienna, Moduły, k-Algebry 
+        \item Wstęp do Geometrii Algebraicznej 
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Literatura}
+    \nocite{*}
+    \printbibliography
+\end{frame}
+
+\end{document}

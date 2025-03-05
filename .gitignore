@@ -247,3 +247,7 @@ pythontex-files-*/
 *.lpz
 
 .task/*
+
+# Ignore out directory
+pdf/*
+!pdf/*.pdf
