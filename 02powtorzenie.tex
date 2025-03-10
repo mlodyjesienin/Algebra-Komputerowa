@@ -1,0 +1,429 @@
+\documentclass{beamer}
+
+\usepackage{polski}
+\usepackage{pgf,tikz}
+\usepackage{tgheros}       
+
+\usetheme{BIT}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath,amsthm}
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes,decorations}
+
+\title{Algebra Komputerowa}
+\subtitle{Powtórzenie Podstaw Algebry}
+\author{Filip Zieli\'nski}
+\date{2025}
+ 
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+ 
+\begin{frame}{Spis Treści}
+    \tableofcontents
+\end{frame}
+
+\section{Działania}
+\begin{frame}{Działanie Wewnętrzne}
+    \begin{block}{Definicja}
+        Niech $X$ będzie ustalonym niepustym zbiorem. Dwuargumentowym \textbf{działaniem wewnętrznym} na zbiorze $X$ nazywamy  dowolne odwzorowanie $h: X \times X \rightarrow X$.
+        Dla elementów $x,y \in X$ wartość $h(x,y)$ nazywamy wynikiem działania $h$ na argumentach $x,y$. 
+    \end{block}
+    \pause 
+    \begin{exampleblock}{Przykład}
+        Działaniami wewnętrznymi są np. 
+        \begin{itemize}
+            \item  $h(x,y) = \frac{x+y}{2}$, dla $X = \mathbb{Q}$ 
+            \item $h(x,y) = 2^{xy}$, dla $X = \mathbb{N}$ 
+            \item $h(f,g) =  f \circ g $, dla $ X = \mathcal{F}(\mathbb{R}, \mathbb{R})$
+        \end{itemize}
+        Działaniem wewnętrznym \textbf{nie jest} np. 
+        \begin{itemize}
+            \item $h(x,y) = x + y$, dla $X = \{ a \in \mathbb{N} : 2\mid a \lor 3\mid a \}$
+        \end{itemize}
+        
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Działanie Zewnętrzne}
+    \begin{block}{Definicja}
+        Dwuargumentowym \textbf{działaniem zewnętrznym} w niepustym zbiorze $X$ nad niepustym zbiorem $F$ nazywamy odwzorowanie
+        $g : F \times X \rightarrow X$.
+    \end{block}
+    \pause 
+    \begin{exampleblock}{Przykład}
+        Działaniami zewnętrznymi są np.
+        \begin{itemize}
+            \item $g(\alpha, [x,y]) = [\alpha \dot x, \alpha \dot y]$, dla $F = \mathbb{R}, X = \mathbb{R}^2$
+            \item $g(a,x) = nx$, dla $F = \mathbb{Z},  X =\mathbb{R}$
+            \item $g(a,b) = ab$, dla $F = \mathbb{Z}, X = \{ b \in \mathbb{Z} : 3 \mid b \}$
+        \end{itemize}
+        Działaniem zewnętrznym \textbf{nie jest} np. 
+        \begin{itemize}
+            \item $g(a,b) = a +b $, dla $F = \mathbb{R}, X = \mathbb{Q}$
+        \end{itemize}
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Oznaczenia}
+    \begin{alertblock}{Konwencja}
+        Zwyczajowo działania oznaczamy symbolami : 
+        
+        $ +, \star, \cdot, \circ, \oplus, \otimes $
+
+        Natomiast wynik działania oznaczamy odpowiednio przez: $x +y, x\star y, x \cdot y, x\circ y, x \oplus y, x\otimes y$
+    \end{alertblock}
+\end{frame}
+
+\section{Grupy}
+\begin{frame}{Półgrupy, Monoidy, Grupy}
+    \setbeamercovered{transparent}
+    \begin{block}{Definicja}
+        Niepusty zbiór $G$ z działaniem wewnętrznym $\oplus$ nazywamy \only<1>{\textbf{Półgrupą}} \only<2>{\textbf{Monoidem}} \only<3>{\textbf{Grupą}} \only<4,5>{\textbf{Grupą abelową}}
+        jeżeli spełnione są następujące warunki 
+        \begin{enumerate}
+            \onslide<1->{\item $\forall x,y,z \in G \quad (x \oplus y) \oplus z = x \oplus (y \oplus z)$ \hfill \textit{(łączność)} }
+            \onslide<2->{ \item $\exists e \in G : \forall x \in G   \quad x \oplus e = e \oplus x = x$ \hfill \textit{(el. neutralny)}}
+            \onslide<3->{ \item $\forall x \in G \: \exists x' \in G \quad x \oplus x' = x' \oplus x = e $ \hfill \textit{(el. odwrotne)}}
+            \onslide<4->{ \item $\forall x,y \in G \quad x \oplus y = y \oplus x$ \hfill \textit{(przemienność)}}
+        \end{enumerate}
+    \end{block} 
+    \setbeamercovered{}
+    \onslide<5->{
+        \begin{alertblock}{Konwencja addytywna}
+            Element neutralny grupy $G$ oznaczamy  często jako $\mathbf{0}$. W szczególności jeśli mowa o "dodawaniu", oznaczanym przez $+ , \oplus$
+            Elementy symetryczne nazywamy "przeciwnymi" i oznaczamy $-a$. Zapis $a-b$ należy rozumieć jako $a + (-b)$
+        \end{alertblock}
+    }
+\end{frame}
+
+
+\begin{frame}{Półgrupy, Monoidy, Grupy}
+    \begin{exampleblock}{Przykład}
+        Półgrupą jest np.
+        \begin{itemize}
+            \item $(\mathbb{N}\setminus \{0\} , +)$
+        \end{itemize}
+        Monoidem jest np. 
+        \begin{itemize}
+            \item $ ( \mathbb{Z}, \cdot )$
+        \end{itemize}
+        Grupą jest np.
+        \begin{itemize}
+            \item $(\mathcal{F}(\mathbb{R},\mathbb{R}), \circ)$
+        \end{itemize}
+        Grupą Abelową jest np.
+        \begin{itemize}
+            \item $( \mathbb{Z}, +)$
+        \end{itemize}
+        
+    \end{exampleblock}
+    \pause 
+    \begin{alertblock}{Konwencja}
+        Jeżeli działanie w grupie wynika z kontekstu, możemy je pomijać w zapisie i utożsamiać grupę ze zbiorem.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Podgrupa}
+    \begin{block}{Definicja}
+        Niech $(G, \oplus)$ będzie grupą. Niepusty podzbiór $H \subseteq G$ nazywamy podgrupą grupy $G$
+        jeżeli zachodzą warunki 
+        \begin{align*}
+            & \forall  x \in H  \quad -x \in H \\ 
+            & \forall x,y \in H  \quad x \oplus y \in H
+        \end{align*}
+    \end{block}
+    \pause 
+    \begin{exampleblock}{Przykład}
+        Podgrupami  $(\mathbb{Z}, +)$ są np.
+
+        \begin{tabular}{cc}
+              $2\mathbb{Z} = \{a \in \mathbb{Z} : 2 \mid a\}$, & 
+            $\{ \mathbf{0}\}$
+        \end{tabular}
+
+        Podgrupami  $(\mathbb{R}, \cdot)$ są np.
+        
+        \begin{tabular}{cc}
+            $\mathbb{Q}$, & $\mathbb{R}$
+        \end{tabular}
+    \end{exampleblock}
+    \pause 
+    \begin{alertblock}{Konwencja}
+        oznaczenie $H < G$ należy rozumieć jako \textit{"H jest pogrupą G"}.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Homomorfizmy Grup}
+    \begin{block}{Definicja}
+        Homomorfizmem między grupą $(G, \oplus)$ oraz grupą $(H, \otimes)$ nazywamy dowolne odwzorowanie 
+        $h : G \rightarrow H$, spełniające warunek
+        $$ \forall x,y \in G \quad h(x \oplus y) = h(x) \otimes h(y)$$
+    \end{block}
+    \pause 
+    \begin{exampleblock}{Przykład}
+        Homomorfizmem grup $(\mathbb{Z}, +), (\mathbb{R}, \cdot)$ jest np.
+        \begin{itemize}
+            \item $h(x) = e^x$
+        \end{itemize} 
+        Homomorfizmem grup $(\mathbb{Z}, +), (\mathbb{Z}, +)$ jest np. 
+        \begin{itemize}
+            \item $h(x) = 2x$ 
+        \end{itemize}
+    \end{exampleblock}
+\end{frame}
+
+\section{Pierścienie}
+
+\begin{frame}{Pierścienie}
+    \begin{block}{Definicja}
+        Zbiór $R$ z dwoma działaniami $\oplus, \otimes$ nazywamy \only<1>{\alert{Pierścieniem}} \only<2>{\alert{Pierścieniem z jedynką}} \only<3>{\alert{Pierścieniem przemiennym z jedynką}}, jeżeli zachodzą następujące warunki
+        \begin{enumerate}
+            \item $(R, \oplus)$ jest grupą abelową 
+            \item $(R, \otimes)$ jest \only<1>{półgrupą} \only<2>{monoidem} \only<3>{monoidem przemiennym}
+            \item $\forall x,y,z \in R \quad x \otimes (y \oplus z) = x \otimes y \oplus x \otimes z \land $ \\ $(x \oplus y) \otimes z = x \otimes z \oplus y \otimes z$ \hfill \textit{(rozdzielność mn. wzg. dod.)} 
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Pierścienie}
+    \begin{exampleblock}{Przykład}
+        Pierścieniem jest np.
+        \begin{itemize}
+            \item $(5\mathbb{Z}, +, \cdot)$
+        \end{itemize}
+        Pierścieniem z jedynką jest np.
+        \begin{itemize}
+            \item $(\mathcal{M}_2(\mathbb{R}, +, \cdot))$
+        \end{itemize}
+        Pierścieniami przemiennymi z jedynką są np.
+        \begin{itemize}
+            \item $(\mathbb{Z}, +, \cdot )$
+            \item $(\mathbb{R}[x], +, \cdot )$
+            \item $(\mathbb{Z}_n, +, \cdot )$
+            \item $(\mathbb{R}[x_1,\ldots, x_n], +, \cdot )$
+        \end{itemize}
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Pierścienie}
+    \begin{block}{Obserwacja}
+        Dla dowolnego pierścienia $(R, \oplus, \otimes)$ zachodzi:
+        $$ \forall x \in R \quad x \otimes \mathbf{0} =  \mathbf{0} \otimes x = \mathbf{0}$$
+    \end{block}
+    \pause 
+    \begin{proof}
+        Przeprowadzimy dowód, że $x \otimes \mathbf{0} = 0$.
+        Załóżmy nie wprost, że istnieje $x \in R$ takie, że $x \otimes \mathbf{0} = y, y\neq \mathbf{0}$.
+        Możemy zapisać $y = x \otimes \mathbf{0} = x \otimes (\mathbf{0} \oplus \mathbf{0}) = x \otimes \mathbf{0} \oplus x \otimes \mathbf{0} = y \oplus y$.
+        Dostaliśmy zatem $y = y \oplus y$ co po obustronnym dodaniu $-y$ prowadzi do $y = \mathbf{0}$ co jest sprzeczne z założeniem.
+        Dowód faktu, że $\mathbf{0} \otimes x = \mathbf{0}$ można przeprowadzić analogicznie.
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Pierścienie}
+    \begin{alertblock}{Konwencja}
+        Jeżeli $(R, \oplus, \otimes)$ jest pierścieniem, to zwyczajowo działanie $\oplus$ nazywamy dodawaniem, a $\otimes$ mnożeniem.
+        Dodatkowo, jeżeli $(R, \otimes)$ jest monoidem, to jego element neutralny nazywamy "jedynką" i oznaczamy $\mathbf{1}$. 
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Podpierścienie}
+    \begin{block}{Definicja}
+        Niepusty podzbiór $S$ pierścienia $(R, \oplus, \ominus)$ nazywamy podpierścieniem $R$, jeżeli $(S,\oplus)$ jest podgrupą (addytywną) $(R,\oplus)$ oraz zbiór $S$ jest zamknięty ze względu na mnożenie.
+        Dodatkowo, jeżeli, $R$ jest pierścieniem z jedynką dodaje się warunek $\mathbf{1} \in S$. 
+    \end{block}
+    \begin{exampleblock}{Przykład}
+        Podpierścieniem pierścienia $\mathbb{R}$ są np.
+        \begin{itemize}
+            \item $\mathbb{Q}$
+            \item $\mathbb{Z}$
+        \end{itemize}
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Pierścienie z Dzielnikami Zera}
+    \begin{block}{Definicja}
+        Niech $(R, \oplus, \otimes)$ będzie pierścieniem. Wtedy $a,b \in R, a,b \neq 0$ są \textbf{dzielnikami zera} wtedy i tylko wtedy gdy $a \otimes b = 0$.
+    \end{block}
+    \begin{block}{Definicja}
+        Pierścień, w którym nie występują dzielniki zera, nazywamy \textbf{Pierścieniem całkowitym}.
+    \end{block}
+    \begin{exampleblock}{Przykład}
+        \begin{enumerate}
+            \item W pierścieniu $\mathbb{Z}_6$ elementy $2,3$ są dzielnikami zera, ponieważ $2,3 \neq \mathbf{0} \land 2\cdot 3 = 6 = \mathbf{0}$.
+            \item Pierścień $\mathbb{Z}$ jest pierścieniem całkowitym. 
+        \end{enumerate}        
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Homomorfizmy Pierścieni}
+    \begin{block}{Definicja}
+        Niech $(R, +, \cdot)$ oraz $(S, \oplus, \otimes)$ będą dowolnymi pierścieniami.
+        Homomorfizmem pierścieni $R,S$ nazywamy dowolne odwzorowanie $h : R \rightarrow S$ takie, że:
+        \begin{align*}
+            \forall a,b \in R \quad h(a + b) & = h(a) \oplus h(b) \\
+            \forall a,b \in R \quad h(a \cdot b) & = h(a) \otimes h(b) 
+        \end{align*}
+        \uncover<2->{Dodatkowo, jeśli, R,S są pierścieniami z jedynką, musi zachodzić 
+        $$ h(\mathbf{1}_R) = \mathbf{1}_S$$}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Homomorfizmy Pierścieni}
+    \begin{exampleblock}{Przykład}
+        Homomorfizmami pierścieni $\mathbb{Z}, \mathbb{Z}[x]$ są np.
+        \begin{itemize}
+            \item $h(a) = a$
+            \item $h(a) = a(x^2 + 2x +7)$
+        \end{itemize}
+        Homomorfizmem pierścieni $\mathbb{Z}, \mathbb{Z}_n$ jest np.
+        \begin{itemize}
+            \item $h(a) = a $ (mod $n$)
+        \end{itemize}
+    \end{exampleblock}
+\end{frame}
+
+\section{Ciała}
+
+\begin{frame}
+    \begin{block}{Definicja}
+        Pierścień z jednością $(K, \oplus, \otimes)$ nazywamy ciałem, jeżeli $(K\setminus \{\mathbf{0}\}, \otimes)$ jest grupą abelową.
+    \end{block}
+    \begin{exampleblock}{Przykład}
+        Ciałami są np.
+        \begin{itemize}
+            \item $\mathbb{R}$
+            \item $\mathbb{Q}$
+            \item $\mathbb{C}$
+            \item $\mathbb{Z}_p$, dla $p$ będącego liczbą pierwszą
+        \end{itemize}
+    \end{exampleblock}
+    \begin{alertblock}{Konwencja}
+        Elementy symetryczne w działaniu "mnożenia" nazywamy elementami odwrotnymi i oznaczamy $a^{-1}$
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Ciała}
+    \begin{block}{Obserwacja}
+        Dowolne ciało $(K, \oplus, \otimes)$ jest pierścieniem całkowitym.
+    \end{block}
+    \pause 
+    \begin{proof}
+        Załóżmy nie wprost, że istnieją $ a,b \in K, a,b \neq \mathbf{0 }$ takie, że $ a \otimes b = \mathbf{0} $. z tego wynika, że
+        $a^{-1} \otimes a \otimes b = a^{-1} \otimes \mathbf{0} $ z czego wynika $ \mathbf{1} \otimes b = \mathbf{0} $ co jest równoważne z $b = \mathbf{0}$, co jest sprzecze z założeniem.    
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Podciała}
+    \begin{block}{Definicja}
+        Niech $K$ będzie ciałem. Niepusty podzbiór $L$ zbioru $K$ nazywamy podciałem, gdy $L$ jest podpierścieniem $K$ oraz zachodzi
+        $$\forall a \in L\setminus{\mathbf{0}} \quad a^{-1} \in L$$
+    \end{block}
+    \begin{exampleblock}{Przykład}
+        Podciałem $\mathbb{C}$ są np.
+        \begin{itemize}
+            \item $\mathbb{R}$
+            \item $\mathbb{Q}$
+            \item $\mathbb{Q}[\sqrt{2}] = \{ a + b\sqrt{2} : a,b \in \mathbb{Q} \}$
+        \end{itemize}
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Homomorfizmy Ciał}
+    \begin{block}{Definicja}
+        Niech $(R, + , \cdot)$ oraz $(S, \oplus, \otimes)$ będą dowolnymi ciałami. Homomorfizem ciał $R$ i $S$ nazywamy dowolne odwzorowanie $h : R \rightarrow S$ spełniające 
+        \begin{align*}
+            \forall a,b \in R \quad h(a + b) & = h(a) \oplus h(b) \\
+            \forall a,b \in R \quad h(a \cdot b) & = h(a) \otimes h(b) 
+        \end{align*}
+    \end{block}
+\end{frame}
+\section{Funkcje}
+
+\begin{frame}{Szczególne homomorfizmy}
+    \begin{block}{Definicja}
+        Homomorfizm (grup, pierścieni, ciał) nazwiemy 
+        \begin{itemize}
+            \item \textit{monomorfizmem}, gdy jest iniektywny
+            \item \textit{epimorfizmem}, gdy jest surjektywny
+            \item \textit{izomorfizmem}, gdy jest bijektywny
+            \item \textit{endomorfizmem}, gdy dziedzina jest równa przeciwdziedzinie
+            \item \textit{automorifzmem}, gdy jest to endomorfizm bijektywny 
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Obraz i Przeciwobraz zbioru}
+    Niech $f : X \rightarrow Y$ będzie dowolnym odwzorowaniem z $X$ do $Y$. 
+    \begin{block}{Definicja}
+        \alert{Obrazem zbioru $A$} $ \subseteq X$ przez odwzorowanie $f$ nazywamy zbiór 
+        $\{y \in Y \mid \exists x \in A : f(x) = y\}$ i oznaczamy przez $f(A)$.
+    \end{block}
+    \begin{block}{Definicja}
+        \alert{Przeciwobrazem zbioru $B$ } $ \subseteq Y$ przez odwzorowanie $f$ nazywamy zbiór 
+        $\{ x \in X  \mid  f(x) \in B \}$ i oznaczamy przez $f^{-1}(B)$.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Obraz i Jądro odwzorowania }
+    Niech $f : X \rightarrow Y$ będzie dowolnym odwzorowaniem z $X$ do $Y$. 
+    \begin{block}{Definicja}
+        \alert{Obrazem odwzorowania $f$} nazywamy zbiór $f(X)$ i oznaczamy przez $Im_f$.
+    \end{block}
+    W przypadku gdy przeciwdziedzina dziedziny tworzy strukturę z elementem neutralnym oznaczanym przez $\mathbf{0}$
+    definiujemy dodatkowo \textit{jądro odwzorowania}
+    \begin{block}{Definicja}
+        \alert{Jądrem odwzorowania $f$} nazywamy zbiór $f^{-1}(\mathbf{0})$ i oznaczamy przez $Ker_f$.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Obraz i Jądro odwzorowania}
+    \begin{exampleblock}{Przykład}
+        Niech $f : \mathbb{Z} \rightarrow \mathbb{Z}_7$ będzie zadane wzorem $f(a) = a $ (mod $7$).
+        Wtedy
+        \begin{itemize}
+            \item $f(\{1,9,15\}) = \{1,2\}$
+            \item $f^{-1}(1) = \{ 7k + 1 \mid k \in \mathbb{Z}\}$
+            \item $Im_f = f(\mathbb{Z}) = \mathbb{Z}_7$
+            \item $Ker_f =f^{-1}(0) = \{ 7k \mid k \in \mathbb{Z} \}$ 
+        \end{itemize}
+    \end{exampleblock}
+\end{frame}
+
+\section{Iloczyn Kartezjański i Suma Prosta}
+\begin{frame}{Iloczyn Kartezjański}
+    Niech $A,B$ będą dowolnymi niepustymi zbiorami.
+    \begin{block}{Definicja}
+         \alert{Iloczynem Kartezjańskim} $A,B$ nazywamy zbiór
+        $\{(a,b) \mid a \in A \land b \in B\}$ i oznaczamy przez $A \times B$.
+    \end{block}
+    \begin{block}{Definicja}
+        $n$-krotny iloczyn kartezjański zbioru $A$ z samym sobą rozumiemy jako $ \underbrace{A \times A \times \ldots \times A}_{n} 
+        = \{(a_1,\ldots, a_n) \mid a_1,\ldots,a_n \in A \}$ i oznaczamy  przez $A^n$.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Suma Algebraiczna, Prosta}
+    Niech $(G, +)$ będzie grupą oraz niech $A,B$ będą dowolnymi niepustymi podzbiorami $G$.
+    \begin{block}{Definicja}
+        \alert{Sumą Algebraiczną} zbiorów $A,B$ nazywamy zbiór $\{ a + b \mid a \in A \land b \in B\}$
+        i oznaczamy przez $A + B$.
+    \end{block}
+    Jeżeli zachodzi własność, że dla każdego $c \in A +B $ istnieje dokładnie jedna para $a,b$ taka, że $a \in A, b \in B$ oraz $c = a +b$, 
+    to mówimy o \alert{Sumie Prostej} zbiorów $A,B$. Zwyczajowo, sumę prostą zbiorów $A,B$ oznaczamy przez $A \oplus B$. 
+    \pause 
+    Zauważmy, że istnieje naturalny izomorfizm  $ \phi : A \times B \rightarrow A \oplus B$ zadany przez
+    $\phi(a,b) = a + b$. Z tego powodu, często w literaturze suma prosta (wewnętrzna) jest nierozróżnialna z iloczynem kartezjańskim. 
+\end{frame}
+
+\begin{frame}
+        \centering 
+        \LARGE Pytania, wątpliwości, uwagi ? 
+\end{frame}
+
+\end{document}
