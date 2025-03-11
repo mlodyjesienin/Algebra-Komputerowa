@@ -1,0 +1,105 @@
+\documentclass{beamer}
+
+\usepackage{polski}
+\usepackage{pgf,tikz}
+\usepackage{tgheros}       
+
+\usetheme{BIT}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath,amsthm}
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes,decorations}
+
+\title{Algebra Komputerowa}
+\subtitle{Macierze Blokowe}
+\author{Filip Zieli\'nski}
+\date{2025}
+ 
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+ 
+\begin{frame}{Spis Treści}
+    \tableofcontents
+\end{frame}
+
+\section{Wstęp} 
+
+\begin{frame}{Macierze Blokowe}
+    W poniższych rozważaniach skupimy się na macierzach blokowych $2 \times 2$. Wiele wyników da się jednak uogólnić.
+    \begin{block}{Definicja}
+        Rozważmy macierze $A \in \mathcal{M}_{n_1 \times m_1}, B \in \mathcal{M}_{n_1 \times m_2}, C \in \mathcal{M}_{n_2 \times m_1}, D \in \mathcal{M}_{n_2 \times m_2}$ nad ustalonym ciałem $K$.
+        Wtedy, \alert{Macierzą Blokową} (klatkową) $X \in \mathcal{M}_{n_1 + n_2 \times m_1 + m_2}$ złożoną z  $A,B,C,D$ definiujemy jako $X = (x_{ij})$, gdzie 
+        $$x_{ij} = \begin{cases}
+            a_{ij} & i \leq n_1 , \quad  j \leq m_1 \\ 
+            b_{ij} &  i \leq n_1 , \quad m_1 < j \leq m_1 + m_2 \\
+            c_{ij} & n_1 < i \leq n_1 + n_2, \quad j \leq m_1 \\
+            d_{ij} & n_1 < i \leq n_1 + n_2 \quad  m_1 < j \leq m_1 + m_2 \\
+        \end{cases}$$
+    \end{block}    
+\end{frame}
+
+\begin{frame}{Macierze Blokowe}
+    Takie macierze zapisujemy jako
+    $$ X = \begin{bmatrix}
+        A & B \\
+        C & D
+    \end{bmatrix}$$
+    Zauważmy, że macierze można dzielić na bloki na wiele sposobów, 
+    $$X = \left[ \begin{array}{ccc|c}
+        1 & 2 & 3 & 4 \\ \hline 
+        5 & 6 & 7 & 8 \\ 
+        9 & 10 & 11 & 12 \\ 
+        13 & 14 & 15 & 16 \\
+    \end{array}\right] =  \left[ \begin{array}{cc|cc}
+        1 & 2 & 3 & 4 \\ 
+        5 & 6 & 7 & 8 \\ \hline 
+        9 & 10 & 11 & 12 \\ 
+        13 & 14 & 15 & 16 \\
+    \end{array}\right] $$
+    ale zawsze zachodzi $colA = colC, \quad colB = colD,\quad  rowA = rowB, \quad rowC = rowD$
+\end{frame}
+
+\section{Podstawowe Operacje} 
+
+\begin{frame}
+    \begin{block}{Obserwacja}
+        Niech $X,Y$ będą macierzami tych samych wymiarów. Jeżeli $X,Y$ podzielimy na bloki 
+        odpowiednio \textit{tych samych wymiarów}, to macierze blokowe można dodawać
+        $$X = \begin{bmatrix}
+            A_1 & B_1 \\ C_1 & D_1 \\
+        \end{bmatrix},
+        Y = \begin{bmatrix}
+            A_2& B_2 \\ C_2 & D_2 \\
+        \end{bmatrix}, \quad 
+        X + Y = \begin{bmatrix}
+            A_1 + A_2 & B_1 + B_2 \\ C_1 + C_2 & D_1 + D_2 \\ 
+        \end{bmatrix}$$
+    \end{block}
+    Równie naturalnie, zdefiniowane jest odejmowanie macierzy blokowych jak i mnożenie macierzy przez skalar z ciała.
+\end{frame}
+
+\section{Mnożenie Macierzy}
+
+\begin{frame}{Mnożenie Macierzy Blokowych}
+    \begin{block}{Twierdzenie}
+        Niech, $X \in \mathcal{M}_{n_1 + n_2 \times m_1 + m_2},Y \in \mathcal{M}_{m_1 + m_2 \times p_1 + p_2}$ będą macierzami nad tym samym ciałem $K$ podzielonymi na bloki w następujący sposób
+        $$X =\begin{bmatrix}
+            A_1 & B_1 \\ C_1 & D_1 \\
+        \end{bmatrix}, \quad Y = \begin{bmatrix}
+            A_2 & B_2 \\ C_2 & D_2 \\ 
+        \end{bmatrix},$$  gdzie $col A_1 = col C_1 = row A_2 = row B_2$ oraz $col B_1 = col D_1 = row C_2 = row D_2 .$
+        \newline 
+        Wtedy 
+        $$ M = XY = \begin{bmatrix}
+            A_1 A_2 +  B_1 C_2 & A_1 B_2 + B_1 D_2 \\
+            C_1 A_2 + D_1 C_2 & C_1 B_2 + D_1 D_2 \\
+        \end{bmatrix}$$
+    \end{block}
+\end{frame}
+
+\end{document}
