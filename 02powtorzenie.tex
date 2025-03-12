@@ -12,6 +12,9 @@
 \usetikzlibrary{arrows}
 \usetikzlibrary{shapes,decorations}
 
+\newcommand{\zero}{\mathbf{0}}
+\newcommand{\one}{\mathbf{1}}
+
 \title{Algebra Komputerowa}
 \subtitle{Powtórzenie Podstaw Algebry}
 \author{Filip Zieli\'nski}
@@ -95,7 +98,7 @@
     \setbeamercovered{}
     \onslide<5->{
         \begin{alertblock}{Konwencja addytywna}
-            Element neutralny grupy $G$ oznaczamy  często jako $\mathbf{0}$. W szczególności jeśli mowa o "dodawaniu", oznaczanym przez $+ , \oplus$
+            Element neutralny grupy $G$ oznaczamy  często jako $\zero$. W szczególności jeśli mowa o "dodawaniu", oznaczanym przez $+ , \oplus$
             Elementy symetryczne nazywamy "przeciwnymi" i oznaczamy $-a$. Zapis $a-b$ należy rozumieć jako $a + (-b)$
         \end{alertblock}
     }
@@ -143,7 +146,7 @@
 
         \begin{tabular}{cc}
               $2\mathbb{Z} = \{a \in \mathbb{Z} : 2 \mid a\}$, & 
-            $\{ \mathbf{0}\}$
+            $\{ \zero\}$
         \end{tabular}
 
         Podgrupami  $(\mathbb{R}, \cdot)$ są np.
@@ -213,29 +216,29 @@
 \begin{frame}{Pierścienie}
     \begin{block}{Obserwacja}
         Dla dowolnego pierścienia $(R, \oplus, \otimes)$ zachodzi:
-        $$ \forall x \in R \quad x \otimes \mathbf{0} =  \mathbf{0} \otimes x = \mathbf{0}$$
+        $$ \forall x \in R \quad x \otimes \zero =  \zero \otimes x = \zero$$
     \end{block}
     \pause 
     \begin{proof}
-        Przeprowadzimy dowód, że $x \otimes \mathbf{0} = 0$.
-        Załóżmy nie wprost, że istnieje $x \in R$ takie, że $x \otimes \mathbf{0} = y, y\neq \mathbf{0}$.
-        Możemy zapisać $y = x \otimes \mathbf{0} = x \otimes (\mathbf{0} \oplus \mathbf{0}) = x \otimes \mathbf{0} \oplus x \otimes \mathbf{0} = y \oplus y$.
-        Dostaliśmy zatem $y = y \oplus y$ co po obustronnym dodaniu $-y$ prowadzi do $y = \mathbf{0}$ co jest sprzeczne z założeniem.
-        Dowód faktu, że $\mathbf{0} \otimes x = \mathbf{0}$ można przeprowadzić analogicznie.
+        Przeprowadzimy dowód, że $x \otimes \zero = 0$.
+        Załóżmy nie wprost, że istnieje $x \in R$ takie, że $x \otimes \zero = y, y\neq \zero$.
+        Możemy zapisać $y = x \otimes \zero = x \otimes (\zero \oplus \zero) = x \otimes \zero \oplus x \otimes \zero = y \oplus y$.
+        Dostaliśmy zatem $y = y \oplus y$ co po obustronnym dodaniu $-y$ prowadzi do $y = \zero$ co jest sprzeczne z założeniem.
+        Dowód faktu, że $\zero \otimes x = \zero$ można przeprowadzić analogicznie.
     \end{proof}
 \end{frame}
 
 \begin{frame}{Pierścienie}
     \begin{alertblock}{Konwencja}
         Jeżeli $(R, \oplus, \otimes)$ jest pierścieniem, to zwyczajowo działanie $\oplus$ nazywamy dodawaniem, a $\otimes$ mnożeniem.
-        Dodatkowo, jeżeli $(R, \otimes)$ jest monoidem, to jego element neutralny nazywamy "jedynką" i oznaczamy $\mathbf{1}$. 
+        Dodatkowo, jeżeli $(R, \otimes)$ jest monoidem, to jego element neutralny nazywamy "jedynką" i oznaczamy $\one$. 
     \end{alertblock}
 \end{frame}
 
 \begin{frame}{Podpierścienie}
     \begin{block}{Definicja}
         Niepusty podzbiór $S$ pierścienia $(R, \oplus, \ominus)$ nazywamy podpierścieniem $R$, jeżeli $(S,\oplus)$ jest podgrupą (addytywną) $(R,\oplus)$ oraz zbiór $S$ jest zamknięty ze względu na mnożenie.
-        Dodatkowo, jeżeli, $R$ jest pierścieniem z jedynką dodaje się warunek $\mathbf{1} \in S$. 
+        Dodatkowo, jeżeli, $R$ jest pierścieniem z jedynką dodaje się warunek $\one \in S$. 
     \end{block}
     \begin{exampleblock}{Przykład}
         Podpierścieniem pierścienia $\mathbb{R}$ są np.
@@ -255,7 +258,7 @@
     \end{block}
     \begin{exampleblock}{Przykład}
         \begin{enumerate}
-            \item W pierścieniu $\mathbb{Z}_6$ elementy $2,3$ są dzielnikami zera, ponieważ $2,3 \neq \mathbf{0} \land 2\cdot 3 = 6 = \mathbf{0}$.
+            \item W pierścieniu $\mathbb{Z}_6$ elementy $2,3$ są dzielnikami zera, ponieważ $2,3 \neq \zero \land 2\cdot 3 = 6 = \zero$.
             \item Pierścień $\mathbb{Z}$ jest pierścieniem całkowitym. 
         \end{enumerate}        
     \end{exampleblock}
@@ -270,7 +273,7 @@
             \forall a,b \in R \quad h(a \cdot b) & = h(a) \otimes h(b) 
         \end{align*}
         \uncover<2->{Dodatkowo, jeśli, R,S są pierścieniami z jedynką, musi zachodzić 
-        $$ h(\mathbf{1}_R) = \mathbf{1}_S$$}
+        $$ h(\one_R) = \one_S$$}
     \end{block}
 \end{frame}
 
@@ -292,7 +295,7 @@
 
 \begin{frame}
     \begin{block}{Definicja}
-        Pierścień z jednością $(K, \oplus, \otimes)$ nazywamy ciałem, jeżeli $(K\setminus \{\mathbf{0}\}, \otimes)$ jest grupą abelową.
+        Pierścień z jednością $(K, \oplus, \otimes)$ nazywamy ciałem, jeżeli $(K\setminus \{\zero\}, \otimes)$ jest grupą abelową.
     \end{block}
     \begin{exampleblock}{Przykład}
         Ciałami są np.
@@ -314,15 +317,15 @@
     \end{block}
     \pause 
     \begin{proof}
-        Załóżmy nie wprost, że istnieją $ a,b \in K, a,b \neq \mathbf{0 }$ takie, że $ a \otimes b = \mathbf{0} $. z tego wynika, że
-        $a^{-1} \otimes a \otimes b = a^{-1} \otimes \mathbf{0} $ z czego wynika $ \mathbf{1} \otimes b = \mathbf{0} $ co jest równoważne z $b = \mathbf{0}$, co jest sprzecze z założeniem.    
+        Załóżmy nie wprost, że istnieją $ a,b \in K, a,b \neq \mathbf{0 }$ takie, że $ a \otimes b = \zero $. z tego wynika, że
+        $a^{-1} \otimes a \otimes b = a^{-1} \otimes \zero $ z czego wynika $ \one \otimes b = \zero $ co jest równoważne z $b = \zero$, co jest sprzecze z założeniem.    
     \end{proof}
 \end{frame}
 
 \begin{frame}{Podciała}
     \begin{block}{Definicja}
         Niech $K$ będzie ciałem. Niepusty podzbiór $L$ zbioru $K$ nazywamy podciałem, gdy $L$ jest podpierścieniem $K$ oraz zachodzi
-        $$\forall a \in L\setminus{\mathbf{0}} \quad a^{-1} \in L$$
+        $$\forall a \in L\setminus{\zero} \quad a^{-1} \in L$$
     \end{block}
     \begin{exampleblock}{Przykład}
         Podciałem $\mathbb{C}$ są np.
@@ -375,10 +378,10 @@
     \begin{block}{Definicja}
         \alert{Obrazem odwzorowania $f$} nazywamy zbiór $f(X)$ i oznaczamy przez $Im_f$.
     \end{block}
-    W przypadku gdy przeciwdziedzina dziedziny tworzy strukturę z elementem neutralnym oznaczanym przez $\mathbf{0}$
+    W przypadku gdy przeciwdziedzina dziedziny tworzy strukturę z elementem neutralnym oznaczanym przez $\zero$
     definiujemy dodatkowo \textit{jądro odwzorowania}
     \begin{block}{Definicja}
-        \alert{Jądrem odwzorowania $f$} nazywamy zbiór $f^{-1}(\mathbf{0})$ i oznaczamy przez $Ker_f$.
+        \alert{Jądrem odwzorowania $f$} nazywamy zbiór $f^{-1}(\zero)$ i oznaczamy przez $Ker_f$.
     \end{block}
 \end{frame}
 

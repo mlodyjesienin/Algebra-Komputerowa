@@ -1,0 +1,296 @@
+\documentclass{beamer}
+
+\usepackage{polski}
+\usepackage{pgf,tikz}
+\usepackage{tgheros}       
+
+\usetheme{BIT}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath,amsthm}
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes,decorations}
+
+\newcommand{\zero}{\mathbf{0}}
+\newcommand{\one}{\mathbf{1}}
+\newcommand{\id}{\mathcal{I}}
+
+\title{Algebra Komputerowa}
+\subtitle{Macierze Blokowe}
+\author{Filip Zieli\'nski}
+\date{2025}
+ 
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+ 
+\begin{frame}{Spis Treści}
+    \tableofcontents
+\end{frame}
+
+\section{Wstęp} 
+
+\begin{frame}{Macierze Blokowe}
+    W poniższych rozważaniach skupimy się na macierzach blokowych $2 \times 2$. Wiele wyników da się jednak uogólnić.
+    \begin{block}{Definicja}
+        Rozważmy macierze $A \in \mathcal{M}_{n_1 \times m_1}, B \in \mathcal{M}_{n_1 \times m_2}, C \in \mathcal{M}_{n_2 \times m_1}, D \in \mathcal{M}_{n_2 \times m_2}$ nad ustalonym ciałem $K$.
+        Wtedy, \alert{Macierzą Blokową} (klatkową) $X \in \mathcal{M}_{n_1 + n_2 \times m_1 + m_2}$ złożoną z  $A,B,C,D$ definiujemy jako $X = (x_{ij})$, gdzie 
+        $$x_{ij} = \begin{cases}
+            a_{ij} & i \leq n_1 , \quad  j \leq m_1 \\ 
+            b_{ij} &  i \leq n_1 , \quad m_1 < j \leq m_1 + m_2 \\
+            c_{ij} & n_1 < i \leq n_1 + n_2, \quad j \leq m_1 \\
+            d_{ij} & n_1 < i \leq n_1 + n_2 \quad  m_1 < j \leq m_1 + m_2 \\
+        \end{cases}$$
+    \end{block}    
+\end{frame}
+
+\begin{frame}{Macierze Blokowe}
+    Takie macierze zapisujemy jako
+    $$ X = \begin{bmatrix}
+        A & B \\
+        C & D
+    \end{bmatrix}$$
+    Zauważmy, że macierze można dzielić na bloki na wiele sposobów, 
+    $$X = \left[ \begin{array}{ccc|c}
+        1 & 2 & 3 & 4 \\ \hline 
+        5 & 6 & 7 & 8 \\ 
+        9 & 10 & 11 & 12 \\ 
+        13 & 14 & 15 & 16 \\
+    \end{array}\right] =  \left[ \begin{array}{cc|cc}
+        1 & 2 & 3 & 4 \\ 
+        5 & 6 & 7 & 8 \\ \hline 
+        9 & 10 & 11 & 12 \\ 
+        13 & 14 & 15 & 16 \\
+    \end{array}\right] $$
+    ale zawsze zachodzi $colA = colC, \quad colB = colD,\quad  rowA = rowB, \quad rowC = rowD$
+\end{frame}
+
+\begin{frame}{Szczególne Macierze Blokowe}
+    \begin{alertblock}{Konwencja}
+        Blok, będący macierzą dowolnych wymiarów wypełnioną samymi zerami oznaczamy jako $\zero$.
+    \end{alertblock}
+    \begin{block}{Definicja}
+        \alert{Diagonalną (Przekątniową) macierzą blokową} nazywamy macierz blokową $D$, jeśli da się ją zapisać jako
+        $$ D = \begin{bmatrix}
+            D_1 & \zero \\ \zero & D_2 \\
+        \end{bmatrix}$$
+    \end{block}
+    
+\end{frame}
+
+\begin{frame}{Szczególne Macierze Blokowe}
+    \begin{block}{Definicja}
+        \alert{Trójkątno-górną macierzą blokową} nazywamy macierz blokową $U$, jeśli da się ją zapisać jako
+        $$ U = \begin{bmatrix}
+            U_{11} & U_{12} \\ \zero & U_{22} \\  
+        \end{bmatrix}$$
+    \end{block}
+    \begin{block}{Definicja}
+        \alert{Trójkątno-dolną macierzą blokową} nazywamy macierz blokową $L$, jeśli da się ją zapisać jako 
+        $$ L = \begin{bmatrix}
+            L_{11} & \zero \\ L_{21} & L_{22} \\
+        \end{bmatrix}$$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Szczególne Macierze Blokowe}
+    \begin{alertblock}{Konwencja}
+        W notacji macierzy blokowej $\id$ może oznaczać macierz jednostkową dowolnego wymiaru. 
+    \end{alertblock}
+    \begin{block}{Uwaga }
+        Macierz jednostkową można zapisać w postaci blokowej jako
+        $$ \id = \begin{bmatrix}
+            \id & \zero \\ \zero & \id \\
+        \end{bmatrix}$$
+    \end{block}
+\end{frame}
+
+\section{Podstawowe Operacje} 
+
+\begin{frame}
+    \begin{block}{Obserwacja}
+        Niech $X,Y$ będą macierzami tych samych wymiarów. Jeżeli $X,Y$ podzielimy na bloki 
+        odpowiednio \textit{tych samych wymiarów}, to macierze blokowe można dodawać
+        $$X = \begin{bmatrix}
+            A_1 & B_1 \\ C_1 & D_1 \\
+        \end{bmatrix},
+        Y = \begin{bmatrix}
+            A_2& B_2 \\ C_2 & D_2 \\
+        \end{bmatrix}, \quad 
+        X + Y = \begin{bmatrix}
+            A_1 + A_2 & B_1 + B_2 \\ C_1 + C_2 & D_1 + D_2 \\ 
+        \end{bmatrix}$$
+    \end{block}
+    Równie naturalnie, zdefiniowane jest odejmowanie macierzy blokowych jak i mnożenie macierzy przez skalar z ciała.
+\end{frame}
+
+\begin{frame}{Transpozycja Macierzy Blokowych}
+    \begin{block}{Twierdzenie}
+        Niech $X = \begin{bmatrix}
+            A & B \\ C & D \\
+        \end{bmatrix}$
+        będzie macierzą blokową. Transpozycja macierzy $A$ jest macierzą blokową, zadaną jako $$A^T = \begin{bmatrix}
+            A^T & C^T \\ B^T & D^T \\   
+        \end{bmatrix} $$
+    \end{block}
+\end{frame}
+
+\section{Mnożenie}
+
+\begin{frame}{Mnożenie Macierzy Blokowych}
+    \begin{block}{Twierdzenie}
+        Niech, $X \in \mathcal{M}_{n_1 + n_2 \times m_1 + m_2},Y \in \mathcal{M}_{m_1 + m_2 \times p_1 + p_2}$ będą macierzami nad tym samym ciałem $K$ podzielonymi na bloki w następujący sposób
+        $$X =\begin{bmatrix}
+            A_1 & B_1 \\ C_1 & D_1 \\
+        \end{bmatrix}, \quad Y = \begin{bmatrix}
+            A_2 & B_2 \\ C_2 & D_2 \\ 
+        \end{bmatrix},$$  gdzie $col A_1 = col C_1 = row A_2 = row B_2$ oraz $col B_1 = col D_1 = row C_2 = row D_2 .$
+        \newline 
+        Wtedy 
+        $$ M = XY = \begin{bmatrix}
+            A_1 A_2 +  B_1 C_2 & A_1 B_2 + B_1 D_2 \\
+            C_1 A_2 + D_1 C_2 & C_1 B_2 + D_1 D_2 \\
+        \end{bmatrix}$$
+    \end{block}
+\end{frame}
+
+\section{Odwrotności}
+
+\begin{frame}{Macierze blokowo-diagonalne}
+    \begin{block}{Twierdzenie}
+        Niech $D = \begin{bmatrix}
+            D_1 & \zero \\ \zero & D_2 \\ 
+        \end{bmatrix}$
+        będzie kwadratową macierzą blokowo-diagonalną, gdzie $D_1, D_2$ są blokami kwadratowymi. Macierz $D$ jest nieosobliwa wtedy i tylko wtedy gdy macierze 
+        $D_1$ oraz $D_2$ są nieosobliwe oraz $D^{-1}$ zadane jest wzorem
+        $$ D^{-1} = \begin{bmatrix}
+            D_{1}^{-1} & \zero \\ \zero & D_{2}^{-1}
+        \end{bmatrix}$$
+    \end{block}
+    \pause 
+    \begin{proof}
+        Wzór najprościej sprawdzić z definicji macierzy odwrotnej. 
+        Wkw na istnienie wynika z analizy liczby liniowo niezależnych wierszy lub macierzy. 
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Macierze blokowo-trójkątne}
+    \begin{block}{Twierdzenie}
+        Niech $U = \begin{bmatrix}
+            U_{11} & U_{12} \\ \zero & U_{22}
+        \end{bmatrix}$
+        będzie kwadratową macierzą blokową trójkątną górną, gdzie $U_{11}, U_{22}$ są blokami kwadratowymi. Macierz $U$ jest nieosobliwa wtedy i tylko wtedy 
+        gdy macierze $U_{11}$ oraz  $U_{22}$ są nieosobliwe oraz $U^{-1}$ zadane jest wzorem
+        $$ U^{-1} = \begin{bmatrix}
+            U_{11}^{-1} & -U_{11}^{-1} U_{12} U _{22}^{-1} \\ \zero & U_{22}^{-1}
+        \end{bmatrix}$$
+    \end{block}
+    \pause 
+    \begin{proof}
+        Wzór można wyprowadzić z metody Gaussa, 
+        natomiast wkw wynika z analizy liczby liniowo niezależnych kolumn i wierszy.
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Macierze blokowo-trójkątne}
+    \begin{block}{Twierdzenie}
+        Niech $L = \begin{bmatrix}
+            L_{11} & \zero \\ \L_{21} & L_{22}
+        \end{bmatrix}$
+        będzie kwadratową macierzą blokową trójkątną dolną, gdzie $U_{11}, U_{22}$ są blokami kwadratowymi. Macierz $L$ jest nieosobliwa wtedy i tylko wtedy 
+        gdy macierze $L_{11}$ oraz  $L_{22}$ są nieosobliwe oraz $L^{-1}$ zadane jest wzorem
+        $$ L^{-1} = \begin{bmatrix}
+            L_{11}^{-1} & \zero\\ -L_{22}^{-1} L_{21} L _{11}^{-1}  & L_{22}^{-1}
+        \end{bmatrix}$$
+    \end{block}
+    \pause 
+    \begin{proof}
+        Wzór można wyprowadzić z metody Gaussa, 
+        natomiast wkw wynika z analizy liczby liniowo niezależnych kolumn i wierszy.
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Ogólne Macierze}
+    Niech $M = \begin{bmatrix}
+        A & B \\ C & D \\ 
+    \end{bmatrix}$ będzie kwadratową macierzą blokową, gdzie $A,D$ są kwadratowymi blokami. 
+    \begin{block}{Definicja}
+        Jeżeli $D$ jest nieosobliwe, \alert{Dopełnienie Schura} macierzy $M$ względem $D$ defniujemy jako 
+        $M/D = A -BD^{-1}C$
+    \end{block}
+    \begin{block}{Definicja}
+        Jeżeli $A$ jest nieosobliwe, \alert{Dopełnienie Schura} macierzy $M$ względem $A$ defniujemy jako 
+        $M/A = D -CA^{-1}B$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Ogólne Macierze}
+    Niech $M = \begin{bmatrix}
+        A & B \\ C & D \\ 
+    \end{bmatrix}$ będzie kwadratową macierzą blokową, gdzie $A,D$ są kwadratowymi blokami.
+    \begin{block}{Twierdzenie}
+        Niech $A$ będzie nieosobliwe. Wtedy $M^{-1}$ istnieje wtedy i tylko wtedy gdy $M/A$ jest odwracalne 
+        oraz zachodzi wzór
+        $$ M^{-1}  = \begin{bmatrix}
+            A^{-1} + A^{-1} B (M/A)^{-1} C A^{-1} & - A^{-1} B (M/A)^{-1} \\
+            -(M/A)^{-1} C A^{-1} & (M/A)^{-1} \\  
+        \end{bmatrix}$$
+    \end{block}
+    \begin{proof}
+        Wzór najprościej wyprowadzić z metody Gaussa. 
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Ogólne Macierze}
+    Niech $M = \begin{bmatrix}
+        A & B \\ C & D \\ 
+    \end{bmatrix}$ będzie kwadratową macierzą blokową, gdzie $A,D$ są kwadratowymi blokami.
+    \begin{block}{Twierdzenie}
+        Niech $D$ będzie nieosobliwe. Wtedy $M^{-1}$ istnieje wtedy i tylko wtedy gdy $M/D$ jest odwracalne 
+        oraz zachodzi wzór
+        $$ M^{-1}  = \begin{bmatrix}
+            (M/D)^{-1} & -(M/D)^{-1} B D^{-1} \\
+            -D^{-1} C (M/D)^{-1}  & D^{-1} + D^{-1} C (M/D)^{-1} B D^{-1}
+        \end{bmatrix}$$
+    \end{block}
+    \begin{proof}
+        Wzór najprościej wyprowadzić z metody Gaussa. 
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Ogólne Macierze}
+    \begin{alertblock}{Konwencja}
+        Oznaczmy przez $\mathcal{J}$ macierz kwadratową dowolnego rozmiaru, która ma $1$ na odwrotnej przekątnej, a pozostałe 
+        elementy są równe $0$. Zauważmy, że można zapisać taką macierz w postaci blokowej jako
+        $$ \mathcal{J} = \begin{bmatrix}
+            \zero & \mathcal{J} \\ 
+            \mathcal{J} & \zero \\ 
+        \end{bmatrix}$$
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Ogólne Macierze}
+    \begin{block}{Obserwacja}
+        Niech $M = \begin{bmatrix}
+            A & B \\ C & D \\
+        \end{bmatrix}$ będzie kwadratową macierzą blokową, której bloki $B, C$ są blokami kwadratowymi. 
+        Zauważmy, że macierz $M\mathcal{J} = \begin{bmatrix}
+            B\mathcal{J} & A\mathcal{J} \\ D\mathcal{J} & C\mathcal{J} \\
+        \end{bmatrix}$ jest macierzą kwadratową o blokach kwadratowych na głównej przekątnej, zatem można policzyć jej odwrotność 
+        przy pomocy wspomnianych wcześniej twierdzeń. 
+    \end{block}
+    \begin{block}{Obserwacja}
+        Macierz odwrotną do macierzy blokowej $M$ posiadającej bloki kwadratowe na przekątnej odwrotnej, możemy wyliczyć z zależności
+        $$M^{-1} = \mathcal{J}\mathcal{J}^{-1} M^{-1} = \mathcal{J} (M\mathcal{J})^{-1}$$
+    \end{block}
+\end{frame}
+\begin{frame}{Źródła}
+    \begin{enumerate}
+        \item \href{https://www.mdpi.com/2227-7390/11/17/3784}{Inverses and Determinants of $n \times n$ matrices, Müge Saadetoğlu, Şakir Mehmet Dinsev, 2023}
+        \item \href{https://gubner.ece.wisc.edu/notes/BlockMatrixFormulas.pdf}{Block Matrix Formulas , John A. Gubner, 2024}
+    \end{enumerate}
+\end{frame}
+\end{document}
