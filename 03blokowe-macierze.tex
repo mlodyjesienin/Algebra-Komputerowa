@@ -261,4 +261,31 @@
     \end{proof}
 \end{frame}
 
+\begin{frame}{Ogólne Macierze}
+    \begin{alertblock}{Konwencja}
+        Oznaczmy przez $\mathcal{J}$ macierz kwadratową dowolnego rozmiaru, która ma $1$ na odwrotnej przekątnej, a pozostałe 
+        elementy są równe $0$. Zauważmy, że można zapisać taką macierz w postaci blokowej jako
+        $$ \mathcal{J} = \begin{bmatrix}
+            \zero & \mathcal{J} \\ 
+            \mathcal{J} & \zero \\ 
+        \end{bmatrix}$$
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Ogólne Macierze}
+    \begin{block}{Obserwacja}
+        Niech $M = \begin{bmatrix}
+            A & B \\ C & D \\
+        \end{bmatrix}$ będzie kwadratową macierzą blokową, której bloki $B, C$ są blokami kwadratowymi. 
+        Zauważmy, że macierz $M\mathcal{J} = \begin{bmatrix}
+            B\mathcal{J} & A\mathcal{J} \\ D\mathcal{J} & C\mathcal{J} \\
+        \end{bmatrix}$ jest macierzą kwadratową o blokach kwadratowych na głównej przekątnej, zatem można policzyć jej odwrotność 
+        przy pomocy wspomnianych wcześniej twierdzeń. 
+    \end{block}
+    \begin{block}{Obserwacja}
+        Macierz odwrotną do macierzy blokowej $M$ posiadającej bloki kwadratowe na przekątnej odwrotnej, możemy wyliczyć z zależności
+        $$M^{-1} = \mathcal{J}\mathcal{J}^{-1} M^{-1} = \mathcal{J} (M\mathcal{J})^{-1}$$
+    \end{block}
+\end{frame}
+
 \end{document}
