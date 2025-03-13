@@ -117,7 +117,7 @@
         \end{itemize}
         Grupą jest np.
         \begin{itemize}
-            \item $(\mathcal{F}(\mathbb{R},\mathbb{R}), \circ)$
+            \item $(\textit{Bij}(\mathbb{R},\mathbb{R}), \circ)$ - Zbiór funkcji bijektywnych z $\mathbb{R}$ w $\mathbb{R}$ ze składaniem odwzorowań.
         \end{itemize}
         Grupą Abelową jest np.
         \begin{itemize}
@@ -133,11 +133,10 @@
 
 \begin{frame}{Podgrupa}
     \begin{block}{Definicja}
-        Niech $(G, \oplus)$ będzie grupą. Niepusty podzbiór $H \subseteq G$ nazywamy podgrupą grupy $G$
-        jeżeli zachodzą warunki 
+        Niech $(G, +)$ będzie grupą. Niepusty podzbiór $H \subseteq G$ nazywamy podgrupą grupy $G$
+        jeżeli zachodzi warunek 
         \begin{align*}
-            & \forall  x \in H  \quad -x \in H \\ 
-            & \forall x,y \in H  \quad x \oplus y \in H
+            & \forall x,y \in H  \quad x - y \in H
         \end{align*}
     \end{block}
     \pause 
@@ -149,10 +148,10 @@
             $\{ \zero\}$
         \end{tabular}
 
-        Podgrupami  $(\mathbb{R}, \cdot)$ są np.
+        Podgrupami  $(\mathbb{R}\setminus \{0\}, \cdot)$ są np.
         
         \begin{tabular}{cc}
-            $\mathbb{Q}$, & $\mathbb{R}$
+            $\mathbb{Q}\setminus \{0\}$, & $\mathbb{R}\setminus \{0\}$
         \end{tabular}
     \end{exampleblock}
     \pause 
@@ -201,7 +200,7 @@
         \end{itemize}
         Pierścieniem z jedynką jest np.
         \begin{itemize}
-            \item $(\mathcal{M}_2(\mathbb{R}, +, \cdot))$
+            \item $(\mathcal{M}_2(\mathbb{R}), +, \cdot)$
         \end{itemize}
         Pierścieniami przemiennymi z jedynką są np.
         \begin{itemize}
@@ -279,10 +278,9 @@
 
 \begin{frame}{Homomorfizmy Pierścieni}
     \begin{exampleblock}{Przykład}
-        Homomorfizmami pierścieni $\mathbb{Z}, \mathbb{Z}[x]$ są np.
+        Homomorfizmem pierścieni $\mathbb{Z}, \mathbb{Z}[x]$ jest np.
         \begin{itemize}
             \item $h(a) = a$
-            \item $h(a) = a(x^2 + 2x +7)$
         \end{itemize}
         Homomorfizmem pierścieni $\mathbb{Z}, \mathbb{Z}_n$ jest np.
         \begin{itemize}
@@ -325,7 +323,7 @@
 \begin{frame}{Podciała}
     \begin{block}{Definicja}
         Niech $K$ będzie ciałem. Niepusty podzbiór $L$ zbioru $K$ nazywamy podciałem, gdy $L$ jest podpierścieniem $K$ oraz zachodzi
-        $$\forall a \in L\setminus{\zero} \quad a^{-1} \in L$$
+        $$\forall a \in L\setminus \{\zero\} \quad a^{-1} \in L$$
     \end{block}
     \begin{exampleblock}{Przykład}
         Podciałem $\mathbb{C}$ są np.
@@ -406,7 +404,7 @@
         $\{(a,b) \mid a \in A \land b \in B\}$ i oznaczamy przez $A \times B$.
     \end{block}
     \begin{block}{Definicja}
-        $n$-krotny iloczyn kartezjański zbioru $A$ z samym sobą rozumiemy jako $ \underbrace{A \times A \times \ldots \times A}_{n} 
+        $n$-tą potęgą zbioru $A$ rozumiemy jako $ \underbrace{A \times A \times \ldots \times A}_{n} 
         = \{(a_1,\ldots, a_n) \mid a_1,\ldots,a_n \in A \}$ i oznaczamy  przez $A^n$.
     \end{block}
 \end{frame}
