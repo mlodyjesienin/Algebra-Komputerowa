@@ -40,9 +40,9 @@
         Wtedy, \alert{Macierzą Blokową} (klatkową) $X \in \mathcal{M}_{n_1 + n_2 \times m_1 + m_2}$ złożoną z  $A,B,C,D$ definiujemy jako $X = (x_{ij})$, gdzie 
         $$x_{ij} = \begin{cases}
             a_{ij} & i \leq n_1 , \quad  j \leq m_1 \\ 
-            b_{ij} &  i \leq n_1 , \quad m_1 < j \leq m_1 + m_2 \\
-            c_{ij} & n_1 < i \leq n_1 + n_2, \quad j \leq m_1 \\
-            d_{ij} & n_1 < i \leq n_1 + n_2 \quad  m_1 < j \leq m_1 + m_2 \\
+            b_{(i)(j-m_1)} &  i \leq n_1 , \quad m_1 < j \leq m_1 + m_2 \\
+            c_{(i-n_1)(j)} & n_1 < i \leq n_1 + n_2, \quad j \leq m_1 \\
+            d_{(i-n_1)(j-m_1)} & n_1 < i \leq n_1 + n_2 \quad  m_1 < j \leq m_1 + m_2 \\
         \end{cases}$$
     \end{block}    
 \end{frame}
@@ -289,7 +289,7 @@
 \end{frame}
 \begin{frame}{Źródła}
     \begin{enumerate}
-        \item \href{https://www.mdpi.com/2227-7390/11/17/3784}{Inverses and Determinants of $n \times n$ matrices, Müge Saadetoğlu, Şakir Mehmet Dinsev, 2023}
+        \item \href{https://www.mdpi.com/2227-7390/11/17/3784}{Inverses and Determinants of $n \times n$ matrices, Müge Saadetoğlu, Şakir Mehmet Dinsev, 2023, \textit{Mathematics}}
         \item \href{https://gubner.ece.wisc.edu/notes/BlockMatrixFormulas.pdf}{Block Matrix Formulas , John A. Gubner, 2024}
     \end{enumerate}
 \end{frame}
