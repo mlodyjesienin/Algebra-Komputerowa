@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+\usepackage{polski}
+\usepackage{enumitem}
+
+\title{Lista Zadań 01 - Podstawowe własności Struktur Algebraicznych}
+\author{Filip Zieliński}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+W zadaniach $1-5$, stwierdź czy podane działanie jest wewnętrzne.
+\begin{enumerate}
+    \item Rozważmy zbiór $\mathcal{C}(\mathbb{R})$ funkcji ciągłych o dziedzinie i przeciwdziedzinie rzeczywsitej. Definujemy działanie $+ : \mathcal{C}(\mathbb{R}) \times \mathcal{C}(\mathbb{R}) \rightarrow \mathcal{C}(\mathbb{R})$ jako $ (f + g)(x) = f(x) + g(x)$ (sumowanie po wartościach). Czy to działanie jest dobrze zdefiniowane (wewnętrzne)?
+    \item Rozważmy zbiór $LF(V,\mathcal{K})$ odwzorowań liniowych przestrzeni wektorowej $V$ nad ciałem $\mathbb{K}$ w samą siebie. Definujemy działanie $+ : LF(V,\mathbb{K}) \times LF(V, \mathbb{K}) \rightarrow LF(V,\mathbb{K})$ jako dodawanie po wartościach. Czy to działanie jest dobrze zdefiniowane (wewnętrzne)?
+    \item Rozważmy zbiór $H((G, +))$ ednomorfizmów grupy $G$. Definujemy działanie $+ : H((G, +)) \times H((G, +)) \rightarrow H((G, +))$ jako dodawanie po wartościach. Czy to działanie jest dobrze zdefiniowane (wewnętrzne)? 
+    \item Rozważmy zbiór $F\uparrow(\mathbb{R})$ funkcji rosnących o dziedzinie i przeciwdziedzinie rzeczywsitej. Definujemy działanie $ + : F\uparrow(\mathbb{R}) \times F\uparrow(\mathbb{R}) \rightarrow F\uparrow(\mathbb{R})$ jako dodawanie po wartościach. Czy takie działanie jest dobrze zdefiniowane (wewnętrzne)?
+\end{enumerate}
+W zadaniach $5-10$ odnosimy się do grupy $(G,\cdot)$.
+\begin{enumerate}[resume]
+    \item Wykaż, że istnieje dokładnie jeden element neutralny w $G$. 
+    \item Wykaż, że istnieje dokładnie jeden element symetryczny dla każdego elementu w $G$.
+    \item Wykaż, że dla każdego $a \in G$ zachodzi $ (a^{-1})^{-1}  = a$. 
+    \item Wykaż, że dla każdego $a,b \in G$ zachodzi $ (ab)^{-1} =  b^{-1}a^{-1}$.
+    \item Wykaż, że jeżeli dla każdego $a \in G$ zachodzi $a a = e$ to $G$ jest grupą abelową.
+    \item Niech $(H, +)$ będzie grupą oraz $f : G \rightarrow H$ będzie homomorfizmem grup. Wykaż, że $ker_f < G$ (jądro jest podgrupą $G$). 
+    \item Podaj przykład struktury z działaniem przemiennym ale nie łącznym.  
+
+\end{enumerate}
+
+W zadaniach $12-14$ odnosimy się do pierścienia $(R, +, \cdot)$
+\begin{enumerate}[resume]
+    \item Wykaż, że dla każdego $a,b \in R$ zachodzi a(-b) = -(ab) = (-a)b
+    \item Wykaż, że dla każdego $a,b \in R$ zachodzi (-a)(-b) = ab 
+    \item * Wykaż, że jeżeli $R$ jest skończonym pierścieniem całkowitym to jest też ciałem
+    \item * Wykaż,że jedynym automorfizmem $\mathbb{Q}$ jako ciała jest identyczność
+\end{enumerate}
+W zadaniach $16-21$ dana jest funkcja $f : X \rightarrow Y$ oraz $A,B \subseteq X$ i  $C,D \subseteq Y$.
+\begin{enumerate}[resume]
+    \item Wykaż, że $f(A \cup B) = f(A) \cup f(B)$.
+    \item Wykaż, że $f(A \cap B) \subseteq f(A) \cap f(B)$.
+    \item Wykaż, że $f(A \setminus B) \subseteq f(A) \setminus f(B)$. 
+    \item Wykaż, że $A \subseteq f^{-1}(f(A))$.
+    \item Wykaż, że $f^{-1}(C \cup D) =  f^{-1}(C) \cup f^{-1}(D).$
+    \item Wykaż, że $f^{-1}(C \cap D) = f^{-1}(C) \cap f^{-1}(D)$
+    \item Wykaż, że funkcja $f : X \rightarrow Y$ jest iniekcją wtedy i tylko wtedy gdy dla dowolnych  $A, B \subseteq X$ zachodzi równość $f(A\setminus B) = f(A) \setminus f(B)$.
+\end{enumerate}
+\end{document}
