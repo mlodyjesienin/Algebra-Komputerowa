@@ -86,12 +86,57 @@
     \end{alertblock}
 \end{frame}
 
-\begin{frame}{izomorfizm grup cyklicznych}
+\begin{frame}{Izomorfizm grup cyklicznych}
     \begin{block}{Twierdzenie}
         Wszystkie grupy cykliczne nieskończonego rzędu są izomorficzne.
         
         Wszystkie grupy cykliczne skończone równych rzędów są izomorficzne.
     \end{block}
+\end{frame}
+
+\begin{frame}{Podgrupy grup cyklicznych}
+    \begin{block}{Twierdzenie}
+        Niech $G =\langle a \rangle$ będzie grupą cykliczną, a $H$ jej podgrupą,
+        $H < G$. Wtedy $H = \{\one\}$, albo $H$ jest grupą cykliczną postaci $\langle a^m \rangle$ dla pewnego $m \in \mathbb{N}$.
+        Dodatkowo:
+        \begin{itemize}
+            \item Jeżeli $G$ jest grupą nieskończoną, to dla każdego $p,q\in \mathbb{N}$, $p \neq q$ zachodzi $\langle a^p \rangle \neq \langle a^q \rangle$.
+            \item Jeżeli $G$ jest grupą skończoną rzędu $n$, to każda podgrupa jest postaci $\langle a^m \rangle$ dla pewnego $m$ będącego dzielnikiem $n$. Wtedy $G$ ma tyle różnych podgrup, ile dzielników naturalnych liczba $n$. Podgrupa $\langle a^m \rangle$ ma dokłanie $q = \frac{n}{m}$ elementów.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\section{Podgrupy Normalne}
+
+\begin{frame}{Warstwy}
+    Niech będzie dana grupa $G$ i jej podgrupa $H$.
+    \begin{block}{Definicja}
+        \alert{Warstwą lewostronną} elementu $a \in G$ względem podgrupy $H$
+        nazywamy zbiór $\{a h \mid h \in H\}$ i oznaczamy przez $aH$.
+    \end{block}    
+    \begin{block}{Definicja}
+        \alert{Warstwą prawostronną} elementu $a \in G$ względem podgrupy $H$
+        nazywamy zbiór $\{h  a \mid h \in H\}$ i oznaczamy przez $Ha$.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Warstwy}
+    \begin{alertblock}{Obserwacja}
+        Niech $b \in G$. Wtedy
+        $$b \in aH\Leftrightarrow ( \exists h \in H : b=ah) \Leftrightarrow (\exists h \in H : a^{-1}b = h) \Leftrightarrow a^{-1}b \in H.$$
+
+        Analogicznie
+        $$b \in Ha \Leftrightarrow ba^{-1} \in H.$$
+    \end{alertblock}
+    \pause 
+    \begin{alertblock}{Konwencja}
+        W zapisie addytywnym warstwy oznaczamy przez $a + H$.
+    \end{alertblock}
+
+    \begin{alertblock}{Obserwacja}
+        W grupie abelowej $G$ zachodzi 
+        $$ \forall a \in G \forall H < G \quad aH = Ha.$$
+    \end{alertblock}
 \end{frame}
 
 \end{document}
