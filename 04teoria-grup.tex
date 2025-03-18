@@ -1,0 +1,97 @@
+\documentclass{beamer}
+
+\usepackage{polski}
+\usepackage{pgf,tikz}
+\usepackage{tgheros}       
+
+\usetheme{BIT}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath,amsthm}
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes,decorations}
+
+\newcommand{\zero}{\mathbf{0}}
+\newcommand{\one}{\mathbf{1}}
+
+\title{Algebra Komputerowa}
+\subtitle{Elementy Teorii Grup}
+\author{Filip Zieli\'nski}
+\date{2025}
+ 
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+ 
+\begin{frame}{Spis Treści}
+    \tableofcontents
+\end{frame}
+
+\section{Grupy Cykliczne}
+
+\begin{frame}{Grupy Cykliczne}
+    \begin{block}{Definicja}
+        Grupa $(G,\cdot)$ jest \alert{grupą cykliczną} wtw. gdy, istnieje taki element $a \in G$, że każdy element grupy $G$
+        jest jego potęgą, to znaczy
+        $$\forall g \in G \ \exists k \in \mathbb{Z}  : \quad g = a^k .$$
+        Element $a$ nazywamy wtedy \textit{generatorem grupy cyklicznej}
+    \end{block}
+    \begin{alertblock}{Uwaga}
+        W konwencji multiplikatywnej mówimy o $k$-tej \textit{potędze elementu} $a$ i zapisujemy ją jako
+        $a^k = \underbrace{a \cdot a \cdot \ldots \cdot a}_{k}$, natomiast w konwencji addytywnej, mówimy o
+        $k$-tej \textit{wielokrotności elementu} $a$ i zapisujemy $k \cdot a = \underbrace{a + a + \ldots + a}_{k}$.
+    \end{alertblock}
+
+\end{frame}
+
+\begin{frame}{Grupy Cykliczne}
+    \begin{alertblock}{Konwencja}
+        Jeśli $a$ jest generatorem grupy $G$ to piszemy $G = \langle a \rangle.$ 
+    \end{alertblock}
+    \begin{exampleblock}{Przykład}
+        Grupami cyklicznymi są np.
+        \begin{enumerate}
+            \item $(\sqrt[n]{1}, \cdot)$
+            \item $(\mathbb{Z}_n, +)$
+            \item $\mathbb{Z}$ 
+        \end{enumerate}
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Abelowość grup cyklicznych}
+    \begin{block}{Obserwacja}
+        Każda grupa cykliczna jest abelowa.
+    \end{block}
+    \begin{proof}
+        Rozważmy grupę $\langle a \rangle $. Wystarczy zauważyć, że z łączności wprost wynika $a^pa^q = a^qa^p.$
+    \end{proof}
+\end{frame}
+    
+\begin{frame}{Skończone grupy cykliczne}
+    \begin{block}{Twierdzenie}
+        Grupa cykliczna $\langle a \rangle$ jest skończona wtedy i tylko wtedy, gdy istnieją liczby całkowite $p,q$, gdzie 
+        $p \neq q$, takie, że $a^p =a^q$.
+    \end{block}
+    \pause
+    \begin{alertblock}{Obserwacja}
+        Grupę cykliczną rzędu $n$ można zapisać w postaci $\{a^0,a^1 \ldots, a^{n-1}\}$, 
+        natomiast nieskończoną grupę cykliczną w postaci $\{\ldots, a^{-1}, a^0, a^1, \ldots\}.$
+    \end{alertblock}
+    \begin{alertblock}{Wniosek}
+        Grupa cykliczna $\langle a \rangle$ jest nieskończona wtedy i tylko wtedy, gdy dla każdego $p \neq q$, $p,q \in \mathbb{Z}$
+        zachodzi $a^p \neq a^q$.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{izomorfizm grup cyklicznych}
+    \begin{block}{Twierdzenie}
+        Wszystkie grupy cykliczne nieskończonego rzędu są izomorficzne.
+        
+        Wszystkie grupy cykliczne skończone równych rzędów są izomorficzne.
+    \end{block}
+\end{frame}
+
+\end{document}
