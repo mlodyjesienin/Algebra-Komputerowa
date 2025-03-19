@@ -14,6 +14,7 @@
 
 \newcommand{\zero}{\mathbf{0}}
 \newcommand{\one}{\mathbf{1}}
+\newcommand{\image}{\textrm{Im}}
 
 \title{Algebra Komputerowa}
 \subtitle{Powtórzenie Podstaw Algebry}
@@ -374,12 +375,12 @@
 \begin{frame}{Obraz i Jądro odwzorowania }
     Niech $f : X \rightarrow Y$ będzie dowolnym odwzorowaniem z $X$ do $Y$. 
     \begin{block}{Definicja}
-        \alert{Obrazem odwzorowania $f$} nazywamy zbiór $f(X)$ i oznaczamy przez $Im_f$.
+        \alert{Obrazem odwzorowania $f$} nazywamy zbiór $f(X)$ i oznaczamy przez $\image_f$.
     \end{block}
     W przypadku gdy przeciwdziedzina dziedziny tworzy strukturę z elementem neutralnym oznaczanym przez $\zero$
     definiujemy dodatkowo \textit{jądro odwzorowania}
     \begin{block}{Definicja}
-        \alert{Jądrem odwzorowania $f$} nazywamy zbiór $f^{-1}(\zero)$ i oznaczamy przez $Ker_f$.
+        \alert{Jądrem odwzorowania $f$} nazywamy zbiór $f^{-1}(\zero)$ i oznaczamy przez $\ker_f$.
     \end{block}
 \end{frame}
 
@@ -390,8 +391,8 @@
         \begin{itemize}
             \item $f(\{1,9,15\}) = \{1,2\}$
             \item $f^{-1}(1) = \{ 7k + 1 \mid k \in \mathbb{Z}\}$
-            \item $Im_f = f(\mathbb{Z}) = \mathbb{Z}_7$
-            \item $Ker_f =f^{-1}(0) = \{ 7k \mid k \in \mathbb{Z} \}$ 
+            \item $\image_f = f(\mathbb{Z}) = \mathbb{Z}_7$
+            \item $\ker_f =f^{-1}(0) = \{ 7k \mid k \in \mathbb{Z} \}$ 
         \end{itemize}
     \end{exampleblock}
 \end{frame}

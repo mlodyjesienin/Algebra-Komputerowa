@@ -14,6 +14,8 @@
 
 \newcommand{\zero}{\mathbf{0}}
 \newcommand{\one}{\mathbf{1}}
+\newcommand{\ord}{\textrm{ord}}
+
 
 \title{Algebra Komputerowa}
 \subtitle{Elementy Teorii Grup}
@@ -31,6 +33,18 @@
 \end{frame}
 
 \section{Grupy Cykliczne}
+
+\begin{frame}{Rząd Grupy}
+    \begin{block}{Definicja}
+        Niech $G$ będzie grupą. Jeśli $G$ jest grupą skończoną, to rząd $G$ to liczba elementów $G$.
+        Jeżeli $G$ jest grupą nieskończoną, to mówimy, że rząd grupy $G$ jest nieskończony. Rząd grupy $G$ oznaczamy jako
+        $$\ord(G)$$
+    \end{block}
+    \pause 
+    \begin{alertblock}{Uwaga}
+        Przez całą prezentacje w przeważającej większości stosujemy konwencje grupy multiplikatywnej, z tym wyjątkiem, że element neutralny oznaczamy jako $e$ zamiast $\one$.
+    \end{alertblock}
+\end{frame}
 
 \begin{frame}{Grupy Cykliczne}
     \begin{block}{Definicja}
@@ -97,7 +111,7 @@
 \begin{frame}{Podgrupy grup cyklicznych}
     \begin{block}{Twierdzenie}
         Niech $G =\langle a \rangle$ będzie grupą cykliczną, a $H$ jej podgrupą,
-        $H < G$. Wtedy $H = \{\one\}$, albo $H$ jest grupą cykliczną postaci $\langle a^m \rangle$ dla pewnego $m \in \mathbb{N}$.
+        $H < G$. Wtedy $H = \{e\}$, albo $H$ jest grupą cykliczną postaci $\langle a^m \rangle$ dla pewnego $m \in \mathbb{N}$.
         Dodatkowo:
         \begin{itemize}
             \item Jeżeli $G$ jest grupą nieskończoną, to dla każdego $p,q\in \mathbb{N}$, $p \neq q$ zachodzi $\langle a^p \rangle \neq \langle a^q \rangle$.
@@ -106,7 +120,17 @@
     \end{block}
 \end{frame}
 
-\section{Podgrupy Normalne}
+\begin{frame}{Rząd elementu}
+    \begin{block}{Definicja}
+        Jeśli podgrupa $\langle a \rangle$ grupy $G$ jest skończona i ma rząd $n$, 
+        to mówimy, że $a$ jest \textit{elementem rzędu} $n$. Jeśli $\langle a \rangle$
+        jest nieskończona to mówimy, że $a$ jest \textit{elementem rzędu nieskończonego}.
+        Rząd elementu $a$ w grupie $G$ oznaczamy jako 
+        $$ \ord_G(a)$$
+    \end{block}    
+\end{frame}
+
+\section{Warstwy}
 
 \begin{frame}{Warstwy}
     Niech będzie dana grupa $G$ i jej podgrupa $H$.
@@ -135,8 +159,236 @@
 
     \begin{alertblock}{Obserwacja}
         W grupie abelowej $G$ zachodzi 
-        $$ \forall a \in G \forall H < G \quad aH = Ha.$$
+        $$ \forall a \in G  \ \forall H < G \quad aH = Ha.$$
     \end{alertblock}
+\end{frame}
+
+\begin{frame}{Równość Warstw}
+    \begin{block}{Twierdzenie}
+        Jeśli $H$ jest podgrupą grupy $G$, to każde dwie warstwy lewostronne (prawostronne)
+        względem $H$ są albo równe albo rozłączne. 
+    \end{block}
+    \pause
+    \begin{alertblock}{Wniosek}
+        Każdy element grupy $G$ należy do dokładnie jednej warstwy lewostronnej (prawostronnej)
+        względem podgrupy $H$. 
+    \end{alertblock}
+    \begin{alertblock}{Wniosek}
+        Jeśli $H$ jest podgrupą grupy $G$ to 
+        \begin{enumerate}
+            \item $aH = bH \Leftrightarrow a^{-1}b \in H$
+            \item $Ha = Hb \Leftrightarrow ba^{-1} \in H$
+        \end{enumerate}
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Równoliczność Warstw}
+    \begin{block}{Twierdzenie}
+        Dowolne dwie lewostronne (prawostronne) warstwy względem tej samej podgrupy są równoliczne.
+
+        Dowolna warstwa lewostronna jest równa z dowolną warstwą prawostronną względem tej samej podgrupy.
+    \end{block}
+    \pause 
+    \begin{proof}
+        Dowód dla warstw lewostronnych.
+        Wystarczy pokazać, że $\phi : aH \rightarrow bH$ zadane przez $\phi(ah) = bh$ jest bijekcją.
+        Dla drugiego stwierdzenia, wystarczy obserwacja, że $e H = H e = H$.
+    \end{proof}           
+\end{frame}
+
+\begin{frame}{Odwrotności Elementów Warstw}
+    \begin{block}{Twierdzenie}
+        Zbiór odwrotności elementów warstwy lewostronnej $aH$ (prawostronnej $Ha$)
+        jest warstwą prawostronną $Ha^{-1}$ (lewostronną $a^{-1}H$).
+    \end{block}
+    \pause
+    \begin{proof}
+        Dowód dla warstw lewostronnych. $b \in aH \Rightarrow b = ah$ dla pewnego $h \in H$.
+        Wtedy $b^{-1} = (ah)^{-1} = h^{-1}a^{-1} \in Ha^{-1}$.
+
+        Weźmy $c \in  Ha^{-1} \Rightarrow c = h_1a^{-1}$ dla pewnego $h_1 \in H$. Zauważmy, że $c = c_1^{-1}$ dla $c_1 = ah_1^{-1} \in aH$.
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Warstwy}
+    \begin{block}{Wniosek}
+        Zbiór wszystkich warstw lewostronnych względem podgrupy $H$ jest równoliczny
+        ze zbiorem wszystkich warstw prawostronnych względem podgrupy $H$.
+    \end{block}
+    \begin{proof}
+        Na podstawie poprzedniego twierdzenia, zauważmy, że odwzorowanie prowadzące ze zbioru warstw
+        lewostronnych w zbiór warstw prawostronnych wzgledem tej samej podgrupy $H$ zadane wzorem
+        $\phi(aH) = Ha^{-1}$ jest bijekcją.
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Indeks Podgrupy}
+    \begin{block}{Definicja}
+        Niech $G$ będzie grupą skończoną, a $H$ jej podgrupą. \alert{Indeksem podgrupy $H$} w grupie $G$
+        nazywamy liczbę warstw lewostronnych grupy $G$ względem $H$. Indeks podgrupy $H$ w grupie $G$ oznaczamy przez $[G:H]$
+    \end{block}
+    \begin{block}{Twierdzenie (Lagrange'a)}
+        Niech $G$ będzie grupą skończoną, a $H$ jej podgrupą. Wtedy 
+        $$\ord(G) = \ord(H) [G:H].$$
+    \end{block}
+    \pause
+    \begin{proof}
+        Wystarczy obserwacja, że każdy element należy do dokładnie jednej warstwy oraz każda warstwa jest równoliczna.
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Indeks Podgrupy}
+    \begin{alertblock}{Wniosek}
+        Rząd elementu grupy skończonej jest dzielnikiem rzędu grupy, to znaczy dla grupy $G$ zachodzi
+        $\ord_G(a) \mid  \ord(G) \quad \forall a \in G$. 
+    \end{alertblock}
+    \begin{alertblock}{Wniosek}
+        W grupie skończonej $G$ rzędu $n$ zachodzi $a^n = e$ dla każdego $a \in G$
+    \end{alertblock}
+    \begin{proof}
+        Niech $\ord_G(a) = m$. Wtedy $n = mq$. Zatem $a^n = (a^m)^q = e^q = e$
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Grupy Pierwszego Rzędu}
+    \begin{block}{Twierdzenie}
+        Grupa skończona $G$, której rząd jest liczbą pierwszą jest grupą cykliczną.
+    \end{block}
+    \pause 
+    \begin{proof}
+        $\ord(G) > 1$, zatem istnieje $a \in G$, różny od $e$. Ponieważ $\ord_G(a) \mid  \ord(G)$ oraz 
+        jedynym elementem rzędu $1$ jest element neutralny, to $\ord_G(a) = \ord(G)$ zatem $\langle a \rangle = G$.
+    \end{proof}
+    \pause 
+    \begin{alertblock}{Wniosek}
+        Grupa różna od jednoelementowej nie zawiera podgrup właściwych wtedy i tylko wtedy gdy jest skończona i jej rząd jest liczbą pierwszą.        
+    \end{alertblock}  
+\end{frame}
+    
+\section{Podgrupy Normalne}
+
+\begin{frame}{Podgrupa Normalna}
+    \begin{block}{Definicja}
+        Niech $G$ będzie grupą, a $H$ jej podgrupą. Mówimy, że $H$ jest \alert{Podgrupą normalną} $G$,
+        jeżeli zachodzi $\forall a \in G \quad aH = Ha$ (równośc warstw prawostronnych i lewostronnych).
+    \end{block}
+    \begin{alertblock}{Konwencja}
+        Jeżeli $H$ jest podgrupą normalną grupy $G$ to zapisujemy $H \trianglelefteq G$.        
+    \end{alertblock}
+    \begin{alertblock}{Konwencja}
+        Funkcjonuje też równoważne określenie jako \textit{Dzielnik Normalny}.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Podgrupy Normalne}
+    \begin{alertblock}{Obserwacja}
+        Każda podgrupa grupy abelowej jest podgrupą normalną.
+    \end{alertblock}
+    \pause 
+    \begin{alertblock}{Obserwacja}
+        Każda grupa zawiera trywialne podgrupy normalne - samą siebie i podgrupę jednoelementową (element neutralny). 
+    \end{alertblock}
+    \pause 
+    \begin{block}{Twierdzenie}
+        Rozważmy grupę $G$ i jej podgrupę $H$. Zdefiniujmy zbiór Gdzie $aHa^{-1} = \{aha^{-1} \mid h \in H\}$. Następujące warunki są równoważne:
+        \begin{enumerate}
+            \item $\forall a \in G \quad aH = Ha$ 
+            \item $\forall a \in G \quad aHa^{-1} = H$
+            \item $\forall a \in G \quad aHa^{-1} \subseteq H$
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Podgrupy Normalne}
+    \begin{exampleblock}{Przykład}
+        \begin{itemize}
+            \item Rozważmy grupę $GL_n(R)$ wszystkich nieosobliwych macierzy $n \times n$ oraz jej podgrupę $SL_n(R)$ wszystkich macierzy $n\times n$ o wyznaczniku równym 1. Zachodzi $SL_n(R) \trianglelefteq GL_n(R)$
+            \item Rozważmy grupę $n$-elementowych permutacji $S_n$ oraz jej podgrupę permutacji parzystych $A_n$. Zachodzi $A_n \trianglelefteq S_n.$
+        \end{itemize}
+    \end{exampleblock}
+    \pause
+    \begin{block}{Lemat}
+        Jeżeli liczba warstw lewostronnych (zatem też prawostronnych) względem podgrupy $H < G$ to zachodzi $H \trianglelefteq G$.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Grupa Ilorazowa}
+    \begin{block}{Twierdzenie}
+        Niech będzie dany zbiór warstw grupy $G$ względem jej podgrupy normalnej $H$.
+        Wówczas odwzorowanie określone wzorem
+        $$aH \circ bH = (ab)H $$
+        określa poprawne działanie w tym zbiorze. Zbiór warstw z tak okreslonym działaniem jest grupą.
+    \end{block}
+    \pause 
+    \begin{block}{Definicja}
+        Grupę warstw grupy $G$ względem podgrupy normalnej $H$ zdefiniowanej jak powyżej nazywamy
+        \alert{Grupą ilorazową} grupy $G$ względem podgrupy $H$ lub grupą ilorazową $G$ modulo $H$ i oznaczamy symbolem $G/H$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Grupy Ilorazowe}
+    \begin{exampleblock}{Przykład}
+        \begin{enumerate}
+            \item $G/\{1\} \cong G.$
+            \item $G/G \cong \{1\}.$
+            \item $\mathbb{Z} / 7\mathbb{Z} \cong \mathbb{Z}_7$
+        \end{enumerate}
+    \end{exampleblock}
+
+\begin{alertblock}{Konwencja}
+    Działanie w grupie warstw zazwyczaj oznaczamy tak samo jak działanie w grupie, co nie prowadzi do nieporozumień.
+    Tak więc zwykle piszemy $aH \cdot bH$ w konwencji multiplikatywnej, bądź $(a + H) + (b + H)$ w zapisie addytywnym. 
+\end{alertblock}
+\end{frame}
+
+\section{Jądro Homomorfizmu}
+
+\begin{frame}{Jądro Homomorfizmu}
+    \begin{block}{Definicja}
+        Rozważmy grupy $G, G'$ oraz homomorfizm $\phi : G \rightarrow G'$. Jądro homomorfizmu $\phi$ to zbiór
+        $$\ker \phi = \phi^{-1}(\{e'\}) = \{ a \in G \mid \phi(a) = e' \}  $$
+        gdzie $e'$ to element neutralny grupy $G'$.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Jądro, a podgrupy normalne}
+    \begin{block}{Twierdzenie}
+        Jeśli $\phi : G \rightarrow  G'$ jest homomorfizmem grup $G, G'$ to $\ker \phi$ jest podgrupą normalną grupy $G$.
+    \end{block}
+    \pause 
+    \begin{proof}
+        Dowód faktu, że jądro jest podgrupą był w zestawie zadań. Skorzystajmy z warunku równoważnego definicji podgrupy normalnej.
+        $\ker \phi \trianglelefteq G \Leftrightarrow \forall a \in G \quad a \ker \phi a^{-1} \subseteq \ker \phi$. 
+        Weźmy dowolny $k \in \ker \phi$ oraz dowolny $a \in G$. Zachodzi $\phi(aka^{-1}) = \phi(a) \phi(k) \phi(a^-1) = \phi(a) e' \phi(a^{-1}) = \phi(a a^{-1}) = \phi(e) = e'$, 
+        zatem $\forall a \in g  \ \forall k \in \ker \phi \quad a k a^{-1} \in \ker \phi  \Leftrightarrow \forall a \in G \quad a \ker \phi a^{-1} \subseteq \ker \phi$.
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Jądro, a podgrupy normalne}
+    \begin{block}{Twierdzenie}
+        Rozważmy grupę $G$ i jej podgrupę normalną $H$. Odwzorowanie $\psi : G \rightarrow G/H$ zadane wzorem $\psi(a) = aH$
+        jest homomorfizmem oraz $\ker \psi = H$.
+    \end{block}
+    \pause 
+    \begin{proof}
+        Jest to homomorfizm ponieważ $\psi(ab) = (ab)H = aH \cdot bH = \psi(a)\psi(b)$. Elementem neutralnym grupy $G/H$ jest warstwa $eH = H = hH \forall h \in H.$
+        Zatem faktycznie $\ker \psi = \{ a \mid \psi(a) = H\} = H$. 
+    \end{proof}    
+    \pause 
+    \begin{alertblock}{Konwencja}
+        Tak zadany homomorfizm z $G$ do $G/H$ nazywamy \textit{homomorfizmem kanonicznym}.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Pełna charakterystyka jądra}
+    \begin{alertblock}{Wniosek}
+        Każda podgrupa normalna jest jądrem homomorfizmu oraz jądrami homomorfizmów są tylko podgrupy normalne.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}
+    \centering 
+    \LARGE Pytania, wątpliwości, uwagi ? 
 \end{frame}
 
 \end{document}
