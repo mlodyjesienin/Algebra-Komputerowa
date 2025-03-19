@@ -1,0 +1,510 @@
+\documentclass{beamer}
+
+\usepackage{polski}
+\usepackage{pgf,tikz, tikz-cd}
+\usepackage{tgheros}       
+
+\usetheme{BIT}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage[backend=bibtex,style=numeric]{biblatex}
+\addbibresource{literature.bib}
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes,decorations}
+
+\newcommand{\zero}{\mathbf{0}}
+\newcommand{\one}{\mathbf{1}}
+\newcommand{\ord}{\textrm{ord}}
+\let\phi\varphi
+
+\title{Algebra Komputerowa}
+\subtitle{Elementy Teorii Grup \cite{Gleichgewicht}}
+\author{Filip Zieli\'nski}
+\date{2025}
+ 
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+ 
+\begin{frame}{Spis Treści}
+    \tableofcontents
+\end{frame}
+
+\section{Grupy Cykliczne}
+
+\begin{frame}{Rząd Grupy}
+    \begin{block}{Definicja}
+        Niech $G$ będzie grupą. Jeśli $G$ jest grupą skończoną, to rząd $G$ to liczba elementów $G$.
+        Jeżeli $G$ jest grupą nieskończoną, to mówimy, że rząd grupy $G$ jest nieskończony. Rząd grupy $G$ oznaczamy jako
+        $$\ord(G)$$
+    \end{block}
+    \pause 
+    \begin{alertblock}{Uwaga}
+        Przez całą prezentacje w przeważającej większości stosujemy konwencje grupy multiplikatywnej, z tym wyjątkiem, że element neutralny oznaczamy jako $e$ zamiast $\one$.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Grupy Cykliczne}
+    \begin{block}{Definicja}
+        Grupa $(G,\cdot)$ jest \alert{grupą cykliczną} wtw. gdy, istnieje taki element $a \in G$, że każdy element grupy $G$
+        jest jego potęgą, to znaczy
+        $$\forall g \in G \ \exists k \in \mathbb{Z}  : \quad g = a^k .$$
+        Element $a$ nazywamy wtedy \textit{generatorem grupy cyklicznej}
+    \end{block}
+    \begin{alertblock}{Uwaga}
+        W konwencji multiplikatywnej mówimy o $k$-tej \textit{potędze elementu} $a$ i zapisujemy ją jako
+        $a^k = \underbrace{a \cdot a \cdot \ldots \cdot a}_{k}$, natomiast w konwencji addytywnej, mówimy o
+        $k$-tej \textit{wielokrotności elementu} $a$ i zapisujemy $k \cdot a = \underbrace{a + a + \ldots + a}_{k}$.
+    \end{alertblock}
+
+\end{frame}
+
+\begin{frame}{Grupy Cykliczne}
+    \begin{alertblock}{Konwencja}
+        Jeśli $a$ jest generatorem grupy $G$ to piszemy $G = \langle a \rangle.$ 
+    \end{alertblock}
+    \begin{exampleblock}{Przykład}
+        Grupami cyklicznymi są np.
+        \begin{enumerate}
+            \item $(\sqrt[n]{1}, \cdot)$
+            \item $(\mathbb{Z}_n, +)$
+            \item $\mathbb{Z}$ 
+        \end{enumerate}
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Abelowość grup cyklicznych}
+    \begin{block}{Obserwacja}
+        Każda grupa cykliczna jest abelowa.
+    \end{block}
+    \begin{proof}
+        Rozważmy grupę $\langle a \rangle $. Wystarczy zauważyć, że z łączności wprost wynika $a^pa^q = a^qa^p.$
+    \end{proof}
+\end{frame}
+    
+\begin{frame}{Skończone grupy cykliczne}
+    \begin{block}{Twierdzenie}
+        Grupa cykliczna $\langle a \rangle$ jest skończona wtedy i tylko wtedy, gdy istnieją liczby całkowite $p,q$, gdzie 
+        $p \neq q$, takie, że $a^p =a^q$.
+    \end{block}
+    \pause
+    \begin{alertblock}{Obserwacja}
+        Grupę cykliczną rzędu $n$ można zapisać w postaci $\{a^0,a^1 \ldots, a^{n-1}\}$, 
+        natomiast nieskończoną grupę cykliczną w postaci $\{\ldots, a^{-1}, a^0, a^1, \ldots\}.$
+    \end{alertblock}
+    \begin{alertblock}{Wniosek}
+        Grupa cykliczna $\langle a \rangle$ jest nieskończona wtedy i tylko wtedy, gdy dla każdego $p \neq q$, $p,q \in \mathbb{Z}$
+        zachodzi $a^p \neq a^q$.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Izomorfizm grup cyklicznych}
+    \begin{block}{Twierdzenie}
+        Wszystkie grupy cykliczne nieskończonego rzędu są izomorficzne.
+        
+        Wszystkie grupy cykliczne skończone równych rzędów są izomorficzne.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Podgrupy grup cyklicznych}
+    \begin{block}{Twierdzenie}
+        Niech $G =\langle a \rangle$ będzie grupą cykliczną, a $H$ jej podgrupą,
+        $H < G$. Wtedy $H = \{e\}$, albo $H$ jest grupą cykliczną postaci $\langle a^m \rangle$ dla pewnego $m \in \mathbb{N}$.
+        Dodatkowo:
+        \begin{itemize}
+            \item Jeżeli $G$ jest grupą nieskończoną, to dla każdego $p,q\in \mathbb{N}$, $p \neq q$ zachodzi $\langle a^p \rangle \neq \langle a^q \rangle$.
+            \item Jeżeli $G$ jest grupą skończoną rzędu $n$, to każda podgrupa jest postaci $\langle a^m \rangle$ dla pewnego $m$ będącego dzielnikiem $n$. Wtedy $G$ ma tyle różnych podgrup, ile dzielników naturalnych liczba $n$. Podgrupa $\langle a^m \rangle$ ma dokłanie $q = \frac{n}{m}$ elementów.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Rząd elementu}
+    \begin{block}{Definicja}
+        Jeśli podgrupa $\langle a \rangle$ grupy $G$ jest skończona i ma rząd $n$, 
+        to mówimy, że $a$ jest \textit{elementem rzędu} $n$. Jeśli $\langle a \rangle$
+        jest nieskończona to mówimy, że $a$ jest \textit{elementem rzędu nieskończonego}.
+        Rząd elementu $a$ w grupie $G$ oznaczamy jako 
+        $$ \ord_G(a)$$
+    \end{block}    
+\end{frame}
+
+\section{Warstwy}
+
+\begin{frame}{Warstwy}
+    Niech będzie dana grupa $G$ i jej podgrupa $H$.
+    \begin{block}{Definicja}
+        \alert{Warstwą lewostronną} elementu $a \in G$ względem podgrupy $H$
+        nazywamy zbiór $\{a h \mid h \in H\}$ i oznaczamy przez $aH$.
+    \end{block}    
+    \begin{block}{Definicja}
+        \alert{Warstwą prawostronną} elementu $a \in G$ względem podgrupy $H$
+        nazywamy zbiór $\{h  a \mid h \in H\}$ i oznaczamy przez $Ha$.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Warstwy}
+    \begin{alertblock}{Obserwacja}
+        Niech $b \in G$. Wtedy
+        $$b \in aH\Leftrightarrow ( \exists h \in H : b=ah) \Leftrightarrow (\exists h \in H : a^{-1}b = h) \Leftrightarrow a^{-1}b \in H.$$
+
+        Analogicznie
+        $$b \in Ha \Leftrightarrow ba^{-1} \in H.$$
+    \end{alertblock}
+    \pause 
+    \begin{alertblock}{Konwencja}
+        W zapisie addytywnym warstwy oznaczamy przez $a + H$.
+    \end{alertblock}
+
+    \begin{alertblock}{Obserwacja}
+        W grupie abelowej $G$ zachodzi 
+        $$ \forall a \in G  \ \forall H < G \quad aH = Ha.$$
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Równość Warstw}
+    \begin{block}{Twierdzenie}
+        Jeśli $H$ jest podgrupą grupy $G$, to każde dwie warstwy lewostronne (prawostronne)
+        względem $H$ są albo równe albo rozłączne. 
+    \end{block}
+    \pause
+    \begin{alertblock}{Wniosek}
+        Każdy element grupy $G$ należy do dokładnie jednej warstwy lewostronnej (prawostronnej)
+        względem podgrupy $H$. 
+    \end{alertblock}
+    \begin{alertblock}{Wniosek}
+        Jeśli $H$ jest podgrupą grupy $G$ to 
+        \begin{enumerate}
+            \item $aH = bH \Leftrightarrow a^{-1}b \in H$
+            \item $Ha = Hb \Leftrightarrow ba^{-1} \in H$
+        \end{enumerate}
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Równoliczność Warstw}
+    \begin{block}{Twierdzenie}
+        Dowolne dwie lewostronne (prawostronne) warstwy względem tej samej podgrupy są równoliczne.
+
+        Dowolna warstwa lewostronna jest równa z dowolną warstwą prawostronną względem tej samej podgrupy.
+    \end{block}
+    \pause 
+    \begin{proof}
+        Dowód dla warstw lewostronnych.
+        Wystarczy pokazać, że $\phi : aH \rightarrow bH$ zadane przez $\phi(ah) = bh$ jest bijekcją.
+        Dla drugiego stwierdzenia, wystarczy obserwacja, że $e H = H e = H$.
+    \end{proof}           
+\end{frame}
+
+\begin{frame}{Odwrotności Elementów Warstw}
+    \begin{block}{Twierdzenie}
+        Zbiór odwrotności elementów warstwy lewostronnej $aH$ (prawostronnej $Ha$)
+        jest warstwą prawostronną $Ha^{-1}$ (lewostronną $a^{-1}H$).
+    \end{block}
+    \pause
+    \begin{proof}
+        Dowód dla warstw lewostronnych. $b \in aH \Rightarrow b = ah$ dla pewnego $h \in H$.
+        Wtedy $b^{-1} = (ah)^{-1} = h^{-1}a^{-1} \in Ha^{-1}$.
+
+        Weźmy $c \in  Ha^{-1} \Rightarrow c = h_1a^{-1}$ dla pewnego $h_1 \in H$. Zauważmy, że $c = c_1^{-1}$ dla $c_1 = ah_1^{-1} \in aH$.
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Warstwy}
+    \begin{block}{Wniosek}
+        Zbiór wszystkich warstw lewostronnych względem podgrupy $H$ jest równoliczny
+        ze zbiorem wszystkich warstw prawostronnych względem podgrupy $H$.
+    \end{block}
+    \begin{proof}
+        Na podstawie poprzedniego twierdzenia, zauważmy, że odwzorowanie prowadzące ze zbioru warstw
+        lewostronnych w zbiór warstw prawostronnych wzgledem tej samej podgrupy $H$ zadane wzorem
+        $\phi(aH) = Ha^{-1}$ jest bijekcją.
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Indeks Podgrupy}
+    \begin{block}{Definicja}
+        Niech $G$ będzie grupą skończoną, a $H$ jej podgrupą. \alert{Indeksem podgrupy $H$} w grupie $G$
+        nazywamy liczbę warstw lewostronnych grupy $G$ względem $H$. Indeks podgrupy $H$ w grupie $G$ oznaczamy przez $[G:H]$
+    \end{block}
+    \begin{block}{Twierdzenie (Lagrange'a)}
+        Niech $G$ będzie grupą skończoną, a $H$ jej podgrupą. Wtedy 
+        $$\ord(G) = \ord(H) [G:H].$$
+    \end{block}
+    \pause
+    \begin{proof}
+        Wystarczy obserwacja, że każdy element należy do dokładnie jednej warstwy oraz każda warstwa jest równoliczna.
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Indeks Podgrupy}
+    \begin{alertblock}{Wniosek}
+        Rząd elementu grupy skończonej jest dzielnikiem rzędu grupy, to znaczy dla grupy $G$ zachodzi
+        $\ord_G(a) \mid  \ord(G) \quad \forall a \in G$. 
+    \end{alertblock}
+    \begin{alertblock}{Wniosek}
+        W grupie skończonej $G$ rzędu $n$ zachodzi $a^n = e$ dla każdego $a \in G$
+    \end{alertblock}
+    \begin{proof}
+        Niech $\ord_G(a) = m$. Wtedy $n = mq$. Zatem $a^n = (a^m)^q = e^q = e$
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Grupy Pierwszego Rzędu}
+    \begin{block}{Twierdzenie}
+        Grupa skończona $G$, której rząd jest liczbą pierwszą jest grupą cykliczną.
+    \end{block}
+    \pause 
+    \begin{proof}
+        $\ord(G) > 1$, zatem istnieje $a \in G$, różny od $e$. Ponieważ $\ord_G(a) \mid  \ord(G)$ oraz 
+        jedynym elementem rzędu $1$ jest element neutralny, to $\ord_G(a) = \ord(G)$ zatem $\langle a \rangle = G$.
+    \end{proof}
+    \pause 
+    \begin{alertblock}{Wniosek}
+        Grupa różna od jednoelementowej nie zawiera podgrup właściwych wtedy i tylko wtedy gdy jest skończona i jej rząd jest liczbą pierwszą.        
+    \end{alertblock}  
+\end{frame}
+    
+\section{Podgrupy Normalne}
+
+\begin{frame}{Podgrupa Normalna}
+    \begin{block}{Definicja}
+        Niech $G$ będzie grupą, a $H$ jej podgrupą. Mówimy, że $H$ jest \alert{Podgrupą normalną} $G$,
+        jeżeli zachodzi $\forall a \in G \quad aH = Ha$ (równośc warstw prawostronnych i lewostronnych).
+    \end{block}
+    \begin{alertblock}{Konwencja}
+        Jeżeli $H$ jest podgrupą normalną grupy $G$ to zapisujemy $H \trianglelefteq G$.        
+    \end{alertblock}
+    \begin{alertblock}{Konwencja}
+        Funkcjonuje też równoważne określenie jako \textit{Dzielnik Normalny}.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Podgrupy Normalne}
+    \begin{alertblock}{Obserwacja}
+        Każda podgrupa grupy abelowej jest podgrupą normalną.
+    \end{alertblock}
+    \pause 
+    \begin{alertblock}{Obserwacja}
+        Każda grupa zawiera trywialne podgrupy normalne - samą siebie i podgrupę jednoelementową (element neutralny). 
+    \end{alertblock}
+    \pause 
+    \begin{block}{Twierdzenie}
+        Rozważmy grupę $G$ i jej podgrupę $H$. Zdefiniujmy zbiór Gdzie $aHa^{-1} = \{aha^{-1} \mid h \in H\}$. Następujące warunki są równoważne:
+        \begin{enumerate}
+            \item $\forall a \in G \quad aH = Ha$ 
+            \item $\forall a \in G \quad aHa^{-1} = H$
+            \item $\forall a \in G \quad aHa^{-1} \subseteq H$
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Podgrupy Normalne}
+    \begin{exampleblock}{Przykład}
+        \begin{itemize}
+            \item Rozważmy grupę $GL_n(R)$ wszystkich nieosobliwych macierzy $n \times n$ oraz jej podgrupę $SL_n(R)$ wszystkich macierzy $n\times n$ o wyznaczniku równym 1. Zachodzi $SL_n(R) \trianglelefteq GL_n(R)$
+            \item Rozważmy grupę $n$-elementowych permutacji $S_n$ oraz jej podgrupę permutacji parzystych $A_n$. Zachodzi $A_n \trianglelefteq S_n.$
+        \end{itemize}
+    \end{exampleblock}
+    \pause
+    \begin{block}{Lemat}
+        Jeżeli liczba warstw lewostronnych (zatem też prawostronnych) względem podgrupy $H$ wynosi $2$, to zachodzi $H \trianglelefteq G$.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Grupa Ilorazowa}
+    \begin{block}{Twierdzenie}
+        Niech będzie dany zbiór warstw grupy $G$ względem jej podgrupy normalnej $H$.
+        Wówczas odwzorowanie określone wzorem
+        $$aH \circ bH = (ab)H $$
+        określa poprawne działanie w tym zbiorze. Zbiór warstw z tak okreslonym działaniem jest grupą.
+    \end{block}
+    \pause 
+    \begin{block}{Definicja}
+        Grupę warstw grupy $G$ względem podgrupy normalnej $H$ zdefiniowanej jak powyżej nazywamy
+        \alert{Grupą ilorazową} grupy $G$ względem podgrupy $H$ lub grupą ilorazową $G$ modulo $H$ i oznaczamy symbolem $G/H$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Grupy Ilorazowe}
+    \begin{exampleblock}{Przykład}
+        \begin{enumerate}
+            \item $G/\{1\} \cong G.$
+            \item $G/G \cong \{1\}.$
+            \item $\mathbb{Z} / 7\mathbb{Z} \cong \mathbb{Z}_7$
+        \end{enumerate}
+    \end{exampleblock}
+
+\begin{alertblock}{Konwencja}
+    Działanie w grupie warstw zazwyczaj oznaczamy tak samo jak działanie w grupie, co nie prowadzi do nieporozumień.
+    Tak więc zwykle piszemy $aH \cdot bH$ w konwencji multiplikatywnej, bądź $(a + H) + (b + H)$ w zapisie addytywnym. 
+\end{alertblock}
+\end{frame}
+
+\section{Jądro Homomorfizmu}
+
+\begin{frame}{Jądro Homomorfizmu}
+    \begin{block}{Definicja}
+        Rozważmy grupy $G, G'$ oraz homomorfizm $\phi : G \rightarrow G'$. Jądro homomorfizmu $\phi$ to zbiór
+        $$\ker \phi = \phi^{-1}(\{e'\}) = \{ a \in G \mid \phi(a) = e' \}  $$
+        gdzie $e'$ to element neutralny grupy $G'$.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Jądro, a podgrupy normalne}
+    \begin{block}{Twierdzenie}
+        Jeśli $\phi : G \rightarrow  G'$ jest homomorfizmem grup $G, G'$ to $\ker \phi$ jest podgrupą normalną grupy $G$.
+    \end{block}
+    \pause 
+    \begin{proof}
+        Dowód faktu, że jądro jest podgrupą był w zestawie zadań. Skorzystajmy z warunku równoważnego definicji podgrupy normalnej.
+        $\ker \phi \trianglelefteq G \Leftrightarrow \forall a \in G \quad a \ker \phi a^{-1} \subseteq \ker \phi$. 
+        Weźmy dowolny $k \in \ker \phi$ oraz dowolny $a \in G$. Zachodzi $\phi(aka^{-1}) = \phi(a) \phi(k) \phi(a^-1) = \phi(a) e' \phi(a^{-1}) = \phi(a a^{-1}) = \phi(e) = e'$, 
+        zatem $\forall a \in g  \ \forall k \in \ker \phi \quad a k a^{-1} \in \ker \phi  \Leftrightarrow \forall a \in G \quad a \ker \phi a^{-1} \subseteq \ker \phi$.
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Jądro, a podgrupy normalne}
+    \begin{block}{Twierdzenie}
+        Rozważmy grupę $G$ i jej podgrupę normalną $H$. Odwzorowanie $\nu : G \rightarrow G/H$ zadane wzorem $\nu(a) = aH$
+        jest homomorfizmem oraz $\ker \nu = H$.
+    \end{block}
+    \pause 
+    \begin{proof}
+        Jest to homomorfizm ponieważ $\nu(ab) = (ab)H = aH \cdot bH = \nu(a)\nu(b)$. Elementem neutralnym grupy $G/H$ jest warstwa $eH = H = hH  \quad \forall h \in H.$
+        Zatem faktycznie $\ker \nu = \{ a \mid \nu(a) = H\} = H$. 
+    \end{proof}    
+    \pause 
+    \begin{alertblock}{Konwencja}
+        Tak zadany homomorfizm z $G$ do $G/H$ nazywamy \textit{homomorfizmem kanonicznym}.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Obraz homomorficzny grupy}
+    \begin{alertblock}{Wniosek}
+        Każda podgrupa normalna jest jądrem homomorfizmu oraz jądrami homomorfizmów są tylko podgrupy normalne.
+    \end{alertblock}
+    \pause
+    \begin{block}{Twierdzenie}
+        Jeśli $\phi$ jest homomorfizmem grupy $G$ na grupę $G'$, to istnieje izomorfizm $\psi : G' \rightarrow G/\ker\phi$,
+        dla którego przemienny jest diagram 
+        $$
+            \begin{tikzcd}[ampersand replacement=\&, column sep=small]
+                G \arrow[r, "\phi"]  \arrow[rd, "\nu"'] \& G \arrow[d, "\psi"] \\
+                \& G' / \ker \phi
+            \end{tikzcd}
+        $$   
+        gdzie $\nu$ to homomorfizm kanoniczny.
+    \end{block}
+\end{frame}
+
+\section{Kongruencje w grupach}
+
+\begin{frame}{Relacja Równoważności}
+    \begin{block}{Definicja}
+        Relacja $R \subseteq  X \times X$, gdzie $X \neq \emptyset$ jest \alert{relacją równoważności}
+        jeżeli są spełnione następujące warunki
+        \begin{enumerate}
+            \item $\forall x \in X \quad xRx$ \hfill \textit{(zwrotność)}
+            \item $\forall x,y \in X \quad xRy \Rightarrow yRx$ \hfill \textit{(symetryczność)}
+            \item $\forall x,y,z \in X \quad xRy \land yRz \Rightarrow xRz $ \hfill \textit{(przechodniość)}
+        \end{enumerate}
+    \end{block}
+    \begin{block}{Definicja}
+        Niech $R \subseteq X \times X$ będzie relacją równoważności. \alert{Klasą abstrakcji} elementu $x \in X$
+        nazywamy zbiór 
+        $$ [x]_R = \{ y \in X \mid xRy\}$$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Podział zbioru}
+    \begin{block}{Definicja}
+        Niech $X$ będzie niepustym zbiorem.  \alert{Podziałem zbioru} (rozbiciem zbioru) $X$ nazywamy taką
+        rodzinę $\varPi$ niepustych jego podzbiorów, że każdy element należy dokładnie do jednego podzbioru tej rodziny.
+        To znaczy, rodzina $\varPi = \{X_t\}_{t \in T}$ podzbiorów $X$ jest jego podziałem wtedy i tylko wtedy, gdy
+        \begin{enumerate}
+            \item $X_t \neq \emptyset$ dla każdego $t \in T$,
+            \item jeśli $X_{i} \neq X_j$, to $X_i \cap X_j = \emptyset$,
+            \item $X = \bigcup_{t \in T} X_t$.  
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Zbiór Ilorazowy}
+    \begin{block}{Definicja}
+        Niech $R \subseteq X \times X$ będzie relacją równoważności. \alert{Zbiorem Ilorazowym} relacji $R$ nazywamy 
+        rodzinę klas abstrakcji elementów z $X$ i oznaczamy
+        $$ X/R = \{ [x]_R \mid x \in X\}.$$
+    \end{block}
+    \pause 
+    \begin{block}{Twierdzenie}
+        Niech $R \subseteq X \times X$ będzie relacją równoważności. Zbiór ilorazowy $X/R$ jest podziałem zbioru $X$.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Podgrupy i Podziały}
+    \begin{block}{Twierdzenie}
+        Niech $X$ będzie niepustym zbiorem, a $\varPi = \{X_t\}_{t \in T}$ jego podziałem. Relacja
+        $R \subseteq X \times X$ określona wzorem 
+        $$xRy \Leftrightarrow  \exists t \in T : x,y \in X_t$$
+        jest relacją równoważności.
+    \end{block}
+    \pause
+    \begin{block}{Twierdzenie}
+        Niech $G$ będzie grupą, a $H$ jej podgrupą. Rodzina watstw lewostronnych $\{Ha \mid a \in G\}$ jest podziałem zbioru $G$.
+        Rodzina warstw prawostronnych $\{aH \mid a \in G\}$ jest podziałem zbioru $G$. Relacje równoważności generowane przez te podziały 
+        oznaczamy odpowiednio przez $\underset{H}{\stackrel{L}{\equiv}}$ oraz $\underset{H}{\stackrel{R}{\equiv}}$.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Podgrupy i Podziały}
+    \begin{alertblock}{Obserwacja}
+        Jeżeli $H$ jest podgrupą normalną $G$ to zbiór warstw lewostronnych i prawostronnych $G/H$ są sobie równe, zatem relacje równoważności
+        indukowane przez nie są tą samą relacją.
+    \end{alertblock}
+    \begin{alertblock}{Konwencja}
+        Zwykle piszemy po prostu $a \underset{H}{\equiv} b$ lub $a \equiv b \  (H)$ lub $a \equiv b \ (mod \ H)$. 
+    \end{alertblock}
+    \begin{alertblock}{Wniosek}
+        Jeżeli $H \trianglelefteq G$ oraz $a,b \in G$, to po prostu 
+        $$ a \equiv b \ (mod \ H) \Leftrightarrow a^{-1}b \in H.$$
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Kongruencje}
+    \begin{alertblock}{Obserwacja}
+        Niech $G$ będzie grupą, $H \trianglelefteq G$ oraz $a,b,c,d \in G$. Załóżmy, że $a \equiv b \ (mod \ h )$
+        oraz $c \equiv d \ (mod \ H)$. Wynika z tego, że $aH = bH$ oraz $cH = dH$. Ponieważ $G/H$ jest grupą, mamy
+        $aH \cdot bH = cH \cdot dH \Leftrightarrow (ac)H = (bd)H \Leftrightarrow ac \equiv bd \ (mod \ H).$
+    \end{alertblock}
+    \pause 
+    \begin{block}{Definicja}
+        Relacja równoważności $R$ w zbiorze $G$, który jest grupą, nazywa się \alert{kongruencją}, jeśli zachodzi 
+        $$\forall a,b,c,d \in G \quad aRb \land cRd \Rightarrow (ac) R(bd) $$
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \begin{block}{Twierdzenie}
+        Jeśli $H$ jest podgrupą normalną grupy $G$, to relacja przystawania elementów modulo $H$ jest kongruencją.
+    \end{block}
+    \pause 
+    \begin{block}{Twierdzenie}
+        Jeśli relacja $R$  jest kongruencją w grupie $G$, to klasa abstrakcji $H$ zawierające element neutralny grupy $G$ jest podgrupą normalną
+        oraz zachodzi $G/R = G/H$.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Źródła}
+    Prezentacja bardzo mocno korzysta z rozdziału $XII$ poniższej książki.
+    \printbibliography
+\end{frame}
+
+\begin{frame}
+    \centering 
+    \LARGE Pytania, wątpliwości, uwagi ? 
+\end{frame}
+
+\end{document}
