@@ -1,13 +1,15 @@
 \documentclass{beamer}
 
 \usepackage{polski}
-\usepackage{pgf,tikz}
+\usepackage{pgf,tikz, tikz-cd}
 \usepackage{tgheros}       
 
 \usetheme{BIT}
 
 \usepackage[utf8]{inputenc}
 \usepackage{amssymb,amsmath,amsthm}
+\usepackage[backend=bibtex,style=numeric]{biblatex}
+\addbibresource{literature.bib}
 
 \usetikzlibrary{arrows}
 \usetikzlibrary{shapes,decorations}
@@ -15,10 +17,10 @@
 \newcommand{\zero}{\mathbf{0}}
 \newcommand{\one}{\mathbf{1}}
 \newcommand{\ord}{\textrm{ord}}
-
+\let\phi\varphi
 
 \title{Algebra Komputerowa}
-\subtitle{Elementy Teorii Grup}
+\subtitle{Elementy Teorii Grup \cite{Gleichgewicht}}
 \author{Filip Zieli\'nski}
 \date{2025}
  
@@ -308,7 +310,7 @@
     \end{exampleblock}
     \pause
     \begin{block}{Lemat}
-        Jeżeli liczba warstw lewostronnych (zatem też prawostronnych) względem podgrupy $H < G$ to zachodzi $H \trianglelefteq G$.
+        Jeżeli liczba warstw lewostronnych (zatem też prawostronnych) względem podgrupy $H$ wynosi $2$, to zachodzi $H \trianglelefteq G$.
     \end{block}
 \end{frame}
 
@@ -366,13 +368,13 @@
 
 \begin{frame}{Jądro, a podgrupy normalne}
     \begin{block}{Twierdzenie}
-        Rozważmy grupę $G$ i jej podgrupę normalną $H$. Odwzorowanie $\psi : G \rightarrow G/H$ zadane wzorem $\psi(a) = aH$
-        jest homomorfizmem oraz $\ker \psi = H$.
+        Rozważmy grupę $G$ i jej podgrupę normalną $H$. Odwzorowanie $\nu : G \rightarrow G/H$ zadane wzorem $\nu(a) = aH$
+        jest homomorfizmem oraz $\ker \nu = H$.
     \end{block}
     \pause 
     \begin{proof}
-        Jest to homomorfizm ponieważ $\psi(ab) = (ab)H = aH \cdot bH = \psi(a)\psi(b)$. Elementem neutralnym grupy $G/H$ jest warstwa $eH = H = hH \forall h \in H.$
-        Zatem faktycznie $\ker \psi = \{ a \mid \psi(a) = H\} = H$. 
+        Jest to homomorfizm ponieważ $\nu(ab) = (ab)H = aH \cdot bH = \nu(a)\nu(b)$. Elementem neutralnym grupy $G/H$ jest warstwa $eH = H = hH  \quad \forall h \in H.$
+        Zatem faktycznie $\ker \nu = \{ a \mid \nu(a) = H\} = H$. 
     \end{proof}    
     \pause 
     \begin{alertblock}{Konwencja}
@@ -380,10 +382,124 @@
     \end{alertblock}
 \end{frame}
 
-\begin{frame}{Pełna charakterystyka jądra}
+\begin{frame}{Obraz homomorficzny grupy}
     \begin{alertblock}{Wniosek}
         Każda podgrupa normalna jest jądrem homomorfizmu oraz jądrami homomorfizmów są tylko podgrupy normalne.
     \end{alertblock}
+    \pause
+    \begin{block}{Twierdzenie}
+        Jeśli $\phi$ jest homomorfizmem grupy $G$ na grupę $G'$, to istnieje izomorfizm $\psi : G' \rightarrow G/\ker\phi$,
+        dla którego przemienny jest diagram 
+        $$
+            \begin{tikzcd}[ampersand replacement=\&, column sep=small]
+                G \arrow[r, "\phi"]  \arrow[rd, "\nu"'] \& G \arrow[d, "\psi"] \\
+                \& G' / \ker \phi
+            \end{tikzcd}
+        $$   
+        gdzie $\nu$ to homomorfizm kanoniczny.
+    \end{block}
+\end{frame}
+
+\section{Kongruencje w grupach}
+
+\begin{frame}{Relacja Równoważności}
+    \begin{block}{Definicja}
+        Relacja $R \subseteq  X \times X$, gdzie $X \neq \emptyset$ jest \alert{relacją równoważności}
+        jeżeli są spełnione następujące warunki
+        \begin{enumerate}
+            \item $\forall x \in X \quad xRx$ \hfill \textit{(zwrotność)}
+            \item $\forall x,y \in X \quad xRy \Rightarrow yRx$ \hfill \textit{(symetryczność)}
+            \item $\forall x,y,z \in X \quad xRy \land yRz \Rightarrow xRz $ \hfill \textit{(przechodniość)}
+        \end{enumerate}
+    \end{block}
+    \begin{block}{Definicja}
+        Niech $R \subseteq X \times X$ będzie relacją równoważności. \alert{Klasą abstrakcji} elementu $x \in X$
+        nazywamy zbiór 
+        $$ [x]_R = \{ y \in X \mid xRy\}$$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Podział zbioru}
+    \begin{block}{Definicja}
+        Niech $X$ będzie niepustym zbiorem.  \alert{Podziałem zbioru} (rozbiciem zbioru) $X$ nazywamy taką
+        rodzinę $\varPi$ niepustych jego podzbiorów, że każdy element należy dokładnie do jednego podzbioru tej rodziny.
+        To znaczy, rodzina $\varPi = \{X_t\}_{t \in T}$ podzbiorów $X$ jest jego podziałem wtedy i tylko wtedy, gdy
+        \begin{enumerate}
+            \item $X_t \neq \emptyset$ dla każdego $t \in T$,
+            \item jeśli $X_{i} \neq X_j$, to $X_i \cap X_j = \emptyset$,
+            \item $X = \bigcup_{t \in T} X_t$.  
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Zbiór Ilorazowy}
+    \begin{block}{Definicja}
+        Niech $R \subseteq X \times X$ będzie relacją równoważności. \alert{Zbiorem Ilorazowym} relacji $R$ nazywamy 
+        rodzinę klas abstrakcji elementów z $X$ i oznaczamy
+        $$ X/R = \{ [x]_R \mid x \in X\}.$$
+    \end{block}
+    \pause 
+    \begin{block}{Twierdzenie}
+        Niech $R \subseteq X \times X$ będzie relacją równoważności. Zbiór ilorazowy $X/R$ jest podziałem zbioru $X$.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Podgrupy i Podziały}
+    \begin{block}{Twierdzenie}
+        Niech $X$ będzie niepustym zbiorem, a $\varPi = \{X_t\}_{t \in T}$ jego podziałem. Relacja
+        $R \subseteq X \times X$ określona wzorem 
+        $$xRy \Leftrightarrow  \exists t \in T : x,y \in X_t$$
+        jest relacją równoważności.
+    \end{block}
+    \pause
+    \begin{block}{Twierdzenie}
+        Niech $G$ będzie grupą, a $H$ jej podgrupą. Rodzina watstw lewostronnych $\{Ha \mid a \in G\}$ jest podziałem zbioru $G$.
+        Rodzina warstw prawostronnych $\{aH \mid a \in G\}$ jest podziałem zbioru $G$. Relacje równoważności generowane przez te podziały 
+        oznaczamy odpowiednio przez $\underset{H}{\stackrel{L}{\equiv}}$ oraz $\underset{H}{\stackrel{R}{\equiv}}$.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Podgrupy i Podziały}
+    \begin{alertblock}{Obserwacja}
+        Jeżeli $H$ jest podgrupą normalną $G$ to zbiór warstw lewostronnych i prawostronnych $G/H$ są sobie równe, zatem relacje równoważności
+        indukowane przez nie są tą samą relacją.
+    \end{alertblock}
+    \begin{alertblock}{Konwencja}
+        Zwykle piszemy po prostu $a \underset{H}{\equiv} b$ lub $a \equiv b \  (H)$ lub $a \equiv b \ (mod \ H)$. 
+    \end{alertblock}
+    \begin{alertblock}{Wniosek}
+        Jeżeli $H \trianglelefteq G$ oraz $a,b \in G$, to po prostu 
+        $$ a \equiv b \ (mod \ H) \Leftrightarrow a^{-1}b \in H.$$
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Kongruencje}
+    \begin{alertblock}{Obserwacja}
+        Niech $G$ będzie grupą, $H \trianglelefteq G$ oraz $a,b,c,d \in G$. Załóżmy, że $a \equiv b \ (mod \ h )$
+        oraz $c \equiv d \ (mod \ H)$. Wynika z tego, że $aH = bH$ oraz $cH = dH$. Ponieważ $G/H$ jest grupą, mamy
+        $aH \cdot bH = cH \cdot dH \Leftrightarrow (ac)H = (bd)H \Leftrightarrow ac \equiv bd \ (mod \ H).$
+    \end{alertblock}
+    \pause 
+    \begin{block}{Definicja}
+        Relacja równoważności $R$ w zbiorze $G$, który jest grupą, nazywa się \alert{kongruencją}, jeśli zachodzi 
+        $$\forall a,b,c,d \in G \quad aRb \land cRd \Rightarrow (ac) R(bd) $$
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \begin{block}{Twierdzenie}
+        Jeśli $H$ jest podgrupą normalną grupy $G$, to relacja przystawania elementów modulo $H$ jest kongruencją.
+    \end{block}
+    \pause 
+    \begin{block}{Twierdzenie}
+        Jeśli relacja $R$  jest kongruencją w grupie $G$, to klasa abstrakcji $H$ zawierające element neutralny grupy $G$ jest podgrupą normalną
+        oraz zachodzi $G/R = G/H$.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Źródła}
+    Prezentacja bardzo mocno korzysta z rozdziału $XII$ poniższej książki.
+    \printbibliography
 \end{frame}
 
 \begin{frame}
