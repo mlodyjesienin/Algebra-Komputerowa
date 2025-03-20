@@ -1,4 +1,4 @@
-# **Algebra Komputerowa**  
+# Algebra Komputerowa
 
 ## **Studencki kurs w ramach koła naukowego BIT**  
 Kurs prowadzony na **Wydziale Informatyki AGH** w Krakowie w **semestrze letnim 2024/2025**.  
