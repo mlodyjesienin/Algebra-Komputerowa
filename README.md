@@ -24,12 +24,12 @@ Wstęp wolny – dla wszystkich zainteresowanych.
 ## **Materiały**  
 
 ### **Prezentacje**  
-- **Informacje wstępne** [[PDF](https://mlodyjesienin.github.io/Algebra-komputerowa/pdf/01wstep.pdf)]  
-- **Podstawowe struktury algebraiczne** [[PDF](https://mlodyjesienin.github.io/Algebra-komputerowa/pdf/02powtorzenie.pdf)]  
-- **Macierze blokowe** [[PDF](https://mlodyjesienin.github.io/Algebra-komputerowa/pdf/03blokowe-macierze.pdf)]  
-- **Elementy teorii grup** [[PDF](https://mlodyjesienin.github.io/Algebra-komputerowa/pdf/04teoria-grup.pdf)]  
+- **Informacje wstępne** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/01wstep.pdf)]  
+- **Podstawowe struktury algebraiczne** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/02powtorzenie.pdf)]  
+- **Macierze blokowe** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/03blokowe-macierze.pdf)]  
+- **Elementy teorii grup** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/04teoria-grup.pdf)]  
 
 ### **Listy zadań**  
-- **Lista 01 – Podstawowe własności struktur** [[PDF](https://mlodyjesienin.github.io/Algebra-komputerowa/pdf/zadania01.pdf)]  
+- **Lista 01 – Podstawowe własności struktur** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/zadania01.pdf)]  
 
 ---
