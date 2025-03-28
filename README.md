@@ -29,6 +29,6 @@ Wstęp wolny – dla wszystkich zainteresowanych.
 - **Elementy teorii grup** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/04teoria-grup.pdf)]  
 
 ### **Listy zadań**  
-- **Lista 01 – Podstawowe własności struktur** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/zadania01.pdf)]  
-
+- **Lista 01 – Podstawowe własności struktur** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/zadania01.pdf)]
+- **Lista 02 - Elementy Teorii Grup** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/zadania02.pdf)]
 ---
