@@ -1,34 +1,39 @@
 # Algebra-Komputerowa
-## **Studencki kurs w ramach koła naukowego BIT**  
-Kurs prowadzony na **Wydziale Informatyki AGH** w Krakowie w **semestrze letnim 2024/2025**.  
 
-**Autor:** [Filip Zieliński](https://github.com/mlodyjesienin)  
+## Studencki kurs w ramach koła naukowego BIT
+
+Kurs prowadzony na **Wydziale Informatyki AGH** w Krakowie w **semestrze letnim 2024/2025**.
+
+**Autor:** [Filip Zieliński](https://github.com/mlodyjesienin)
 
 ---
 
-## **Terminy zajęć**  
-- Środa, godz. 18:30  
-- Sala 3.27c, budynek D-17  
+## Terminy zajęć
+
+- Środa, godz. 18:30
+- Sala 3.27c, budynek D-17
 
 Wstęp wolny – dla wszystkich zainteresowanych.
 
 ---
 
-## **Tematyka kursu**  
-- Wprowadzenie do algebry abstrakcyjnej  
-- Informatyczne zastosowania – *Obliczeniowa Algebra Przemienna*  
+## Tematyka kursu
+
+- Wprowadzenie do algebry abstrakcyjnej
+- Informatyczne zastosowania – *Obliczeniowa Algebra Przemienna*
 
 ---
 
-## **Materiały**  
+## Materiały
 
-### **Prezentacje**  
-- **Informacje wstępne** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/01wstep.pdf)]  
-- **Podstawowe struktury algebraiczne** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/02powtorzenie.pdf)]  
-- **Macierze blokowe** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/03blokowe-macierze.pdf)]  
-- **Elementy teorii grup** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/04teoria-grup.pdf)]  
+### Prezentacje
 
-### **Listy zadań**  
+- **Informacje wstępne** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/01wstep.pdf)]
+- **Podstawowe struktury algebraiczne** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/02powtorzenie.pdf)]
+- **Macierze blokowe** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/03blokowe-macierze.pdf)]
+- **Elementy teorii grup** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/04teoria-grup.pdf)]
+
+### Listy zadań
+
 - **Lista 01 – Podstawowe własności struktur** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/zadania01.pdf)]
 - **Lista 02 - Elementy Teorii Grup** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/zadania02.pdf)]
----
