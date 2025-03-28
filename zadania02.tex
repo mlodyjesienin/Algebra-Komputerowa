@@ -19,9 +19,39 @@
     \item Czy cykliczna jest grupa $(\mathbb{Z}, \star)$, gdzie działanie $\star$ określone jest wzorem $a \star b = a + b + 5$.
     \item Udowodnić, że dla $n > 1$ grupa $\mathbb{Z}_n \times \mathbb{Z}_n$ nie jest cykliczna.
     \item Udowodnić, że jeśli NWD$(m,n) > 1$ to grupa $\mathbb{Z}_n \times \mathbb{Z}_m$ nie jest cykliczna.
-    \item Udowodnić, że dla każdego $a \in G$ zachodzi $\ord (a) = \ord (a^-1)$.
-    \item Udowodnić, że jeśli $G$ jest grupą abelową, to zbiór $T(G) = \{ a \mid a \in G \land \ord (a) < \infty \}$ jest podgrupą grupy $G$. (Nazywamy ją \textit{pogdupą torsyjną grupy} $G$.)
+    \item Udowodnić, że dla każdego $a \in G$ zachodzi $\ord (a) = \ord (a^{-1})$.
+    \item Udowodnić, że jeśli $G$ jest grupą abelową, to zbiór  \\ $T(G) = \{ a \in G \mid  \land \ord (a) < \infty \}$ jest podgrupą grupy $G$. (Nazywamy ją \textit{pogrupą torsyjną grupy} $G$.)
     \item Udowodnić, że jeśli $\phi : G \rightarrow H$ jest homomorfizmem grup oraz $\phi (a) = b$ i $\ord (a) < \infty$ to $\ord (b) \mid \ord (a)$. Udowodnić, że jeśli $\phi$ jest izomorfizmem, to zachodzi $\ord (b) = \ord (a)$. 
     \item Udowodnić, że obraz homomorficzny grupy cyklicznej jest grupą cykliczną.
 \end{enumerate}
+\textbf{Warstwy}
+\begin{enumerate}[resume]
+    \item  Udowodnij, że zbiór odwrotności elementów z warstwy $aH$ to dokładnie warstwa $Ha^{-1}$.
+\end{enumerate}
+\textbf{Podgrupy Normalne}
+\begin{enumerate}[resume]
+    \item Niech $G$ bedzie grupą oraz $H < G$. Udowodnij, że następujące warunki są równoważne 
+        \begin{itemize}
+            \item $\forall a \in G \quad aH = Ha$ 
+            \item $\forall a \in G \quad aHa^{-1} = H$
+            \item $\forall a \in G \quad aHa^{-1} \subseteq H$
+        \end{itemize}
+    \item Centrum grupy $G$ oznaczamyy przez $Z(G)$ i definiujemy jako
+        $$Z(G) = \{ g\in G \mid \forall a \in G \ ag = ga\}.$$
+        Udowodnić, że $Z(G) \trianglelefteq G$ dla każdej grupy $G$.
+    \item Niech $G$ będzie grupą oraz $H \trianglelefteq G$ i $F < G$. Zdefiniujmy zbiór $HF$ jako $HF = \{ hf \in G \mid h \in H \land f \in F\}$ oraz zbiór $FH$ analogicznie. Udowodnić, że
+        \begin{itemize}
+            \item $HF < G$
+            \item $FH < G$
+            \item jeżeli dodatkowo $F \trianglelefteq G$ to $HF \trianglelefteq G$.
+        \end{itemize}
+    \item Sprawdzić, że jeśli $S$ jest niżej podanym podzbiorem zbioru $R^*$ oraz  \\  $H = \{ A \in GL_n(\mathbb{R}) \mid \text{det}A \in S\}$ to $H \trianglelefteq G$ \\ 
+        a) $\mathbb{R}^+$, \quad b) $Q^*$, \quad c) $Q^{+}$, \quad d)$\{ 2^k \mid k \in \mathbb{Z} \}$.
+    \item Niech będzie dany niepusty zbiór $T$ oraz grupa $G$. Udowodnić, że 
+        \begin{itemize}
+            \item jeśli $H_t < G$ dla każdego $t \in T$ to $\bigcap_{t \in T}H_t < G$
+            \item jeśli $H_t \trianglelefteq G$ dla każdego $t \in T$ to $\bigcap_{t \in T}H_t \trianglelefteq G$
+        \end{itemize}
+\end{enumerate}
+
 \end{document}
