@@ -8,6 +8,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage{amssymb,amsmath,amsthm}
+\usepackage{mathtools}
 
 \usetikzlibrary{arrows}
 \usetikzlibrary{shapes,decorations}
@@ -15,7 +16,7 @@
 \newcommand{\zero}{\mathbf{0}}
 \newcommand{\one}{\mathbf{1}}
 \newcommand{\id}{\mathcal{I}}
-
+\renewcommand{\det}{\textrm{det}}
 \title{Algebra Komputerowa}
 \subtitle{Macierze Blokowe}
 \author{Filip Zieli\'nski}
@@ -157,6 +158,37 @@
     \end{block}
 \end{frame}
 
+\section{Eliminacja Gaussa}
+
+\begin{frame}{Operacje Elementarne - Mnożenie}
+    Niech $M = \begin{bmatrix}
+        A & B \\ C & D \\ 
+    \end{bmatrix}$ będzie macierzą blokową o wymiarach: \\
+    $A$ \textendash \ $n \times m$, \quad$B$ \textendash \ $n \times k$,\quad $C$ \textendash \ $p \times m$, \quad $D$ \textendash \ $p \times k$ \\
+    oraz niech $E$ będzie dowolną macierzą o wymiarach $n \times n$. 
+    \begin{alertblock}{Obserwacja}
+        Operacje $\begin{bmatrix}
+            A & B \\ C & D \\
+        \end{bmatrix} \xrightarrow{R_1 = E \cdot R_1} \begin{bmatrix}
+            E  A & E  B \\ C & D \\ 
+        \end{bmatrix}$ da się wykonać i da się przedstawić jako złożenie operacji elementarnych na wierszach.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Operacje Elementarne - Odejmowanie}
+    Niech $M = \begin{bmatrix}
+        A & B \\ C & D \\ 
+    \end{bmatrix}$ będzie macierzą blokową o wymiarach: \\
+    $A$ \textendash \ $n \times m$, \quad$B$ \textendash \ $n \times k$,\quad $C$ \textendash \ $p \times m$, \quad $D$ \textendash \ $p \times k$ \\
+    oraz niech $F$ będzie dowolną macierzą o wymiarach $n \times p$
+    \begin{alertblock}{Obserwacja}
+        Operacje $\begin{bmatrix}
+            A & B \\ C & D \\
+        \end{bmatrix} \xrightarrow{R_1 = R_1 -  F \cdot R_2} \begin{bmatrix}
+            A - F  C & B - F D \\ C & D \\ 
+        \end{bmatrix}$ da się wykonać i da się przedstawić jako złożenie operacji elementarnych na wierszach.
+    \end{alertblock}
+\end{frame}
 \section{Odwrotności}
 
 \begin{frame}{Macierze blokowo-diagonalne}
@@ -198,9 +230,9 @@
 \begin{frame}{Macierze blokowo-trójkątne}
     \begin{block}{Twierdzenie}
         Niech $L = \begin{bmatrix}
-            L_{11} & \zero \\ \L_{21} & L_{22}
+            L_{11} & \zero \\ L_{21} & L_{22}
         \end{bmatrix}$
-        będzie kwadratową macierzą blokową trójkątną dolną, gdzie $U_{11}, U_{22}$ są blokami kwadratowymi. Macierz $L$ jest nieosobliwa wtedy i tylko wtedy 
+        będzie kwadratową macierzą blokową trójkątną dolną, gdzie $L_{11}, L_{22}$ są blokami kwadratowymi. Macierz $L$ jest nieosobliwa wtedy i tylko wtedy 
         gdy macierze $L_{11}$ oraz  $L_{22}$ są nieosobliwe oraz $L^{-1}$ zadane jest wzorem
         $$ L^{-1} = \begin{bmatrix}
             L_{11}^{-1} & \zero\\ -L_{22}^{-1} L_{21} L _{11}^{-1}  & L_{22}^{-1}
@@ -287,10 +319,192 @@
         $$M^{-1} = \mathcal{J}\mathcal{J}^{-1} M^{-1} = \mathcal{J} (M\mathcal{J})^{-1}$$
     \end{block}
 \end{frame}
+
+\section{Wyznacznik}
+
+\begin{frame}{Wyznacznik Macierzy Blokowej}
+    \begin{block}{Twierdzenie}
+        Niech $\mathbb{K}$ będzie ciałem i niech $R$ będzie podpierścieniem przemiennym pierścienia $\mathcal{M}_{n \times n}(\mathbb{K})$ macierzy kwadratowych wymiaru $n$ o współczynnikach z ciała $\mathbb{K}$.
+        Rozważmy macierz $M \in \mathcal{M}_{p \times p}(R)$. Zachodzi 
+        $$ \det_{\mathbb{K}}M = \det _{\mathbb{K}}(\det_R M)$$ 
+    \end{block}
+    \pause 
+    Twierdzenie to ma charakter ogólny 
+    - jest eleganackie algebraiczne i praktycznie bezużyteczne, bo posiada pewne ewidentne ograniczenia.
+
+\end{frame}
+
+\begin{frame}{Macierze blokowo-diagonalne $2 \times 2$}
+    \begin{block}{Twierdzenie}
+        Niech będzie dana macierz blokowo-diagonalna $M = \begin{bmatrix}
+            D_1 & \zero \\ \zero& D_2 \\ 
+        \end{bmatrix}$. Zachodzi 
+        $$ \det M = \det D_1 \cdot \det D_2 .$$
+         Dodatkowo, jeśli oba bloki mają ten sam wymiar zachodzi $$ \det M = \det D_1 \cdot \det D_2 =  \det(D_1  D_2).$$
+    \end{block}
+    \pause
+    \begin{proof}
+        Należy skorzystać z indukcji względem wymiaru macierzy $D_1$ oraz rozwinięcia Laplace'a.
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Macierze blokowo-trójkątne}
+    \begin{block}{Twierdzenie}
+        Niech będzie dana kwadratowa macierz blokowo-górnotrójkątna $M = \begin{bmatrix}
+            U_{11} & U_{12} \\  \zero & U_{22} \\ 
+        \end{bmatrix}$ gdzie bloki $U_{11}$ oraz $U_{22}$ są kwadratowe. Wtedy zachodzi 
+        $$\det M = \det U_{11} \cdot \det U_{22}.$$ 
+        Dodatkowo, jeśli ich wymiary są takie same, zachodzi 
+        $$\det M = \det U_{11} \cdot \det U_{22} = \det (U_{11} U_{22}).$$
+    \end{block}
+    \pause
+    \begin{proof}
+        Należy skorzystać z indukcji względem wymiaru macierzy $U_{11}$ oraz rozwinięcia Laplace'a.
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Macierze z blokiem zerowym}
+    \begin{block}{Twierdzenie}
+        Niech będzie dana kwadratowa macierz blokowa $M = \begin{bmatrix}
+            A & B \\ C & D \\  
+        \end{bmatrix}$
+        o wszystkich blokach tego samego rozmiaru. Jeżeli choć jeden blok jest blokiem zerowym, zachodzi
+        $$\det M = \det (AD - BC)$$
+    \end{block}
+    \pause 
+    \begin{proof}
+        W przypadku, gdy $C= \zero$ bądź $B = \zero$ wystarczy skorzystać z poprzednich twierdzeń. Natomiast, w przypadku gdy $A = \zero$ lub $B = \zero$, zauważmy, że 
+        $$\begin{bmatrix}
+            \id & - \id \\ \zero & \id \\
+        \end{bmatrix}
+        \cdot \begin{bmatrix}
+            \id & \zero \\ \id & \id \\
+        \end{bmatrix}
+        \cdot \begin{bmatrix}
+            \id & - \id \\ \zero & \id \\
+        \end{bmatrix} 
+        \cdot \begin{bmatrix}
+            A & B \\ C & D \\ 
+        \end{bmatrix} = 
+        \begin{bmatrix}
+            -C & -D \\ A & B \\
+        \end{bmatrix}
+        $$
+    \end{proof}    
+\end{frame}
+
+\begin{frame}{Macierze  blokowe $2 \times 2 $}
+    \begin{block}{Twierdzenie}
+        Niech będzie dana kwadratowa macierz blokowa $M = \begin{bmatrix}
+            A & B \\ C & D \\  
+        \end{bmatrix}$
+        o wszystkich blokach tego samego rozmiaru. Jeżeli $D$ jest odwracalna, zachodzi 
+        $$\det M = \det(AD - BD^{-1}CD)$$
+    \end{block}    
+    \pause 
+    \begin{proof}
+        Zauważmy, że 
+        $$ \begin{bmatrix}
+            A & B \\ C & D \\
+        \end{bmatrix}
+        \cdot \begin{bmatrix}
+            \id & \zero \\ - D^{-1} C & \id  \\
+        \end{bmatrix}
+        = \begin{bmatrix}
+            A - B D^{-1}C & B \\ \zero & D \\  
+        \end{bmatrix}
+        $$
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Macierze blokowe $2 \times 2$}
+            \begin{alertblock}{Wniosek}
+                Jeżeli dodatkowo $CD = DC$ to zachodzi $\det M = \det(AD - BC)$
+            \end{alertblock}
+\end{frame}
+
+\section{Ogólne Twierdzenie  Laplace'a}
+
+\begin{frame}{Dopełnienie minora macierzy}
+
+    Niech będzie dana macierz kwadratowa $A = \begin{bmatrix}
+        a_{11} & \cdots  & a_{1n} \\ 
+        \vdots & \ddots & \vdots \\ 
+        a_{n1} & \cdots & a_{nn} \\
+    \end{bmatrix}$ 
+    Niech $M$ będzie minorem wymiaru $p \leq n$.
+    Niech $$ j_1 < j_2 \ldots < j_p $$ będą wskaźnikami wierszy, a 
+    $$ k_1 < k_2 \ldots < k_p$$ będą wskaźnikami kolumn, z których powstał minor $M$.
+    Niech $q = n-p$ oraz $M_1$ będzie minorem wymiaru $q$ powstałym przez wykreślenie wierszy i kolumn należących do minora $M$.
+\end{frame}
+
+\begin{frame}{Dopełnienie minora macierzy}
+    \begin{block}{Definicja}
+        \alert{Dopełnieniem algebraicznym minora $M$} względem macierzy $A$ nazywamy liczbę 
+        $$ M^* = (-1)^{\Sigma j + \Sigma k} \cdot M_1.$$
+    gdzie $\Sigma j = j_1 + \cdots j_p $ i $\Sigma k = k_1 + \cdots + k_p$.
+    \end{block}    
+\end{frame}
+
+\begin{frame}{Wieloliniowość wyznacznika}
+    \begin{alertblock}{Fakt}
+        Niech $A$ będzie macierzą zdefiniowaną jak na poprzednich slajdach. 
+        Niech $A_i = \begin{bmatrix}
+            a_{i1} & a_{i2} & \ldots & a_{in}
+        \end{bmatrix}$ oznacza $i-$ty wiersz macierzy i niech zachodzi 
+        $$A_{i} = \begin{bmatrix}
+            v_1 & v_2 &\ldots & v_n 
+        \end{bmatrix} + \alpha \cdot \begin{bmatrix}
+            u_1 & u_2 & \ldots & u_n 
+        \end{bmatrix}.$$
+        Zachodzi wtedy 
+        $$\det \begin{bmatrix}
+            a_{11} & \cdots  & a_{1n} \\ 
+            \vdots & \ddots & \vdots \\
+            a_{i1} & \ldots & a_{in} \\  
+            \vdots & \ddots & \vdots \\ 
+            a_{n1} & \cdots & a_{nn} \\
+        \end{bmatrix}  = 
+        \det \begin{bmatrix}
+            a_{11} & \cdots  & a_{1n} \\ 
+            \vdots & \ddots & \vdots \\
+            v_{1} & \ldots & v_{n} \\  
+            \vdots & \ddots & \vdots \\ 
+            a_{n1} & \cdots & a_{nn} \\
+        \end{bmatrix} + \alpha \cdot 
+        \det \begin{bmatrix}
+            a_{11} & \cdots  & a_{1n} \\ 
+            \vdots & \ddots & \vdots \\
+            u_{1} & \ldots & u_{n} \\  
+            \vdots & \ddots & \vdots \\ 
+            a_{n1} & \cdots & a_{nn} \\
+        \end{bmatrix}
+        $$
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Twierdzenie Laplace'a}
+    Zdefinujmy macierz $A$ jak na poprzednich slajdach.
+    Rozbijmy macierz $A$ na dwie macierze prostokątne $A'$ oraz $A''$, z których 
+    pierwsza składa się z $p$ pierwszych kolumn, a druga z $q$ ostatnich kolumn.
+    \begin{block}{Lemat}
+        Jeśli w macierzy $A'$ ilość wierszy zawierająca same zera jest większa od $q$ to $\det A = 0$.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Twierdzenie}
+    \begin{block}{Ogólne Twierdzenie Laplace'a}
+        Niech $M$ przebiega wszystkie minory jakie można utworzyć
+        z dowolnie wybranych i ustalonych kolumn (wierszy) macierzy $A$, natomiast $M^*$ niech będzie algebraicznym dopełnieniem minora $M$.
+        Suma wszystkich iloczynów $M M^*$ jest równa $\det A$.
+    \end{block}
+\end{frame}
+
 \begin{frame}{Źródła}
     \begin{enumerate}
         \item \href{https://www.mdpi.com/2227-7390/11/17/3784}{Inverses and Determinants of $n \times n$ matrices, Müge Saadetoğlu, Şakir Mehmet Dinsev, 2023, \textit{Mathematics}}
         \item \href{https://gubner.ece.wisc.edu/notes/BlockMatrixFormulas.pdf}{Block Matrix Formulas , John A. Gubner, 2024}
+        \item Elementy Algebry Wyższej, A. Mostowski, M. Stark, \textit{Wydawnictwo Naukowe PWN }
     \end{enumerate}
 \end{frame}
 \end{document}
