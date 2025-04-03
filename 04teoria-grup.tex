@@ -331,8 +331,8 @@
 \begin{frame}{Grupy Ilorazowe}
     \begin{exampleblock}{Przykład}
         \begin{enumerate}
-            \item $G/\{1\} \cong G.$
-            \item $G/G \cong \{1\}.$
+            \item $G/\{e\} \cong G.$
+            \item $G/G \cong \{e\}.$
             \item $\mathbb{Z} / 7\mathbb{Z} \cong \mathbb{Z}_7$
         \end{enumerate}
     \end{exampleblock}
@@ -392,8 +392,8 @@
         dla którego przemienny jest diagram 
         $$
             \begin{tikzcd}[ampersand replacement=\&, column sep=small]
-                G \arrow[r, "\phi"]  \arrow[rd, "\nu"'] \& G \arrow[d, "\psi"] \\
-                \& G' / \ker \phi
+                G \arrow[r, "\phi"]  \arrow[rd, "\nu"'] \& G' \arrow[d, "\psi"] \\
+                \& G / \ker \phi
             \end{tikzcd}
         $$   
         gdzie $\nu$ to homomorfizm kanoniczny.
