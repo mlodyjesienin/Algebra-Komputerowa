@@ -32,6 +32,7 @@ Wstęp wolny – dla wszystkich zainteresowanych.
 - **Podstawowe struktury algebraiczne** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/02powtorzenie.pdf)]
 - **Macierze blokowe** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/03blokowe-macierze.pdf)]
 - **Elementy teorii grup** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/04teoria-grup.pdf)]
+- **Elementy teorii pierścieni** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/05teoria-pierscieni.pdf)]
 
 ### Listy zadań
 
