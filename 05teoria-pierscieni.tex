@@ -1,0 +1,315 @@
+\documentclass{beamer}
+
+\usepackage{polski}
+\usepackage{pgf,tikz, tikz-cd}
+\usepackage{tgheros}       
+
+\usetheme{BIT}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage[backend=bibtex,style=numeric]{biblatex}
+\addbibresource{literature.bib}
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes,decorations}
+
+\newcommand{\zero}{\mathbf{0}}
+\newcommand{\one}{\mathbf{1}}
+\newcommand{\ord}{\textrm{ord}}
+\newcommand{\II}{\mathnormal{I}}
+\newcommand{\JJ}{\mathnormal{J}}
+
+\let\phi\varphi
+
+\title{Algebra Komputerowa}
+\subtitle{Elementy Teorii Pierścieni}
+\author{Filip Zieli\'nski}
+\date{2025}
+ 
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+ 
+\begin{frame}{Spis Treści}
+    \tableofcontents
+\end{frame}
+
+\section{Pierścienie}
+\begin{frame}{Powtórka}
+    \begin{block}{Definicja}
+        Zbiór $R$ z dwoma działaniami $+, \cdot$ nazywamy \only<1>{\alert{Pierścieniem},} \only<2>{\alert{Pierścieniem z jedynką},} \only<3,4>{\alert{Pierścieniem przemiennym z jedynką},} jeżeli zachodzą następujące warunki
+        \begin{enumerate}
+            \item $(R, +)$ jest grupą abelową 
+            \item $(R, \cdot)$ jest \only<1>{półgrupą} \only<2>{monoidem} \onslide<3->{monoidem przemiennym}
+            \item $\forall x,y,z \in R \quad x \cdot (y + z) = x \cdot y + x \cdot z \land $ \\ $(x + y) \cdot z = x \cdot z + y \cdot z$ \hfill \textit{(rozdzielność mn. wzg. dod.)} 
+        \end{enumerate}
+    \end{block}
+    \onslide<4->{
+        \begin{alertblock}{Uwaga}
+            Od tego momentu rozważamy jedynie pierścienie przemienne z jedynką. O ile nie jest powiedziane inaczej, gdy piszemy \textit{pierścień} mamy na myśli \textit{pierścień przemienny z jedynką.}
+        \end{alertblock}
+    }
+\end{frame}
+
+\begin{frame}{Przykłady}
+    \begin{exampleblock}{Kluczowe pierścienie}
+        Z naszej perspektywy najistotniejszymi pierścieniami będą
+        \begin{itemize}
+            \item $\mathbb{Z}$ - pierścień liczb całkowitych.
+            \item $R[x]$ - pierścień wielomianów jednej zmiennej o współczynnikach z pierścienia $R$.
+            \item $R[x_1, \ldots , x_n]$ - pierścienie wielomianów wielu zmiennych.
+        \end{itemize}
+    \end{exampleblock}
+    \pause 
+    \begin{alertblock}{Uwaga}
+        W przypadku rozważania pierścienia $R[x_1, \ldots, x_n]$ często dodajemy założenie, że $R$ jest ciałem. 
+    \end{alertblock}
+\end{frame}
+
+\section{Ideały}
+\begin{frame}{Ideały}
+    \begin{block}{Definicja}
+        Niepusty podzbiór $\II $ pierścienia $R$ nazywa się \alert{ideałem}, jeżeli zachodzi 
+        \begin{align}
+            & \forall a,b \in \II  \quad a + b \in \II  \\
+            & \forall a \in \II \ \forall r \in R \quad r \cdot a \in \II
+        \end{align}
+    \end{block}
+    \pause 
+    \begin{alertblock}{Konwencja}
+        Fakt, że $\II$ jest ideałem pierścienia $R$ oznaczamy przez $\II \triangleleft R$.
+    \end{alertblock}
+    \begin{alertblock}{Uwaga}
+        Jeżeli potraktujemy $R$ jako grupę z dodawaniem, to $\II$ jest podgrupą normalną grupy $R$.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Przykłady Ideałów}
+    \begin{exampleblock}{Przykład}
+        Ideałami są np. 
+        \begin{enumerate}
+            \item Każdy pierścień $R$ posiada ideał trywialny $\{ \zero \}$ oraz ideał niewłaściwy $R$.
+            \item W pierścieniu $\mathbb{Z}$ ideałami są zbiory postaci $n\mathbb{Z} = \{n \cdot k  \mid k \in \mathbb{Z} \}$ - zbiory wielokrotności danej liczby.
+            \item W pierścieniu wielomianów $R[x]$ weźmy ustalony wielomian $f$. Zbiór $\II = \{fg \mid g \in R[x]\}$ jest ideałem w $R[x]$.
+            \item W pierścieniu wielomianów $R[x_1, \ldots , x_n]$ weźmy ustalone wielomiany $f,g$. Zbiór $\II = \{ a_1f + a_2g \mid a_1,a_2 \in R[x_1, \ldots x_n]\}$ jest ideałem w pierścieniu $R[x_1, \ldots, x_n]$.
+        \end{enumerate}
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Ideały Ciała}
+    \begin{block}{Twierdzenie}
+        Niech $R$ będzie pierścieniem, a $\II$ ideałem tego pierścienia. Zachodzi 
+        $$ \II = R \Leftrightarrow \one \in \II$$
+    \end{block}
+    \pause 
+    \begin{proof}
+        ($\Rightarrow$). Oczywiste. \\ 
+        ($\Leftarrow$). Jeżeli $\one \in \II$ to z definicji dla dowolnego $r \in R$ zachodzi $r \cdot \one \in \II$, czyli $r \in \II$.
+    \end{proof}
+    \pause 
+\end{frame}
+
+\begin{frame}{Ideały Ciała}
+    \begin{block}{Twierdzenie}
+        Jeżeli $K$ jest ciałem, to jedynymi jego ideałami są $\{\zero\}$ oraz $K$.
+    \end{block}
+    \pause 
+    \begin{proof}
+        Niech $\II \triangleleft K$. Jeżeli $\II = \{\zero\}$ to twierdzenie zachodzi. W innym przypadku istnieje $a \in K$ takie, że $a \neq \zero, a \in \II$. Z definicji dla dowolnego $r \in K$ mamy $r \cdot a \in K$. W szczególności dla $r = a^{-1}$ z czego wynika $a \cdot a^{-1} = 1 \in \II$ zatem $\II = K$.
+    \end{proof}
+    \pause 
+    \begin{block}{Twierdzenie}
+        Jeżeli jedynymi ideałami pierścienia $R$ są $\{\zero\}$ oraz całe $R$, to $R$ jest ciałem. 
+    \end{block}
+\end{frame}
+
+\begin{frame}{Przecięcia Ideałów}
+    \begin{block}{Twierdzenie}
+        Niech będzie dany pierścień $R$ oraz niepusty podzbiór $T$. 
+        Jeśli $\II_t \triangleleft R$ dla każdego $t \in T$ to $\bigcap_{t \in T} \II_t \triangleleft R$
+        (przecięcie ideałów jest ideałem).
+    \end{block}
+\end{frame}
+\begin{frame}{Ideały generowane}
+    Rozważmy pierścień $R$ i element $a \in R$. Zdefiniujmy $\II = \{ r \cdot a \mid r \in R\}$. Zauważmy, że $\II$ jest ideałem $R$. Dodatkowo, zauważmy, że jest to najmnijeszy ideał zawierający $a$, to znaczy
+    $$\{r \cdot a \mid r \in R\} = \bigcap \{\JJ \triangleleft R \mid  \land a \in \JJ\}.$$
+    \pause 
+    Możemy to uogólnić:
+    \begin{block}{Definicja}
+        Niech $R$ będzie pierścieniem, natomiast $A = \{a_1, \ldots, a_s\} \subseteq R$ skończonym jego podzbiorem. 
+        \alert{Ideałem generowanym przez A} nazywamy zbiór 
+        $$\langle A \rangle = \langle a_1, \ldots , a_s \rangle = \left\{ \sum r_i \cdot a_i \mid r_i \in R, a_i \in A \right\}$$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Ideały generowane}
+    \begin{block}{Twierdzenie}
+        Ideał generowany przez zbiór jest ideałem.
+    \end{block}
+    \begin{block}{Twierdzenie}
+        Niech $R$ będzie pierścieniem oraz $A = \{a_1, \ldots , a_s\} \subseteq R$.
+        Zachodzi
+        $$\langle A \rangle = \bigcap\{\II \triangleleft R \mid A \subseteq \II \}.$$
+    \end{block}    
+    \pause 
+    \begin{alertblock}{Konwencja}
+        Jeżeli $\II = \langle A \rangle = \langle a_1 , \ldots , a_s \rangle  \triangleleft R$, to $A$ nazywamy \textit{zbiorem generatorów} $\II$, elementy $a_1, \ldots , a_s$ nazywamy \textit{generatorami} $\II$. Jeżeli da się zapisać ideał jako generowany przez skończony zbiór, to mówimy, że ideał jest \textit{skończenie generowny}.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Ideały generowane}
+    \begin{alertblock}{Uwaga}
+        Jeżeli podzbiór $A$ pierścienia $R$ jest nieskończony, wszystkie definicje i twierdzenia wciąż zachodzą, tylko dokładamy do definicji jeden warunek
+        $$ \langle A \rangle = \left\{ \sum r_i \cdot a_i \mid r_i \in R, a_i \in A \right\}$$ gdzie \textit{prawie wszystkie} $r_i$ są równe 0.    
+    \end{alertblock}
+    \pause 
+    \begin{alertblock}{Uwaga}
+        Dowodzi się, że każdy ideał w $\mathbb{Z}$ oraz $K[x_1, \ldots , x_n]$, gdzie $K$ jest ciałem jest skończenie generowany.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Suma Ideałów}
+    \begin{block}{Definicja}
+        Niech $R$ bedzie pierścieniem oraz $\II, \JJ \triangleleft R$. \alert{Sumę ideałów $\II, \JJ$} definiujemy jako
+        $$\II + \JJ = \{ a+b \mid a \in \II, b \in \JJ\}.$$
+    \end{block}
+    \pause 
+    \begin{block}{Twierdzenie}
+        Jeżeli $\II , \JJ \triangleleft R$, gdzie $R$ jest pierścieniem, to $\II + \JJ \triangleleft R$ (suma ideałów jest ideałem). 
+    \end{block}
+    \pause
+    \begin{block}{Twierdzenie}
+        Jeżeli $\II = \langle a_1, \ldots, a_s \rangle$ oraz $\JJ = \langle b_1, \ldots, b_r \rangle$ to 
+        $$ \II + \JJ = \langle a_1, \ldots a_s, b_1, \ldots, b_r \rangle.$$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Iloczyn algebraiczny Ideałów}
+    \begin{block}{Definicja}
+        Niech $R$ będzie pierścieniem oraz $\II, \JJ$ ideałami w tym pierścieniu. \alert{Iloczyn algebraiczny ideałów $\II, \JJ$} definiujemy jako
+        $$ \II \JJ = \{ \sum a_i \cdot b_i \mid a _i\in \II, b_i \in \JJ\}.$$
+        gdzie prawie wszystkie $a_i \cdot b_i$ są zerami (są to skończone sumy).
+    \end{block}
+    \pause
+    \begin{block}{Twierdzenie}
+        Iloczyn algebraiczny ideałów jest ideałem. 
+    \end{block}
+    \pause
+    \begin{block}{Twierdzenie}
+        Jeżeli $R$ jest pierścieniem oraz $\II, \JJ \triangleleft R$ są ideałami tego pierścienia, to zachodzi
+        $$\II \JJ \subseteq \II \cap \JJ $$
+    \end{block}
+\end{frame}
+
+\section{Pierścień Ilorazowy}
+\begin{frame}{Warstwy Ideału}
+    Rozważmy pierścień $R$ oraz jego ideał $\II$.
+    \begin{alertblock}{Obserwacja}
+        Ponieważ $(\II, +)$ jest podgrupą (normalną) addytywną pierścienia, konstrukcja warstw oraz grupy ilorazowej ze względu na dodawanie jest w pełni poprawna.
+    \end{alertblock}
+    \begin{alertblock}{Konwencja}
+        Zwyczajowo warstwę elementu $a \in R$ względem ideału $\II$ oznaczamy jako $a + \II.$ 
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Mnożenie Warstw}
+    \begin{block}{Twierdzenie}
+        Jeśli $\II$ jest ideałem pierścienia $R$ to wzór
+        $$(a + \II) \odot (b + \II) = ab + \II$$
+        określa działanie w zbiorze warstw względem $\II$ nazywane mnożeniem warstw. Zbiór warstw z dodawaniem warstw i mnożeniem warstw tworzy pierścień.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Pierścień Ilorazowy}
+    \begin{block}{Definicja}
+        Jeżeli $\II$ jest ideałem pierścienia $R$ to pierścień warstw z dodawaniem warstw i mnożeniem warstw nazywamy \alert{Pierścieniem Ilorazowym} $R$ względem $\II$ i oznaczamy przez $R/\II$.
+    \end{block}
+    \pause 
+    \begin{alertblock}{Konwencja}
+        Warstwe $a + \II$ nazywamy klasą reszt $a$ albo klasą modulo $a$ albo klasą abstrakcji $a$. \\
+        $R/\II$ czasem nazywane jest też pierścieniem reszt modulo $\II$. \\
+        Działania w pierścieniu ilorazowym $R/\II$ oznacza się zwykle tak samo jak działania w pierścieniu $R$.
+    \end{alertblock}
+\end{frame}
+
+\section{Jądro Homomorfizmu}
+\begin{frame}{Homomorfizmy pierścieni}
+    \begin{block}{Twierdzenie}
+        Niech $R, R'$ będą pierścieniami. Jądro homomorfizmu $\phi : R \rightarrow R'$ jest ideałem pierścienia $R$.
+    \end{block}
+    \pause 
+    \begin{block}{Twierdzenie}
+        Niech $R, R'$ będą pierścieniami oraz $\phi : R \rightarrow R'$ homomorfizmem tych pierścieni oraz $\JJ \triangleleft R'$. Zachodzi $\phi^{-1}(\JJ) \triangleleft R$ (przeciwobraz ideału jest ideałem).
+    \end{block}
+    \pause
+    \begin{alertblock}{Uwaga}
+        Obrazem homomorficznym ideału \alert{nie zawsze} jest ideał.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Charakterystyka jądra}
+    \begin{block}{Twierdzenie}
+        Jeśli $\II$ jest ideałem pierścienia $R$ to odwzorowanie $\nu : R \rightarrow R/\II$ zadane wzorem $\nu(a) = a + \II$ jest homomorfizmem pierścieni $R, R/\II$ oraz $\ker \nu = \II$. 
+    \end{block}
+    \pause
+    \begin{alertblock}{Konwencja}
+        Homomorfizm $\nu : R \rightarrow R/\II$ nazywamy homomorfizmem kanonicznym.
+    \end{alertblock}
+    \pause 
+    \begin{alertblock}{Wniosek}
+        Ideały danego pierścienia i tylko one są jądrami homomorfizmów pierścieni.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Obraz homomorficzny pierścienia}
+    \begin{block}{Twierdzenie}
+        Jeśli $\phi$ jest homomorfizmem pierścienia $R$ na pierścień $R'$, to istnieje izomorfizm $\psi : R' \rightarrow R/\ker\phi$,
+        dla którego przemienny jest diagram 
+        $$
+            \begin{tikzcd}[ampersand replacement=\&, column sep=small]
+                R \arrow[r, "\phi"]  \arrow[rd, "\nu"'] \& R' \arrow[d, "\psi"] \\
+                \& R / \ker \phi
+            \end{tikzcd}
+        $$   
+        gdzie $\nu$ to homomorfizm kanoniczny.
+    \end{block}
+    \pause
+    \begin{block}{Twierdzenie}
+        Jedynymi homomorfizmami ciała na ciało są izomorfizmy. 
+    \end{block}
+\end{frame}
+
+\section{Kongruencje Pierścieni}
+\begin{frame}{Kongruencje}
+    \begin{block}{Definicja}
+        Relacja równoważności $\sim$ określona na pierścieniu $R$ nazywa się \alert{kongruencją}, jeżeli 
+        $$[(a \sim b) \land (c \sim d)] \Rightarrow [(a+c \sim b+d) \land (ac \sim bd)].$$
+    \end{block}
+    Kongruencje, to relacje równoważności, ktore można dodawać i mnożyc stronami.
+\end{frame}
+
+\begin{frame}{Przystawanie modulo Ideał}
+    \begin{block}{Twierdzenie}
+        Niech $\II$ będzie ideałem pierścienia $R$. Relacja przystawania elementów modulo $\II$
+        $$ a \equiv b \ (\II) \Leftrightarrow a - b \in \II$$ 
+        jest kongruencją w pierścieniu $R$. 
+    \end{block}
+    \pause
+    \begin{alertblock}{Obserwacja}
+        Kongruencje pierścieni można odejmować stronami. 
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Charakterystyka Kongruencji}
+    \begin{block}{Twierdzenie}
+        Jeśli relacja równoważności $\sim$ określona na pierścieniu $R$ jest kongruencją, to klasa abstrakcji $\II$ zbioru ilorazowego $R/\sim$ która zawiera $\zero$ pierścienia $R$ jest ideałem pierścienia $R$ oraz $R/\sim = R/\II$.
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \centering 
+    \LARGE Pytania, wątpliwości, uwagi ? 
+\end{frame}
+\end{document}
