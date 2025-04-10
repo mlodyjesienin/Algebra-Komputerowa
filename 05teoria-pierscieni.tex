@@ -23,7 +23,7 @@
 \let\phi\varphi
 
 \title{Algebra Komputerowa}
-\subtitle{Elementy Teorii Pierścieni}
+\subtitle{Elementy Teorii Pierścieni \cite{Gleichgewicht,Rusek}}
 \author{Filip Zieli\'nski}
 \date{2025}
  
@@ -62,10 +62,6 @@
             \item $R[x_1, \ldots , x_n]$ - pierścienie wielomianów wielu zmiennych.
         \end{itemize}
     \end{exampleblock}
-    \pause 
-    \begin{alertblock}{Uwaga}
-        W przypadku rozważania pierścienia $R[x_1, \ldots, x_n]$ często dodajemy założenie, że $R$ jest ciałem. 
-    \end{alertblock}
 \end{frame}
 
 \section{Ideały}
@@ -132,9 +128,10 @@
         (przecięcie ideałów jest ideałem).
     \end{block}
 \end{frame}
+
 \begin{frame}{Ideały generowane}
     Rozważmy pierścień $R$ i element $a \in R$. Zdefiniujmy $\II = \{ r \cdot a \mid r \in R\}$. Zauważmy, że $\II$ jest ideałem $R$. Dodatkowo, zauważmy, że jest to najmnijeszy ideał zawierający $a$, to znaczy
-    $$\{r \cdot a \mid r \in R\} = \bigcap \{\JJ \triangleleft R \mid  \land a \in \JJ\}.$$
+    $$\{r \cdot a \mid r \in R\} = \bigcap \{\JJ \triangleleft R \mid a \in \JJ\}.$$
     \pause 
     Możemy to uogólnić:
     \begin{block}{Definicja}
@@ -170,7 +167,7 @@
     \end{alertblock}
 \end{frame}
 
-\begin{frame}{Suma Ideałów}
+\begin{frame}{Suma Algebraiczna Ideałów}
     \begin{block}{Definicja}
         Niech $R$ bedzie pierścieniem oraz $\II, \JJ \triangleleft R$. \alert{Sumę ideałów $\II, \JJ$} definiujemy jako
         $$\II + \JJ = \{ a+b \mid a \in \II, b \in \JJ\}.$$
@@ -186,20 +183,46 @@
     \end{block}
 \end{frame}
 
+\begin{frame}{Względna pierwszość Ideałów}
+    \begin{block}{Definicja}
+        Mówimy, że dwa ideały $\II, \JJ$ pierścienia $R$ są \alert{względnie pierwsze} jeśli zachodzi
+        $$\II + \JJ = R$$
+    \end{block}
+\end{frame}
+
 \begin{frame}{Iloczyn algebraiczny Ideałów}
     \begin{block}{Definicja}
         Niech $R$ będzie pierścieniem oraz $\II, \JJ$ ideałami w tym pierścieniu. \alert{Iloczyn algebraiczny ideałów $\II, \JJ$} definiujemy jako
-        $$ \II \JJ = \{ \sum a_i \cdot b_i \mid a _i\in \II, b_i \in \JJ\}.$$
+        $$ \II \JJ = \left\{ \sum a_i \cdot b_i \mid a _i\in \II, b_i \in \JJ \right\}.$$
         gdzie prawie wszystkie $a_i \cdot b_i$ są zerami (są to skończone sumy).
     \end{block}
     \pause
     \begin{block}{Twierdzenie}
         Iloczyn algebraiczny ideałów jest ideałem. 
     \end{block}
+    \begin{alertblock}{Obserwacja}
+        Jeśli $\II_1, \ldots \II_n$ to ideały pierścienia $R$, to zauważmy, że 
+        $$ \II_1 \cdots \II_n =  \langle a_{i1} \cdots a_{in} \mid a_{ij} \in I_j \rangle$$
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Iloczyn algebraiczny ideałów}
+    \begin{block}{Twierdzenie}
+        Jeśli $\II_1, \ldots \II_n$ to ideały pierścienia $R$, to zachodzi
+        $$\II_1 \cdots \II_n \subseteq \II_1 \cap \ldots \cap \II_n $$
+    \end{block}
     \pause
     \begin{block}{Twierdzenie}
-        Jeżeli $R$ jest pierścieniem oraz $\II, \JJ \triangleleft R$ są ideałami tego pierścienia, to zachodzi
-        $$\II \JJ \subseteq \II \cap \JJ $$
+        Niech $R$ będzie pierścieniem oraz $\II_1 , 
+        \ldots \II_n \triangleleft R$ będą ideałami (parami) względnie pierwszymi w $R$. Zachodzi
+        $$\II_1 \cap \ldots \cap \II_n = \II_1 \cdot \ldots \cdot \II_n$$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Ideały Pierwsze}
+    \begin{block}{Definicja}
+        Ideał $\II$ pierścienia $R$ nazywamy \alert{ideałem pierwszym}, jeżeli zachodzi 
+        $$\forall a,b \in R \quad ab \in \II \Rightarrow a \in \II \lor b \in \II .$$
     \end{block}
 \end{frame}
 
@@ -241,7 +264,7 @@
     \end{block}
     \pause 
     \begin{block}{Twierdzenie}
-        Niech $R, R'$ będą pierścieniami oraz $\phi : R \rightarrow R'$ homomorfizmem tych pierścieni oraz $\JJ \triangleleft R'$. Zachodzi $\phi^{-1}(\JJ) \triangleleft R$ (przeciwobraz ideału jest ideałem).
+        Niech $R, R'$ będą pierścieniami, $\phi : R \rightarrow R'$ homomorfizmem tych pierścieni oraz $\JJ \triangleleft R'$. Zachodzi $\phi^{-1}(\JJ) \triangleleft R$ (przeciwobraz ideału jest ideałem).
     \end{block}
     \pause
     \begin{alertblock}{Uwaga}
@@ -304,8 +327,12 @@
 
 \begin{frame}{Charakterystyka Kongruencji}
     \begin{block}{Twierdzenie}
-        Jeśli relacja równoważności $\sim$ określona na pierścieniu $R$ jest kongruencją, to klasa abstrakcji $\II$ zbioru ilorazowego $R/\sim$ która zawiera $\zero$ pierścienia $R$ jest ideałem pierścienia $R$ oraz $R/\sim = R/\II$.
+        Jeśli relacja równoważności $\sim$ określona na pierścieniu $R$ jest kongruencją, to klasa abstrakcji $\II$ zbioru ilorazowego $R/\sim$ która zawiera $\zero$ pierścienia $R$ jest ideałem pierścienia $R$ oraz $R/\! \! \sim  \ = \  R/\II$.
     \end{block}
+\end{frame}
+
+\begin{frame}{Źródła}
+    \printbibliography
 \end{frame}
 
 \begin{frame}
