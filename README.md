@@ -33,6 +33,7 @@ Wstęp wolny – dla wszystkich zainteresowanych.
 - **Macierze blokowe** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/03blokowe-macierze.pdf)]
 - **Elementy teorii grup** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/04teoria-grup.pdf)]
 - **Elementy teorii pierścieni** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/05teoria-pierscieni.pdf)]
+- **Pierścienie z jednoznacznością rozkładu** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/06rozkladalnosc.pdf)]
 
 ### Listy zadań
 
