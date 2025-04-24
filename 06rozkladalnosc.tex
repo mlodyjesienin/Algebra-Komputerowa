@@ -1,0 +1,333 @@
+\documentclass{beamer}
+
+\usepackage{polski}
+\usepackage{pgf,tikz, tikz-cd}
+\usepackage{tgheros}       
+\usepackage{bm}
+
+\usetheme{BIT}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage[backend=bibtex,style=numeric]{biblatex}
+\addbibresource{literature.bib}
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes,decorations}
+
+\newcommand{\zero}{\mathbf{0}}
+\newcommand{\one}{\mathbf{1}}
+\newcommand{\ord}{\textrm{ord}}
+\newcommand{\II}{\mathnormal{I}}
+\newcommand{\JJ}{\mathnormal{J}}
+\newcommand{\NWD}{\rm{NWD}}
+\newcommand{\NWW}{\rm{NWW}}
+
+\let\phi\varphi
+\renewcommand{\epsilon}{\bm{\varepsilon}}
+
+\title{Algebra Komputerowa}
+\subtitle{Pierścienie z jednoznacznością rozkładu \cite{Computative1,Gleichgewicht}}
+\author{Filip Zieli\'nski}
+\date{2025}
+ 
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+ 
+\begin{frame}{Spis Treści}
+    \tableofcontents
+\end{frame}
+
+\section{Podzielność}
+\begin{frame}{Założenia}
+    \begin{alertblock}{Uwaga}
+        Przypominam, że mówiąc pierścień mamy na myśli pierścień przemienny z jedynką. \\
+    \end{alertblock}
+    \pause
+    \begin{alertblock}{Uwaga}
+        Dodatkowo, w tym rozdziale zawężamy nasze rozważania do pierścieni całkowitych. Mówiąc pierścień, mamy na myśli pierścień całkowity przemienny z jedynką.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Relacja podzielności}
+    Niech $R$ będzie pierścieniem oraz $a,b$ elementami tego pierścienia.
+    \begin{block}{Definicja}
+        Mówimy, że element $a$ \textit{dzieli} $b$, jeśli istnieje taki element $c \in R$, że $ac = b$.
+        Tak więc 
+        $$ a \mid b \Leftrightarrow \exists c \in R : b = ac$$
+        Gdy $a \mid b$ mówimy, że "$a$ jest dzielnikiem elementu $b$" lub "$b$ jest podzielne przez $a$" lub "$b$ jest wielokrotnością $a$". Jeśli $a$ nie dzieli $b$ to piszemy $a \nmid b$.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Własności podzielności}
+    \begin{alertblock}{Obserwacja}
+        Relacja $\mid$ określona na pierścieniu $R$ jest relacją zwrotnią i przechodnią.
+    \end{alertblock}
+    \begin{block}{Twierdzenie}
+        Dla dowolnych $a,b,c,d \in R$ zachodzi 
+        \begin{enumerate}
+            \item $\one \mid a$ 
+            \item $a \mid b \Rightarrow a \mid bc$ 
+            \item $a \mid b \land a \mid c \Rightarrow a \mid b \pm c$
+            \item $a \mid b \Rightarrow ac \mid bc$
+            \item $a \mid b \land c \mid d \Rightarrow ac \mid bd$
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Relacja stowarzyszenia}
+    \begin{block}{Definicja}
+        Mówimy, że elementy $a,b \in R$ są stowarzyszone, co zapisujemy $a \sim b$, jeśli $a \mid b \land b \mid a$. 
+    \end{block}
+    \begin{exampleblock}{Obserwacja}
+        Relacja stowarzyszenia, jest relacją równoważności.
+    \end{exampleblock}
+    \pause 
+    \begin{block}{Definicja}
+        Element $u$ pierścienia $R$ nazywamy jednością, jeżeli istnieje w pierścieniu $R$ do niego element odwrotny.
+    \end{block}
+    \begin{block}{Definicja}
+        Zbiór wszystkich jedności w pierścieniu $R$ nazywamy \textit{zbiorem elementów odwracalnych} i oznaczamy przez $U_R$.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Zbiór jedności}
+    \begin{alertblock}{Obserwacja}
+        Zbiór elementów odwracalnych pierścienia $R$ jest grupą względem ich mnożenia.
+    \end{alertblock}
+    \pause 
+    \begin{alertblock}{Obserwacja}
+        Zachodzi 
+        $U_R = \{ a\in R : a \sim \one\}$,
+        czyli jednoścu to dokładnie elementy stowarzyszone z jedynką. 
+    \end{alertblock}
+    \pause 
+    \begin{block}{Twierdzenie}
+        Jeśli $a,b$ są elementami pierścienia $R$, to 
+        $$a \sim b \Leftrightarrow \exists \epsilon \in U_R : b = a \epsilon.$$
+    \end{block}
+\end{frame}
+
+\section{Pierścienie z jednoznacznościa rozkładu}
+\begin{frame}{Rozkład elementu}
+    \begin{block}{Definicja}
+        Niech $a \in R \setminus \{ \zero \}$. Rozkładem elementu $a$ na czynniki nazywamy każde przedstawienie go w postaci iloczynu $a = a_1 a_2 \ldots a_n$.
+    \end{block}
+    \pause 
+    \begin{block}{Definicja}
+        Różny od zera element $a$ pierścienia $R$ nazywamy \alert{rozkładalnym}, jeśli da  się go przestawić jako iloczyn $a_1, a_2$ gdzie $a_1$ oraz $a_2$ są elementami nieodwracalnymi. \\ 
+        Jeżeli element nie jest zerem, nie jest jednością oraz nie jest rozkładalny to nazywamy go \alert{nierozkładalnym.}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Jednoznaczność rozkładu}
+    \begin{block}{Definicja}
+        Niech $R$ będzie pierścieniem. 
+        \begin{itemize}
+            \item Pierścień $R$ nazywamy pierścieniem z rozkładem, gdy każdy niezerowy i nieodwracalny element tego pierścienia można przedstawić w postaci iloczynu elementów nierozkładalnych.
+            \item Pierścień $R$ nazywmy \alert{pierścieniem z jednoznacznościa rozkładu} (lub 
+            \textit{pierścieniem gaussowskim}, lub \textit{UFD}), gdy każdy niezerowy i nieodwracalny element tego pierścienia można
+            przedstawić w postaci iloczynu elementów nierozkładalnych w sposób jednoznaczny z dokładnością do stowarzyszenia.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Elementy pierwsze}
+    \begin{block}{Definicja}
+        Niech $p$ będzie elementem pierścienia $R$. element $p$ nazywamy \alert{pierwszym}, jeżeli zachodzi 
+        $$p \mid ab \Rightarrow p \mid a \lor p \mid b.$$
+    \end{block}
+    \pause 
+    \begin{block}{Twierdzenie}
+        Jeżeli $p$ jest elementem pierwszym pierścienia $R$ to $p$ jest elementem nierozkładalnym. 
+    \end{block}
+    \pause 
+    \begin{alertblock}{Uwaga}
+        Twierdzenie odwrotne nie jest prawdziwe. Element nierozkładalny nie musi być pierwszy.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Elementy pierwsze, a nierozkładalne}
+    \begin{block}{Twierdzenie}
+        Niech $R$ będzie pierścieniem z rozkładem. Następujące warunki są równoważne
+        \begin{itemize}
+            \item $R$ jest pierścieniem z jednoznacznościa rozkładu, 
+            \item Każdy element nierozkładalny w $R$ jest pierwszy.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \begin{block}{Twierdzenie}
+        Niech $R$ będzie pierścieniem z jednoznacznością rozkładu. Wtedy $R[x]$ jest pierścieniem z jednoznacznością rozkładu.
+    \end{block}
+    \pause 
+    \begin{alertblock}{Wniosek}
+        Niech $R$ będzie pierścieniem z jednoznacznościa rozkładu. Wtedy $R[x_1, \ldots x_n]$ jest pierścieniem z jednoznacznościa rozkładu. 
+    \end{alertblock}
+\end{frame}
+
+\section{NWD i NWW}
+\begin{frame}{Rozkład kanoniczny}
+    Niech $R$ będzie pierścieniem z jednoznacznościa rozkładu.
+    \begin{alertblock}{Obserwacja}
+        Niech $\mathcal{P} \subseteq R$ będzie zbiorem reprezentantów klas abstrakcji względem relacji stowarzyszenia
+        wyznaczonych przez elementy nierozkładalne to każdy element $a \in R$ ma jednoznaczne przedstawienie postaci 
+        $$a = \epsilon \prod_{p \in \mathcal{P}} p^{\alpha_{p}}$$
+        gdzie $\epsilon \in U_R$ oraz $alpha_p \in \mathbb{N} \cup \{0\}$, z tym, że $\alpha_p = 0$ dla prawie wszystkich $p$. Takie przedstawienie nazywamy \alert{rozkładem kanonicznym}.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{NWD i NWW}
+    Niech $R$ będzie pierścieniem z jednoznacznościa rozkładu oraz $a,b \in R$ będą elementami pierścienia z rozkładami kanonicznymi odpowiednio
+    $\epsilon_1 \prod_{p \in \mathcal{P}} p^{\alpha_{p}}$ oraz $\epsilon_2 \prod_{p \in \mathcal{P}} p^{\beta_{p}}$. 
+    \begin{alertblock}{Twierdzenie}
+        $b \mid a$ wtedy i tylko wtedy, gdy $\beta_p \leq \alpha_p$ dla każdego $p \in \mathcal{P}$.
+    \end{alertblock}
+    \pause
+    \begin{block}{Definicja}
+        \begin{itemize}
+            \item\alert{Największym wspólnym dzielnikiem} $a,b$ nazywamy $\NWD (a,b) = \prod_{p \in \mathcal{P}} p^{min\{\alpha_{p}, \beta_{p}\}}$
+            \item \alert{Najmniejszą wspólną wielokrotnością} $a,b$ nazywamy $\NWW (a,b) = \prod_{p \in \mathcal{P}} p^{max\{\alpha_{p}, \beta_{p}\}} $
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Rozszerzenie definicji}
+    \begin{block}{Definicja}
+        Niech $R$ będzie pierścieniem z jednoznacznościa rozkładu i $a_1, \ldots a_m$ elementami tego pierścienia.
+        Dla $m >2$ pojęcie największego wspólnego dzielnika i najmniejszej wspólnej wielokrotności definiujemy rekurencyjnie jako
+        \begin{align*}
+            \NWD(a_1 , \ldots , a_m) & = \NWD(\NWD(a_1, \ldots , a_{m-1}), a_m) \\
+            \NWW(a_1 , \ldots , a_m) & = \NWW(\NWW(a_1, \ldots , a_{m-1}), a_m)
+        \end{align*}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Własności NWD i NWW}
+    \begin{alertblock}{Obserwacja}
+        Dla elementów $a_1, \ldots, a_m$, gdzie $a_i$ ma rozkład kanoniczny $\epsilon_i \prod_{p \in \mathcal{P}} p^{\alpha_{p_{i}}}$ zachodzi 
+        \begin{align*}
+            \NWD(a_1 , \ldots , a_m) & = \prod_{p \in \mathcal{P}} p^{min\{\alpha_{p_1}, \ldots , \alpha_{p_{m}}\}}\\
+            \NWW(a_1 , \ldots , a_m) & = \prod_{p \in \mathcal{P}} p^{max\{\alpha_{p_1}, \ldots , \alpha_{p_{m}}\}}.
+        \end{align*}
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Własności NWD i NWW}
+    \begin{alertblock}{Obserwacja}
+        Tak zdefiniowane $\NWD$ oraz $\NWW$ zależy od wyboru reprezentantów klas abstrakcji elementów nierozkładalnych.
+        Rozważmy dwa różne zbiory tych reprezentantów  $\mathcal{P}_1 , \mathcal{P}_2 \subseteq R$ oraz elementy pierścienia $a_1, \ldots, a_m$. 
+        Zauważmy, że 
+        \begin{align*}
+            \NWD_{\mathcal{P}_1} (a_1 , \ldots a_m) & \sim  \NWD_{\mathcal{P}_2} (a_1 , \ldots a_m) \\ 
+            \NWW_{\mathcal{P}_1} (a_1 , \ldots a_m) & \sim \NWW_{\mathcal{P}_2} (a_1 , \ldots a_m).
+        \end{align*}
+        Z tego powodu można myśleć, że dla danych elementów $\NWD$ jest dokładnie jedno oraz $\NWW$ jest dokładnie jedno.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Charakterystyka NWD i NWW}
+    \begin{block}{Twierdzenie}
+        Niech $R$ będzie pierścieniem z jednoznacznością rozkładu oraz niech $a_1, \ldots a_m$ będą elementami tego pierścienia. $d = \NWD(a_1, \ldots, a_m)$ wtedy i tylko wtedy, gdy
+        \begin{itemize}
+            \item $\forall i=1,\ldots, m \quad d \mid a_i$, 
+            \item $\forall c \in R  \quad [(\forall i=1 , \ldots , m \quad c \mid a_i)  \Rightarrow c \mid d]$.
+        \end{itemize}
+    \end{block}
+    \pause 
+    \begin{block}{Twierdzenie}
+        Niech $R$ będzie pierścieniem z jednoznacznością rozkładu oraz niech $a_1, \ldots a_m$ będą elementami tego pierścienia. $d = \NWW(a_1, \ldots, a_m)$ wtedy i tylko wtedy, gdy
+        \begin{itemize}
+            \item $\forall i=1,\ldots, m \quad a_i \mid d$, 
+            \item $\forall c \in R  \quad [(\forall i=1 , \ldots , m \quad a_i \mid c)  \Rightarrow d \mid c]$.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Własności NWD i NWW}
+    \begin{block}{Definicja}
+        Elementy $a,b$ pierścienia z jednoznacznościa rozkładu $R$, nazywamy \alert{względnie pierwszymi}, jeżeli $\NWD(a,b) = \one$
+    \end{block}
+    \begin{block}{Twierdzenie}
+        Niech $R$ będzie pierścieniem z jednoznacznością rozkładu oraz $a_1 , \ldots, a_m \in R$ elementami tego pierścienia. Zachodzi
+        \begin{itemize}
+            \item $\langle \NWW(a_1, \ldots , a_m) \rangle =  \langle a_1 \rangle \cap \cdots \cap \langle a_m \rangle$
+            \item $\NWD(a_1, a_2) = \dfrac{a_1 a_2}{\NWW(a_1,a_2)}$
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\section{Pierścienie ideałów głównych}
+\begin{frame}{Ideał główny}
+    Niech $R$ będzie pierścieniem.
+    \begin{block}{Definicja}
+        Ideał $\II$ pierścienia $R$ nazywamy \alert{głównym}, jeśli istnieje taki element $a \in R$, że $\II = \langle a \rangle.$
+    \end{block}
+    \pause 
+    \begin{block}{Definicja}
+        $R$ nazywamy \alert{pierścieniem ideałów głównych} (lub \textit{pierścieniem głównym}, lub \textit{PID}), jeżeli każdy ideał tego pierścienia jest główny. 
+    \end{block}
+\end{frame}
+
+\begin{frame}{PID, a UFD}
+    \begin{block}{Twierdzenie}
+        Niech $R$ będzie pierścieniem ideałów głównych. Wtedy $R$ jest pierścieniem z jednoznacznościa rozkładu.        
+    \end{block}
+    \pause 
+    \begin{block}{Twierdzenie}
+        Niech $R$ będzie pierścieniem ideałów głównych oraz $a_1, \ldots , a_m$ elementami tego pierścienia oraz $d = \NWD(a_1, \ldots , a_m)$. Zachodzi 
+        $$\langle a_1 , \ldots , a_m \rangle = \langle d \rangle $$
+    \end{block}
+    \pause 
+    \begin{alertblock}{Wniosek}
+        Niech $a_1, \ldots a_m$ będą elementami pierścienia ideałów głównych $R$ oraz $d$ największym wspólnym dzielnikiem tych elementów. Istnieją takie $r_1, \ldots r_m \in R$, że 
+        $r_1 a_1 + \ldots + r_m a_m = d$.
+    \end{alertblock}
+\end{frame}
+
+\section{Pierścienie Euklidesowe}
+\begin{frame}{Pierścienie Euklidesowe}
+    \begin{block}{Definicja}
+        Pierścień $R$ nazywamy \alert{pierścieniem euklidesowym}, jeśli określona jest funkcja $N: R\setminus \{ \zero\} \rightarrow \mathbb{N} \cup \{0\}$ zwaną normą, gdzie zachodzi 
+        $$ \forall a,b \in R, b \neq \zero  \ \exists q,r \in R : [(a = bq + r) \land (N(r) < N(b) \lor r = \zero)].$$
+        element $r$ w powyższym wzorze nazywamy \textit{resztą}.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Pierścienie Euklidesowe, a PID}
+    \begin{block}{Twierdzenie}
+        Niech $R$ będzie pierścieniem euklidesowym. Wtedy $R$ jest też pierścieniem ideałów głównych. 
+    \end{block}
+    \begin{alertblock}{Uwaga}
+        Twierdzenie odwrotne nie zachodzi. Np. $\mathbb{Z}[\frac{1}{2}(1 + \sqrt{-19})]$ jest pierścieniem ideałów głównych, natomiast nie jest pierścieniem euklidesowym. 
+        Dowód można zobaczyć pod tym \href{https://webspace.maths.qmul.ac.uk/r.a.wilson/MTH5100/PIDnotED.pdf}{\alert{linkiem}}
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Przykłady}
+    \begin{exampleblock}{Przykład}
+        Pierścieniami euklidesowymi są np. 
+        \begin{itemize}
+            \item $\mathbb{Z}$ z norma zadaną przez $N(a) = |a|$,
+            \item $K[x]$, gdzie $K$ jest ciałem, a norma jest  zadana przez $N(f) = deg(f)$,
+            \item $\mathbb{Z}[\sqrt{-1}]$ z normą zadaną przez $N(a + bi) = a^2 + b^2$.
+        \end{itemize}
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Źródła}
+    \begin{itemize}
+        \item[] \alert{Paweł Gładki}, Uniwersytet Śląski - Podstawowe pojęcia teorii podzielności. \href{https://www.math.us.edu.pl/~pgladki/teaching/2011-2012/a3z_w07.pdf}{Pierścienie z jednoznacznym rozkładem}
+    \end{itemize}
+    \printbibliography
+\end{frame}
+
+\begin{frame}
+    \centering 
+    \LARGE Pytania, wątpliwości, uwagi ? 
+\end{frame}
+
+\end{document}
