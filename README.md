@@ -34,8 +34,17 @@ Wstęp wolny – dla wszystkich zainteresowanych.
 - **Elementy teorii grup** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/04teoria-grup.pdf)]
 - **Elementy teorii pierścieni** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/05teoria-pierscieni.pdf)]
 - **Pierścienie z jednoznacznością rozkładu** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/06rozkladalnosc.pdf)]
+- **Algorytmy Modularne** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/07algorytmy-modularne.pdf)]
+  
 
 ### Listy zadań
 
 - **Lista 01 – Podstawowe własności struktur** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/zadania01.pdf)]
 - **Lista 02 - Elementy Teorii Grup** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/zadania02.pdf)]
+
+### Laboratoria 
+
+Laboratoria w formacie jupyter-notebook'ow dostępne na repozytorium [[LINK]](https://github.com/mlodyjesienin/AK-Laboratoria)
+
+- **Laboratoria 01 - Wprowadzenie do Paczki OSCAR**
+- **Laboratoria 02 - Algorytmy Modularne**
