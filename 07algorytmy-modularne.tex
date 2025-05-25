@@ -1,0 +1,294 @@
+\documentclass{beamer}
+
+\usepackage{polski}
+\usepackage{pgf,tikz, tikz-cd}
+\usepackage{tgheros}       
+\usepackage{bm}
+
+\usetheme{BIT}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage[backend=bibtex,style=numeric]{biblatex}
+\addbibresource{literature.bib}
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes,decorations}
+
+\newcommand{\zero}{\mathbf{0}}
+\newcommand{\one}{\mathbf{1}}
+\newcommand{\ord}{\textrm{ord}}
+\newcommand{\II}{\mathnormal{I}}
+\newcommand{\JJ}{\mathnormal{J}}
+\newcommand{\NWD}{\rm{NWD}}
+\newcommand{\NWW}{\rm{NWW}}
+
+\let\phi\varphi
+\renewcommand{\epsilon}{\bm{\varepsilon}}
+
+\title{Algebra Komputerowa}
+\subtitle{Algorytmy Modularne \cite{ComputerAlgebra,LCM}}
+\author{Filip Zieli\'nski}
+\date{2025}
+ 
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+ 
+\begin{frame}{Spis Treści}
+    \tableofcontents
+\end{frame}
+
+\section{Chińskie Twierdzenie o Resztach}
+\begin{frame}{Układ Kongruencji}
+    \begin{block}{Problem}
+        Rozważmy układ kongruencji 
+        $$
+        \begin{cases}
+            a \equiv 1 \pmod{5} \\
+            a \equiv 6 \pmod{7} \\
+            a \equiv 5 \pmod{9}
+        \end{cases}
+        $$
+    \end{block}
+    pojawiają się naturalne pytania 
+    \begin{itemize}
+        \item Czy układ ma rozwiązanie i czy da się je znaleźć?
+        \item Jeśli tak, to ile jest tych rozwiązań?
+        \item Jak znaleźć wszystkie rozwiązania?
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{CRT - Wersja Podstawowa}
+    \begin{block}{Chińskie Twierdzenie o Resztach (CRT)}
+        Niech $R$ będzie pierścieniem Euklidesowym oraz $m_1, \ldots ,m_k, a_1, \ldots a_k \in R$. Oznaczmy $M = \prod_{i=1}^{k} m_i$.
+        Jeżeli $m_1, \ldots, m_k$ są parami względnie pierwsze to układ 
+        $$
+        \begin{cases}
+            a \equiv a_1 \pmod{m_1} \\ 
+            a \equiv a_2 \pmod{m_2} \\
+            \vdots \\ 
+            a \equiv a_k \pmod{m_k}
+        \end{cases} 
+        $$
+        ma dokładnie jedno rozwiązanie $ \in R/ \langle M \rangle $ (dokładnie jedno rozwiązenie modulo $M$.)
+    \end{block}
+\end{frame}
+
+\begin{frame}{CRT - Wersja Zaawansowana}
+    \begin{block}{Chińskie Twierdzenie o Resztach (CRT)}
+        Niech $R$ będzie pierścieniem oraz $\II_1, \ldots \II_k$ parami względnie pierwszymi ideałami w tym pierścienu.
+        Wtedy 
+        $$ R/(\II_1 \cap \ldots \cap \II_k) \cong R/\II_1 \times \ldots \times R/ \II_k. $$
+    \end{block}
+\end{frame}
+
+\section{Układy Kongruencji}
+\begin{frame}{Zawężenie do Pierścieni Euklidesowych}
+    \begin{alertblock}{Uwaga}
+        Oba prezentowane algorytmy, bazują na możliwości wyznaczenia współczynników Bezouta z Rozszerzonego
+        Algorytmu Euklidesa, zatem wprost odnoszą się tylko do pierścieni Euklidesowych (standardowo dla nas $\mathbb{Z}, k[x]$)
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Algorytm Lagrange'a}
+    \textbf{Założenia}: pierścień euklidesowy $R$.
+
+    \textbf{Wejście:}
+    \begin{itemize}
+        \item $a_1, \ldots , a_k \in R$
+        \item $m_1, \ldots , m_k \in R$
+    \end{itemize}
+    \textbf{Wyjście:}
+    \begin{itemize}
+        \item $a : a \equiv a_i \pmod{m_i}$ dla każdego $i=1,\ldots,k$.
+    \end{itemize}
+    \textbf{Kroki:}
+    \begin{enumerate}
+        \item Dla każdego $i \in \{1, \ldots k\}, j \in \{i+1,\ldots,k\} $ wyznacz $\alpha_{ij},\alpha_{ji}$ takie, że 
+        $\alpha_{ij}m_i + \alpha_{ji}m_j = 1$ (współczynniki Bezouta).
+        \item Zdefiniuj $M := \prod_{i=1}^{k}m_i.$ 
+        \item Dla każdego $i \in \{1,\ldots,k\}$ wyznacz $A_i := \dfrac{M}{m}\prod_{j=1, j\neq i}^{k}\alpha_{ji}.$
+        \item Zwróć $a := \sum_{i=1}^{k}a_i A_i \pmod{M}.$ 
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Wady Algorytmu Lagrange'a}
+    \begin{alertblock}{Uwaga}
+        Współczynniki $A_i$ z poprzedniego algorytmu bardzo szybko rosną oraz nie jest to algorytm "przyrostowy"
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Układy dwóch kongruencji}
+    \textbf{Wejście:}:
+    \begin{itemize}
+        \item $a_1, a_2 \in R$
+        \item $m_1, m_2 \in R$
+    \end{itemize}
+    \textbf{Wyjście:}
+    \begin{itemize}
+        \item $a$ taki, że $a \equiv a_1 \pmod{m_1} \land a \equiv a_2 \pmod{m_2}$
+    \end{itemize}
+    \textbf{Kroki:}
+    \begin{enumerate}
+        \item Wyznacz $\alpha, \beta$ takie, że $\alpha m_1 + \beta m_2 = 1.$
+        \item Zdefiniuj $r := mod(a_1,m_1)$
+        \item Wyznacz $b := (a_2 -r)\alpha$
+        \item Wyznacz $s := b \pmod{m_2}$ 
+        \item Zwróć $r + sm_1$ 
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Algorytm przyrostowy Newtona}
+    \textbf{Wejście:}
+    \begin{itemize}
+        \item $a_1, \ldots , a_k \in R$
+        \item $m_1, \ldots , m_k \in R$
+    \end{itemize}
+    \textbf{Wyjście:}
+    \begin{itemize}
+        \item $a : a \equiv a_i \pmod{m_i}$ dla każdego $i=1,\ldots,k$.
+    \end{itemize}
+    \textbf{Kroki:}
+    \begin{enumerate}
+        \item Zdefiniuj $M:=1, A:=1$
+        \item dla każdego $i \in \{1,\ldots, k\}$ \begin{itemize}
+            \item Używając poprzedniego algorytmu, znajdź b takie, że $b \equiv A \pmod{M} \land b \equiv a_i \pmod{m_i}$.
+            \item Zamień $A := b$ oraz $M:=M \cdot m[i].$
+        \end{itemize}
+        \item Zwróć $A$.
+    \end{enumerate}
+\end{frame}
+
+\section{Potęgowanie Modulo}
+\begin{frame}{Szybkie potęgowanie modulo}
+    \textbf{Wejście:}
+    \begin{itemize}
+        \item $a \in \mathbb{Z}, n,m \in \mathbb{N}$ 
+    \end{itemize}
+    \textbf{Wyjście:}
+    \begin{itemize}
+        \item $a^{n} \pmod{m}$
+    \end{itemize}
+    \textbf{Kroki:}
+    \begin{enumerate}
+        \item Zdefiniuj $(d_k \ldots d_0)_2$ jako binarny zapis wykładnika $n$. 
+        \item Zainicjalizuj $r:=1$, $b:= a \pmod{m}$ 
+        \item Dla każdego $i \in \{1, \ldots, k\}$
+        \item \begin{itemize}
+            \item Jeżeli $d_i = 1$ to podstaw $r :=  r\cdot b \pmod{m}$
+            \item Podstaw $b := b^2 \pmod{m}$ 
+        \end{itemize}
+        \item Zwróć $r$
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Małe Twierdzenie Fermata}
+    \begin{block}{Twierdzenie (Fermat, 1640)}
+        Jeżeli $p$ jest liczbą pierwszą, to dla każdego $a \in \mathbb{Z}$ zachodzi 
+        $$a^{p-1} \equiv \begin{cases}
+            0 \pmod{p}, \quad p \mid a \\ 
+            1 \pmod{p}, \quad p \nmid a 
+        \end{cases}$$
+    \end{block}
+    \pause 
+    \begin{alertblock}{Obserwacja}
+        To twierdzenie, pozwala często przyspieszyć potęgowanie modularne (zmniejszyć błyskawicznie wykładnik). Niestety tylko i wyłącznie, gdy potęgujemy modulo liczba pierwsza.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Funkcja $\phi$ Eulera}
+    \begin{block}{Definicja}
+        Funkcją Eulera nazywamy funkcję $\phi : \mathbb{N} \rightarrow \mathbb{N}$ zdefiniowaną jako
+        $$\phi(n) = \# \{a \in \{0,\ldots, n-1\} \mid NWD(a,n) = 1\}$$
+        Innymi słowami $\phi(n)$ to liczba jedności w pierścieniu ilorazowym $\mathbb{Z}/\langle n \rangle.$
+    \end{block}
+    \pause 
+    \begin{alertblock}{Obserwacja}
+        Jeżeli $p$ jest liczba pierwszą, to $\phi(p) = p-1$
+    \end{alertblock}
+    \begin{block}{Twierdzenie}
+        \begin{itemize}
+            \item Jeżeli $p$ jest liczbą pierwszą, to $\phi(p^k) = p^k - p^{k-1}$
+            \item Jeżeli $\NWD(m,n) = 1$ to $\phi(mn) = \phi(m) \cdot \phi(n)$
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Twierdzenie Eulera}
+    \begin{block}{Twierdzenie (Euler, 1736)}
+        Niech $m >1$ będzie liczbą całkowitą dodatnią. Jeżeli $a \in \mathbb{Z}$ jest względnie pierwsze z $m$ to zachodzi 
+        $$a^{\phi(m)} \equiv 1 \pmod{m}$$
+    \end{block}
+    \pause 
+    \begin{alertblock}{Obserwacja}
+        To twierdzenie również bardzo przyspiesza potęgowanie modularne.
+    \end{alertblock}
+\end{frame}
+
+\section{Wyznacznik Macierzy Całkowitoliczbowej}
+\begin{frame}{Problemy Eliminacji Gaussa}
+    \begin{alertblock}{Obserwacja}
+        Rozważmy macierz kwadratową $M \in \mathcal{M}_{n}(\mathbb{Z})$.
+        W oczywisty sposób $\det M \in \mathbb{Z}$. 
+        
+        Mimo tego, wykorzystując klasyczne algorytmy liczenia wyznacznika (eliminacja Gaussa) na komputerze 
+        z powodu dzielenia możemy natrafić na liczby zmiennoprzecinkowe i końcowy wynik może nie być dokładny. 
+
+        Pomysł: W ciałach skończonych $\mathbb{Z}_p$ operację są dokładne - można policzyć wyznacznik modulo wiele liczb pierwszych, a później z Chińskiego Twierdzenia o Resztach złożyć wiele wyników w jeden ostateczny.
+        Dodatkowa zaleta: Operacje modulo są stosunkowo szybkie!
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Wyznacznik Macierzy Modulo}
+    \begin{block}{Twierdzenie}
+        Niech $M = (m_{ij})\in \mathcal{M}_n(\mathbb{Z})$ będzie macierza kwadratową $n \times n$, a $p$ dowolną liczbą pierwszą.
+        Niech $\overline{m}_{ij} = (m_{ij} \pmod{p})$ oraz $\overline{M} = (\overline{m}_{ij})$. Zachodzi 
+        $$\det \overline{M} \equiv \det M \pmod{p}$$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Nierówność Hadamarda}
+    \begin{block}{Twierdzenie (Hadamard, 1893)}
+        Niech $M = (m_{ij}) \in \mathcal{M}_n(\mathbb{R})$ będzie rzeczywistą macierzą kwadratową. Zachodzi 
+        $$ |\det M | \leq \prod_{j=1}^{n}\sqrt{\sum_{i=1}^{n}m_{ij}^{2}}$$
+    \end{block}
+    \pause 
+    \begin{alertblock}{Wniosek}
+        Jeżeli rozważymy $B > 0$ takie, że $ | m_{ij} | \leq B$ dla wszystkich $i,j \leq n$, to zachodzi 
+        $$ | \det M| \leq B^n \sqrt{n^n}$$ 
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Algorytm Modularny Gaussa}
+    \textbf{Wejście:}
+    \begin{itemize}
+        \item $M = (m_{ij})$ macierz  całkowitoliczbowa wymiaru $n \times n$.
+    \end{itemize}
+    \textbf{Wyjście:}
+    \begin{itemize}
+        \item $\det M$.
+    \end{itemize}
+    \textbf{Kroki:}
+    \begin{enumerate}
+        \item Wyznacz $B \geq |m_{ij}||$ dla każdego $i,j \leq n$. 
+        \item Znajdź liczby pierwsze $p_1, \ldots p_k \geq 3$ takie, że $m := p_1 \cdots p_k > 2B^n\sqrt{n^n}$.
+        \item Dla każdego $i \in \{1, \ldots, k\}$ oblicz $d_i := det(M \pmod{p_i}) \in \mathbb{Z}_p$.
+        \item Rozwiąż układ kongruencji $d \equiv d_i \pmod{p_i}$ dla $i \in \{1,\ldots,k\}$.
+        \item Jeśli $d > m/2$ to podstaw $d := d-m$.
+        \item Zwróć $d$. 
+    \end{enumerate}
+\end{frame}
+\begin{frame}{Źródła}
+    Prezentacja jest mocno oparta o wykład autorstwa \textit{Przemysława Koprowskiego}, który można obejrzeć pod tym 
+    \href{https://www.youtube.com/watch?v=O4e0N-0glUw}{linkiem}
+    \printbibliography
+\end{frame}
+
+\begin{frame}
+    \centering 
+    \LARGE Pytania, wątpliwości, uwagi ? 
+\end{frame}
+
+\end{document}
