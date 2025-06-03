@@ -1,0 +1,162 @@
+\documentclass{beamer}
+
+\usepackage{polski}
+\usepackage{pgf,tikz, tikz-cd}
+\usepackage{tgheros}       
+\usepackage{bm}
+
+\usetheme{BIT}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage[backend=bibtex,style=numeric]{biblatex}
+\addbibresource{literature.bib}
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes,decorations}
+
+\newcommand{\zero}{\mathbf{0}}
+\newcommand{\one}{\mathbf{1}}
+\newcommand{\ord}{\textrm{ord}}
+\newcommand{\II}{\mathnormal{I}}
+\newcommand{\JJ}{\mathnormal{J}}
+\newcommand{\NWD}{\rm{NWD}}
+\newcommand{\NWW}{\rm{NWW}}
+\newcommand{\rad}{\textrm{rad}}
+
+\let\phi\varphi
+\renewcommand{\epsilon}{\bm{\varepsilon}}
+
+\title{Algebra Komputerowa}
+\subtitle{Rozkład Bezkwadratowy Wielomianu \cite{ComputerAlgebra,LCM}}
+\author{Filip Zieli\'nski}
+\date{2025}
+ 
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+ 
+\begin{frame}{Spis Treści}
+    \tableofcontents
+\end{frame}
+
+\section{Elementy bezkwadratowe}
+\begin{frame}{Założenia}
+    \begin{itemize}
+        \item Przez całą prezentacje zakładamy, że $K$ jest ciałem \textbf{charakterystyki zero}, bądź ciałem \textbf{skończonym}.
+        \item Uwaga! Przedstawione twierdzenia nie muszą zachodzić dla ciał nieskończonych o skończonej charakterystyce.
+        \item Mówiąc o pierścieniu, musimy mówić o pierścieniu z jednoznacznością rozkładu.
+        \item Zazwyczaj myślimy o pierścieniu wielomianów jednej zmiennej $K[x]$.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Bezkwadratowość}
+    \begin{block}{Definicja}
+        Niech $R$ będzie pierścieniem oraz $a \in R$ elementem tego pierścienia. $a$ nazywamy \textit{bezkwadratowym}, jeżeli nie jest podzielny przez kwadrat żadnego elementu nieodwracalnego.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Wielomiany Bezkwadratowe}
+    \begin{alertblock}{Obserwacja}
+        Niech $f \in K[x]$ będzie wielomianem o rozkładzie 
+        $$f = \epsilon \cdot p_1^{\alpha_1} \cdots p_k^{\alpha_m} $$ 
+        gdzie $\epsilon$ jest elementem odwracalnym, a $p_1,\ldots, p_m$ są różnymi wielomianami unormowanymi nierozkładalnymi. 
+
+        Następujące warunki są równoważne
+        \begin{enumerate}
+            \item $f$ jest bezkwadratowy,
+            \item $\alpha_1 = \ldots = \alpha_m = 1$,
+            \item rozważając $f$ w swoim ciele rozkładu, $f$ posiada jedynie pierwiastki jednokrotne.
+        \end{enumerate}
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Pierwiastki wielokrotne wielomianu}
+    \begin{block}{Lemat}
+        Niech $f \in K[x]$ będzie wielomianem, a $z$ pierwiastkiem $f$ o krotności $k$.
+        Jeżeli $k > 1$ to $f'(z) = 0$. 
+    \end{block}
+    \pause 
+    \begin{block}{Twierdzenie}
+        Niech $f \in K[x]$ będzie wielomianem jednej zmiennej o współczynnikach z ciała $K$. Zachodzi 
+        $$f \text{ jest bezkwadratowy} \Leftrightarrow \NWD(f,f') = 1$$
+    \end{block}
+\end{frame}
+
+\section{Rozkład bezkwadratowy wielomianu}
+\begin{frame}{Definicja}
+    Niech $f \in K[x]$ będzie wielomianem o rozkładzie 
+    $$f = \epsilon \cdot p_1^{\alpha_1} \cdots p_k^{\alpha_m}.$$
+    Oznaczmy $k = \max \{\alpha_1 , \ldots \alpha,_m\}$.
+    Pogrupujmy czynniki względem ich krotności, tzn 
+    $$ g_i = \prod_{j \leq m, \ \alpha_j = i}p_j \quad i \leq k $$
+    \begin{block}{Definicja}
+        \textit{Rozkładem bezkwadratowym} wielomianu $f$ nazywamy zapisanie go w postaci
+        $$f = \epsilon \cdot g_1^{1} \cdot g_2^2 \cdots g_k^k$$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Radykał Wielomianu}
+    \begin{block}{Definicja}
+        Niech $f \in K[x]$ będzie wielomianem o rozkładzie postaci
+        $$f =\epsilon \cdot p_1^{\alpha_1} \cdots p_k^{\alpha_m}.$$
+        \textit{Radykałem wielomianu} $f$ nazywamy wielomian 
+        $$ \rad(f) = p_1 \cdots p_m.$$
+    \end{block}
+    \pause
+    \begin{block}{Twierdzenie}
+        Niech $f$ będzie wielomianem  o współczynnikach z \textbf{ciała charakterystyki zero}.
+        Zachodzi 
+        $$\rad (f) = g_1 \cdots g_k = \frac{f}{\NWD(f,f')}$$
+    \end{block}
+\end{frame}
+
+\section{Algorytm Tobeya - Horowitza}
+\begin{frame}{Algorytm rozkładu bezkwadratoego}
+    \textbf{Założenia:} $K$ -- ciało charakterystyki zero. 
+
+    \textbf{Wejście:} $f \in K[x]$
+
+    \textbf{Wyjście:} $g_1,\ldots, g_k$ takie, że $f = \epsilon \prod_{i=1}^{k}g_i^i$
+    
+    \textbf{Kroki:}
+    \begin{enumerate}
+        \item Przypisz $a_0 := f$, $a_1 := \NWD(a_0, a_0')$, $b_1 = \frac{a_0}{a_1}$, $i:=1$. 
+        \item Dopóki $b_i \neq 1$, wykonuj:
+        \begin{itemize}
+            \item Wylicz $a_{i+1} = \NWD(a_i, a_i')$.
+            \item Wylicz $b_{i+1} = \frac{a_{i}}{a_{i+1}}$.
+            \item Wylicz $g_i = \frac{b_i}{b_{i+1}}$.
+        \end{itemize}
+        \item Zwróć $g_1, \ldots, g_k$. 
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Zaawansowane algorytmy}
+    Algorytm Tobeya - Horowitza jest \textbf{najstarszym} znanym algorytmem rozkładania bezkwadratowego wielomianu.
+    Został wymyślony w latach 1967/1969. 
+    \pause 
+    \begin{itemize}
+        \item Drobna modyfikacja tego algorytmu, sprawia, że działa on na wielomianach nad ciałami skończonymi. 
+        \pause \item Istnieje szereg szybszych algorytmów \begin{enumerate}
+            \item algorytm Mussera (1971),
+            \item algorytm Yuna (1976),
+            \item algorytm Gerharda (2001),
+            \item algorytm Guersenzvaiga-Szechtmana (2012/2017).
+        \end{enumerate}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Źródła}
+    Prezentacja jest mocno oparta o wykład autorstwa \textit{Przemysława Koprowskiego}, który można obejrzeć pod tym 
+    \href{https://www.youtube.com/watch?v=x8AMniwrD4s&t=3373s}{linkiem}
+    \printbibliography
+\end{frame}
+
+\begin{frame}
+    \centering 
+    \LARGE Pytania, wątpliwości, uwagi ? 
+\end{frame}
+
+\end{document}
