@@ -37,6 +37,7 @@ Wstęp wolny – dla wszystkich zainteresowanych.
 - **Algorytmy Modularne** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/07algorytmy-modularne.pdf)]
 - **Rozkład Bezkwadratowy Wielomianu** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/09rozklad-bezkwadratowy.pdf)]
 - **Rozkład Wielomianu nad Ciałem Skończonym** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/10rozklad-ciala-skonczone.pdf)]
+- **Bazy Gröbnera** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/11bazy-grobnera.pdf)]
 
 ### Listy zadań
 
