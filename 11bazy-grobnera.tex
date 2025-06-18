@@ -1,0 +1,290 @@
+\documentclass{beamer}
+
+\usepackage{polski}
+\usepackage{pgf,tikz, tikz-cd}
+\usepackage{tgheros}       
+\usepackage{bm}
+
+\usetheme{BIT}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage[backend=bibtex,style=numeric]{biblatex}
+\addbibresource{literature.bib}
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes,decorations}
+
+\newcommand{\zero}{\mathbf{0}}
+\newcommand{\one}{\mathbf{1}}
+\newcommand{\ord}{\textrm{ord}}
+\newcommand{\II}{\mathnormal{I}}
+\newcommand{\JJ}{\mathnormal{J}}
+\newcommand{\NWD}{\rm{NWD}}
+\newcommand{\NWW}{\rm{NWW}}
+\newcommand{\supp}{\textrm{supp}}
+\newcommand{\lc}{\textrm{lc}}
+\newcommand{\lt}{\textrm{lt}}
+\newcommand{\lm}{\textrm{lm}}
+
+\let\phi\varphi
+\renewcommand{\epsilon}{\bm{\varepsilon}}
+
+\title{Algebra Komputerowa}
+\subtitle{Bazy Gr{\"o}bnera \cite{ComputerAlgebra,LCM,Computative1,Dumnicki}}
+\author{Filip Zieli\'nski}
+\date{2025}
+ 
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+ 
+\begin{frame}{Spis Treści}
+    \tableofcontents
+\end{frame}
+
+\section{Porządki jednomianowe}
+\begin{frame}{Relacje porządkujące}
+    \begin{block}{Definicja}
+        Porządkiem \only<1>{\alert{częściowym}}\only<2>{\alert{totalnym}} nazywamy relacje $\preceq$ określoną na zbiorze $A$ spełniającą warunki
+        \begin{itemize}
+            \item \alert{zwrotność} -- $\forall a \in A \quad a \preceq a,$
+            \item \alert{antysymetryczność} -- $\forall a,b \in A \quad (a \preceq b \land b \preceq a) \Rightarrow  a = b,$
+            \item \alert{przechodniość} -- $\forall a,b,c \in A \quad  (a \preceq b \land b \preceq c) \Rightarrow a \preceq b,$
+            \only<2>{\item \alert{spójność} -- $\forall a,b \in A \quad a \preceq b \lor b \preceq a$.}
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Oznaczenia i Definicja}
+    \begin{alertblock}{Notacja}
+        \begin{itemize}
+            \item $K[\mathbb{X}] = K [x_1, \ldots, x_n],$
+            \item $\alpha = (\alpha_1, \ldots, \alpha_n),$
+            \item $c_{\alpha} \mathbb{X}^{\alpha} = c_{\alpha} x_1^{\alpha_1}x_2^{\alpha_2}\cdots x_n^{\alpha_n},$
+            \item $\mathbb{M}^n = \{\mathbb{X}^{\alpha} \mid \alpha \in \mathbb{N}^n_{0}\}.$
+        \end{itemize}
+    \end{alertblock}
+    \pause 
+    \begin{block}{Definicja}
+        Porządek totalny $\preceq$ określony na zbiorze $\mathbb{M}^n$ nazywamy \alert{jednomianowym}, jeżeli spełnione są następujące warunki 
+        \begin{itemize}
+            \item $1 \preceq \mathbb{X}^{\alpha}$ dla każdego $\alpha \in \mathbb{N}^n_{0}.$
+            \item każdy niepusty zbiór $S \subset \mathbb{M}^n$ posiada element najmniejszy.
+            \item $\mathbb{X}^{\alpha} \preceq \mathbb{X}^{\beta} \Rightarrow \mathbb{X}^{\alpha}\mathbb{X}^{\gamma} \preceq \mathbb{X}^{\beta}\mathbb{X}^{\gamma}.$ dla każdego $\gamma \in \mathbb{N}^{n}_{0}.$
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Przykłady}
+    \begin{exampleblock}{Przykład porządku jednomianowego}
+            \textit{Porządek leksykograficzny (lex)} 
+            $$ \mathbb{X}^{\alpha} \preceq \mathbb{X}^{\beta} \Leftrightarrow \alpha_1 = \beta_1, \ldots \alpha_s = \beta_s, \alpha_{s+1} < \beta_{s+1}$$
+    \end{exampleblock}
+    \pause 
+    Inne znane i wykorzystywane porządki to np.
+    \begin{itemize}
+        \item porządek stopniowo leksykograficzny,
+        \item porządek odwrotny do leksykograficznego,
+        \item stopniowy porządek odwrotny do leksykograficznego.
+    \end{itemize}
+\end{frame}
+
+\section{Redukcje wielomianowe}
+\begin{frame}{Notacja}
+    \begin{block}{Definicja}
+        Niech będzie dany porządek jednomianowy $\preceq$ oraz wielomian wielu zmiennych 
+        $$f = c_{\alpha_1}\mathbb{X}^{\alpha_1} + \ldots + c_{\alpha_m}\mathbb{X}^{\alpha_m},$$ gdzie
+        $\mathbb{X}^{\alpha_1} \succeq \ldots \succeq \mathbb{X}^{\alpha_m}.$
+        Wtedy 
+        \begin{itemize}
+            \item \alert{Nośnikiem} wielomianu $f$ nazywamy zbiór wszystkich jego jednomianów 
+            $$ \supp \ f := \{\mathbb{X}^{\alpha_1}, \ldots, \mathbb{X}^{\alpha_m}\}$$
+            \item \alert{Jednomianem wiodącym} $f$ nazywamy
+            $\lm_{\preceq}(f)
+            = \mathbb{X}^{\alpha_1}.$
+            \item \alert{Współczynnikiem wiodącym} $f$ nazywamy $\lc_{\preceq}(f) = c_{\alpha_1}.$
+            \item \alert{Wyrazem wiodącym} $f$ nazywamy $\lt_{\preceq}(f) = \lc_{\preceq}(f) \cdot \lm_{\preceq}(f).$
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Redukcja Wielomianowa}
+    \begin{block}{Definicja}
+        \begin{itemize}
+        \item Mówimy, że wielomian $f$ redukuję się jednym kroku do wielomianu $h$,  modulo wielomian $g$, co oznaczamy $f \xrightarrow{g} h $, jeżeli istnieje $\mathbb{X}^{\alpha} \in \supp \ f$, taki, że 
+        $$ \lm(g) \mid \mathbb{X}^{\alpha}  \text{  oraz  } h = f - \frac{c_{\alpha} \mathbb{X}^{\alpha} }{\lt (g)} g.$$
+
+        \item Wielomian $f$ redukuje się do wielomianu $h$ modulo $G = \{g_1, \ldots , g_s\}$, co oznaczamy $f \xrightarrow{G} h$, jeżeli 
+        $$ f = f_0 \xrightarrow{g_{i1}} f_1 \xrightarrow{g_{i2}}  \ldots  \xrightarrow{g_{im}} f_m =  h.$$
+        
+        \item Jeżeli wielomianu $h$ nie można bardziej zredukować modulo $G$, to mówimy, że $h$ jest \alert{resztą} wielomianu $f$ modulo $G$.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Jednoznaczność redszty modulo}
+    \begin{alertblock}{Uwaga}
+        Reszta wielomianu $f$ modulo $G = \{g_1, \ldots, g_s\}$ dla wielomianów wielu zmiennych \textbf{nie} jest wyznaczona jednoznacznie.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Algorytm Wyznaczania reszt modulo $G$}
+    \begin{alertblock}{Obserwacja}
+        W tym wypadku najprostsze podejście polega na brutalnym sprawdzaniu, czy da się wykonać krok redukcji, jeżeli tak to go wykonujemy, jeżeli nie, to znaleźliśmy już resztę.
+    \end{alertblock}
+\end{frame}
+
+\section{Bazy Gr{\"o}bnera}
+\begin{frame}{Ideały jednomianowe}
+    \begin{block}{Twierdzenie}
+        Niech $\II \triangleleft K[\mathbb{X}]$ będzie ideałem oraz zbiór $G$ jego skończonym zbiorem generatorów. Wszystko rozważamy w ustalonym porządkun jednomianowym $\preceq$. Następujące warunki są równoważne 
+        \begin{enumerate}
+            \item $\langle \lt(g) \mid g \in g \rangle = \langle \lt (f) \mid f \in \II \rangle =: \lt (\II).$
+            \item $f \in \II , f \neq 0  \Rightarrow \lt (g) \mid \lt(f) $ dla pewnego $g \in G$. 
+            \item Reszty modulo $G$ są jednoznaczne. 
+            \item $f \in \II \Leftrightarrow f \xrightarrow{G} 0.$
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Bazy Gr\"obnera}
+    \begin{block}{Definicja}
+        Zbiór $G$ spełniający warunki poprzedniego twierdzenia nazywamy \alert{bazą Gr\"obnera} ideału $\II$.
+    \end{block}
+    \pause 
+    \begin{alertblock}{Uwaga}
+        Każdy ideał $\II \triangleleft K[\mathbb{X}]$ posiada bazę Gr\"obnera.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{S-wielomiany}
+    \begin{block}{Definicja}
+        Niech $f,g \in K[\mathbb{X}]$ będą wielomianami. $S-$wielomianem $f,g$ nazywamy wielomian zadany wzorem 
+        $$ S(f,g) = \frac{\textrm{lcm} (\lm(f),\lm(g))}{\lt(f)}f -\frac{\textrm {lcm}(\lm(f),\lm(g))}{\lt(g)}g $$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Kryterium Buchbergera}
+    \begin{block}{Twierdzenie (Buchberger)}
+        Niech $\II \triangleleft K[\mathbb{X}]$ będzie ideałem w pierścieniu wielomianów wielu zmiennych oraz niech $G = \{g_1 , \ldots , g_n\}$ będzie skończonymz zbiorem generatorów $\II$. 
+
+        Następujące warunki są równoważne:
+        \begin{enumerate}
+            \item $G$ jest bazą Gr\"obnera. 
+            \item $S(g_i,g_j) \xrightarrow{G} 0,$ dla każdego $1 \leq i < j \leq n$. 
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Algorytm \textit{is\_Gr\"obner\_basis}}
+    \textbf{Wejście:} 
+    \begin{itemize} 
+        \item Skończony zbiór $G \subset K[\mathbb{X}],$ \item porządek jednomianowy $\preceq$. 
+    \end{itemize}
+
+    \textbf{Wyjście:} 
+    \begin{itemize}
+        \item Wartość logiczna prawda - $G$ jest bazą Gr\"obnera ideału $\langle G \rangle,$ 
+        \item wartość logiczna fałsz wpp. wraz z niezerową resztą $S-$wielomianu dwóch wielomianów z $G$.
+    \end{itemize}
+
+    \textbf{Kroki:}
+    \begin{enumerate}
+        \item Dla każdej pary wielomianów $f,g \in G$, $f \neq g$:
+        \begin{itemize}
+            \item Utwórz ich $S-$wielomian, 
+            \item wyznacz resz†ę $r$ wielomianu  $S(f,g)$ modulo $G$, 
+            \item jeżeli jest niezerowa zwróć (\textit{fałsz},$r$).
+        \end{itemize}
+        \item Zwróć \textit{prawda}.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Algorytm Buchbergera}
+        \textbf{Wejście:} 
+    \begin{itemize} 
+        \item Skończony zbiór generatorów $F$ ideału $\II$.
+    \end{itemize}
+
+    \textbf{Wyjście:} 
+    \begin{itemize}
+        \item Baza Gr\"obnera $G$ ideału $\II$.
+    \end{itemize}
+
+    \textbf{Kroki:}
+    \begin{enumerate}
+        \item Zainicjalizuj $G := F$, 
+        \item dopóki \textit{is\_Gr\"obner\_basis($G$)} to fałsz wykonuj: 
+        \begin{itemize}
+            \item $G := G \cup \{r \}$, gdzie $r$ jest niezerową resztą zwróconą przez \textit{is\_Gr\"obner\_basis($G$)}.
+        \end{itemize}
+        \item Zwróć $G$.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Minimalne bazy Gr\"obnera}
+    \begin{block}{Twierdzenie}
+        Niech $G$ będzie bazą Gr\"obnera idału $\II \triangleleft K[\mathbb{X}]$ oraz $f,g \in G$, $f \neq g$ będą wielomianami z bazy. 
+
+        Jeżeli $\lm(g) \mid \lm(f)$, to $G \setminus \{f\}$ też jest bazą Gr\"obnera ideału $\II$.
+    \end{block}
+    \pause 
+    \begin{block}{Definicja}
+        Bazę Gr\"obnera ideału $\II$ nazywamy minimalną jeżeli zachodzi: 
+        $$ \forall f,g \in G, f \neq g \quad \lm(g) \nmid \lm(f)$$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Algorytm}
+    \begin{block}{Obserwacja}
+        Brutalny algorytm minimalizujący bazę Gr\"obnera $G$ jest oczywisty.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Zredukowana baza Gr\"obnera}
+    \begin{block}{Definicja}
+    Bazę Gr\"obnera $G$ nazywamy zredukowaną jeżeli 
+    \begin{itemize}
+        \item $\forall f \in G  \lc(f) = 1$
+        \item dla wszystkich $f,g \in G$ oraz dla wszystkich $\mathbb{X}^{\alpha} \in \supp \ f$ zachodzi 
+        $$ \lm(g) \mid \mathbb{X}^{\alpha}.$$
+    \end{itemize}
+    \end{block}
+    \pause 
+    \begin{alertblock}{Obserwacja}
+        Redukowanie minimalnych baz Gr\"obnera sprowadza się do przeprowadzania redukcji modulo $G$ wszystkich wielomianów z $G$. 
+    \end{alertblock}
+    \pause 
+    \begin{block}{Twierdzenie}
+        Każdy ideał $\II \triangleleft K[\mathbb{X}]$ posiada dokładnie \alert{dokładnie jedną} minimalną zredukowaną bazę Gr\"obnera.
+    \end{block}
+\end{frame}
+
+\section{Eliminacja Zmiennych}
+\begin{frame}{Twierdzenie o Eliminacji}
+    \begin{block}{Twierdzenie}
+        Rozważmy pierścień wielomianów wielu zmiennych $K[x_1, \ldots, x_m, y_1, \ldots, y_r] = K[\mathbb{X}, \mathbb{Y}].$
+
+        Niech $\preceq$ będzie porządkiem jednomianowym na $K[\mathbb{X},\mathbb{Y}]$ takim, że
+        $$ \forall \alpha \in \mathbb{N}_{0}^{m}, \beta \in \mathbb{N}_{0}^{r} \quad \mathbb{X}^{\alpha} \succeq \mathbb{Y}^{\beta} $$
+        oraz $G$ będzie bazą Gr\"obnera (względem porządku $\preceq$) ideału $\II \triangleleft K[\mathbb{X}, \mathbb{Y}]$. 
+        Wtedy 
+        $$ G \cap K[\mathbb{Y}]$$
+        jest bazą Gr\"obnera ideału $\II \cap K[\mathbb{Y}] \triangleleft K[\mathbb{Y}]$, względem porządku jednomianowego $\left.\preceq \right|_{K[\mathbb{Y}]}.$
+    \end{block}    
+\end{frame}
+
+\begin{frame}{Źródła}
+    Prezentacja jest mocno oparta o wykład autorstwa \textit{Przemysława Koprowskiego}, który można obejrzeć pod tym 
+    \href{https://www.youtube.com/watch?v=vdmyrbNqRlY&t=6452s}{linkiem}
+    \printbibliography
+\end{frame}
+
+\begin{frame}
+    \centering 
+    \LARGE Pytania, wątpliwości, uwagi ? 
+\end{frame}
+
+\end{document}
