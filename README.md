@@ -35,7 +35,7 @@ Wstęp wolny – dla wszystkich zainteresowanych.
 - **Elementy teorii pierścieni** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/05teoria-pierscieni.pdf)]
 - **Pierścienie z jednoznacznością rozkładu** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/06rozkladalnosc.pdf)]
 - **Algorytmy Modularne** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/07algorytmy-modularne.pdf)]
-- **Rozkład Bezkwadratowy Wielomianu** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/09rozklad-bezkwadraowy.pdf)]
+- **Rozkład Bezkwadratowy Wielomianu** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/09rozklad-bezkwadratowy.pdf)]
 - **Rozkład Wielomianu nad Ciałem Skończonym** [[PDF](https://mlodyjesienin.github.io/Algebra-Komputerowa/pdf/10rozklad-ciala-skonczone.pdf)]
 
 ### Listy zadań
