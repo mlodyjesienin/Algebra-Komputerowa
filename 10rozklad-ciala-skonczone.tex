@@ -28,7 +28,8 @@
 \renewcommand{\epsilon}{\bm{\varepsilon}}
 
 \title{Algebra Komputerowa}
-\subtitle{Rozkład Bezkwadratowy Wielomianu \cite{ComputerAlgebra,LCM}}
+
+\subtitle{Rozkład Wielomianu nad Ciałem Skończonym \cite{ComputerAlgebra,LCM}}
 \author{Filip Zieli\'nski}
 \date{2025}
  
@@ -41,6 +42,111 @@
     \tableofcontents
 \end{frame}
 
+\section{Wstęp}
+\begin{frame}{Oznaczenia}
+    Ciało skończone liczności $q$ oznaczmy przez $\mathbb{F}_q$. 
+    
+    Oczywiście $q = p^m$ dla pewnego $p$ będącego liczbą pierwszą i dla dodatniego całkowitego wykładnika $m$. 
+
+     Zachodzi $char(\mathbb{F}_q)= p$.
+\end{frame}
+
+\begin{frame}{Plan}
+    Algorytm dzielenia wielomianów nad ciałem skończonym dzielimy na trzy etapy,
+    \begin{enumerate}
+        \item \textit{Squarefree factorization} (rozkład ze względu na krotność).
+        \item \textit{Distinct-degree factorization} (podział ze względu na stopień)
+        \item \textit{Equal degree factorization} (ostateczny rozkład)
+    \end{enumerate}
+    \pause 
+    Temat rozkładu bezkwadratowego wielomianu poruszała poprzednia prezentacja.
+    Dzięki temu możemy rozważać problem rozkładu wielomianu $g$, który jest bezkwadratowy.
+\end{frame}
+
+\section{Distinct-degree factorization}
+\begin{frame}{Definicja}
+    Rozważmy bezkwadratowy unormowany wielomian $g \in \mathbb{F}_q[x]$ o rozkładzie
+    $$g = p_1 \cdots p_m.$$
+    Oznaczmy $s = \max \{ \deg p_i \mid i \leq m\}.$
+    Pogrupujmy czynniki $g$ względem stopnia, znaczy się 
+    $$h_k = \prod_{\deg p_i = k}p_i \quad \text{dla } k \leq s.$$
+    \begin{block}{Definicja}
+        Rozkładem \textit{distinct-degree} wielomianu $g$ nazywamy wyrażenie 
+        $$ g = h_1 \cdots h_s.$$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Kluczowe twierdzenie}
+    \begin{block}{Twierdzenie}
+        Ustalmy liczbę całkowitą $d \geq 1$ oraz niech $p_1, \ldots, p_t \in \mathbb{F}_q[X]$ będą 
+        \textbf{wszystkimi} unormowanymi nierozkładalnymi wielomianami o współczynnikach z $\mathbb{F}_q$ o takim stopniu, że $\deg(p_i) \mid d$ dla każdego $i$.
+        Zachodzi 
+        $$p_1 \cdots p_t = x^{q^d} - x.$$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Algorytm}
+ \textbf{Założenia:}  
+\( g \in \mathbb{F}_q[x] \) – wielomian unormowany bezkwadratowy.
+
+\textbf{Wejście:}  
+Wielomian \( g \in \mathbb{F}_q[x] \).
+
+\textbf{Wyjście:}  
+Wielomiany \( h_1, \ldots, h_s \in \mathbb{F}_q[x] \), takie że  
+\[
+g = h_1 h_2 \cdots h_s,
+\]
+gdzie każdy \( h_i \) jest iloczynem nierozkładalnych czynników stopnia dokładnie \( i \).
+
+\textbf{Kroki:}
+\begin{enumerate}
+    \item Przypisz \( f_0 := x \), \( g_1 := g \), \( k := 1 \).
+    \item Dopóki \( g_k \) jest wielomianem niebędącym stałą, wykonuj:
+    \begin{itemize}
+        \item Oblicz \( f_k := f_{k-1}^q \bmod g_k \).
+        \item Oblicz \( h_k := \gcd(g_k, f_k - x) \).
+        \item Zwiększ \( k := k + 1 \).
+        \item Przypisz \( g_k := \frac{g_{k-1}}{h_{k-1}} \).
+    \end{itemize}
+    \item Zwróć \( h_1, \ldots, h_{k} \).
+\end{enumerate}
+\end{frame}
+
+\section{Equal degree factorization}
+\begin{frame}{Pozostałości}
+    Musimy teraz rozłożyć wielomian $f$ stopnia $n$ o współczynnikach z ciała $\mathbb{F}_q$, o rozkładzie 
+    $$f = p_1 \cdots p_ m$$ gdzie $\deg (p_i) = d$ dla każdego $p$. 
+    \pause 
+    Oznaczmy sobie $R = \mathbb{F}_q[x]/\langle f \rangle$ oraz  $K_i = \mathbb{F}_q / \langle p_i \rangle$.
+    
+    Zauważmy, że $K_i$ jest rozszerzeniem ciała $\mathbb{F}_q$ stopnia $d$ dla każdego $K_i$. 
+    Tak więc $K_i \cong K_j$ dla każdego $i,j$.
+
+    Dodatkowo, zauważmy, że $R \cong \mathbb{F}_q[x]_{\leq n-1}.$
+\end{frame}    
+
+\begin{frame}{Izomorfizm}
+    \begin{alertblock}{Obserwacja}
+    Z chińskiego twierdzenia o resztach wynika istnienie izomorfizmu $\Phi$, takiego, że
+    $$ \Phi : R \leftarrow K_1 \times \ldots \times K_m.$$        
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Algortym Cantora - Zassenhausa (1981)}
+    Rozważmy $g$ względnie pierwsze z $f$. Oznaczmy $\tilde{g} = g \pmod{f}$.
+    Mamy $$ \Phi(\tilde{g}) = (\tilde{g_1}, \ldots, \tilde{g}_m)$$
+    ustalmy $e = \frac{q^d - 1}{2}$. Zauważmy, że 
+    $$ \Phi(\tilde{g}^e) = (\tilde{g_1}^e, \ldots, \tilde{g}_m^e) = (\pm 1, \ldots , \pm 1)$$
+    \pause 
+    \begin{block}{Twierdzenie}
+        Niech $h$ będzie resztą z dzielenia $g^e -1$ przez $f$. Jeżeli jest takie $i \neq j$,
+        że $\tilde{g_i}^e =1$ oraz $\tilde{g_j}^e = -1$, to $\NWD(h,f)$ jest nietrywialnym dzielnikiem $f$.  
+    \end{block}
+\end{frame}
+
+\begin{frame}{Źródła}
+=======
 \section{Elementy bezkwadratowe}
 \begin{frame}{Założenia}
     \begin{itemize}
@@ -148,9 +254,8 @@
     \end{itemize}
 \end{frame}
 \begin{frame}{Źródła}
-    Prezentacja jest mocno oparta o wykład autorstwa \textit{Przemysława Koprowskiego}, który można obejrzeć pod tym 
-    \href{https://www.youtube.com/watch?v=x8AMniwrD4s&t=3373s}{linkiem}
-    \printbibliography
+
+\printbibliography
 \end{frame}
 
 \begin{frame}
